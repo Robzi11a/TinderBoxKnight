@@ -13,7 +13,7 @@ class Tile:
     def __init__(self, id, x, y, kind_of_tile):
         filename = ""
         self.id = id
-        self.x = int(x)
+        self.x = int(x + 6)
         self.y = int(y)
         self.kind_of_tile = kind_of_tile
         # ----
@@ -21,7 +21,7 @@ class Tile:
         elif kind_of_tile == "d" : filename = floor.DARK
         elif kind_of_tile == "k" : filename = floor.KNIGHT_DARK_BACKGROUND
         elif kind_of_tile == "s" : filename = floor.SPIDER_DARK_BACKGROUND
-        else: raise ValueError("Error! kind of tile: ", kind_of_tile)
+        else: raise ValueError("Error, unkown tile: ", kind_of_tile)
         # ---------------------
         self.rect = pygame.Rect(self.x * TILESIZE, self.y * TILESIZE, TILESIZE, TILESIZE)
         image_path = os.path.join("levels", "images")
@@ -57,7 +57,7 @@ class Tiles:
 
     def draw(self, surface):
         if len(self.inner) == 0:
-            raise ValueError("Doh! There are no tiles to display. 😕")
+            raise ValueError("Specify tile to display")
         for elem in self.inner:
             self.screen.blit(elem.image, elem.rect)
 
