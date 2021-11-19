@@ -55,6 +55,19 @@ class Tiles:
                 self.inner.append(new_tile)
                 id += 1
 
+    def get_tile(self, x, y):
+        for elem in self.inner:
+            if elem.x == x:
+                if elem.y == y:
+                    return elem
+        return None
+
+    def has_collided(self, mouse_pos):
+        for elem in self.inner:
+            if elem.rect.collidepoint(mouse_pos) == 1:
+                return elem.x, elem.y
+        return None, None
+    
     def draw(self, surface):
         if len(self.inner) == 0:
             raise ValueError("Specify tile to display")

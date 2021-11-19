@@ -1,5 +1,5 @@
-KIND_OF_TILES = ["stone_square", "stone_marking_square", "ranged_enemy_checker"]
-KIND_OF_TILES += ["trap_square", "key_square", "chest_square"]
+KIND_OF_TILES = ["dark_square", "knight_square", "unlit_torch_square"]
+KIND_OF_TILES += ["spider_square"]
 
 DARK_PURPLE = (3.5, 3.9, 7.8)
 
