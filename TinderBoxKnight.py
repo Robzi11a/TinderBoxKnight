@@ -1,48 +1,47 @@
-import sys
 import pygame
-from settings import Settings
+import ground as floor
+import os
 
-class TinderBoxKnight:
-    """Overall class to manage game assets and behavior."""
+from tiles import Tile 
+from tiles import Tiles
 
+TITLE = "Tinder Box Knight"
+
+class Tinder_Box_Knight:
     def __init__(self):
-        """Initialize the game, and create game resources."""
         pygame.init()
-        self.settings = Settings()
-
-        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-        self.settings.screen_width = self.screen.get_rect().width
-        self.settings.screen_height = self.screen.get_rect().height
+        self.clock = pygame.time.Clock()
         pygame.display.set_caption("Tinder Box Knight")
+        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        WINDOW_WIDTH = self.screen.get_rect().width
+        WINDOW_HEIGHT = self.screen.get_rect().height
+        self.surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+        self.BG_COLOR = floor.DARK_PURPLE
+        self.keep_looping = True
+        self.tiles = Tiles(self.surface)
 
-
-    def run_game(self):
-        """Start the main loop for the game."""
-        while True:
-            self._check_events()
-            self._update_screen()
-
-    def _check_events(self):
-        """Respond to keypresses and mouse events."""
+    def keydown_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                sys.exit()
+                self.keep_looping = False
             elif event.type == pygame.KEYDOWN:
-                self._check_keydown_events(event)    
+                if event.key == pygame.K_q:
+                    self.keep_looping = False
 
-    def _check_keydown_events(self, event):
-        """Respond to keypresses."""  
-        if event.key == pygame.K_q:
-            sys.exit() 
+    def update(self):
+        pass
 
-    def _update_screen(self):
-        """Update images on the screen, and flip to the new screen."""
-        self.screen.fill(self.settings.bg_colour)
-             # Make the most recently drawn screen visible.
+    def draw(self):
+        self.surface.fill(self.BG_COLOR)
+        self.tiles.draw(self.surface)
+        pygame.display.update()
 
-        pygame.display.flip()
+    def main(self):
+        while self.keep_looping:
+            self.keydown_events()
+            self.update()
+            self.draw()
 
-if __name__ == '__main__':
-    # Make a game instance, and run the game.
-    tbk = TinderBoxKnight()
-    tbk.run_game()
+if __name__ == "__main__":
+    mygame = Tinder_Box_Knight()
+    mygame.main()
