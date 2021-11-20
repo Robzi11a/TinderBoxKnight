@@ -20,7 +20,7 @@ class Knight:
         if knight_kind == "k":
             self.knight_image = floor.KNIGHT_DARK_BACKGROUND
         else:
-            s = "Sorry, I don't recognize that: {}".format(knight_kind)
+            s = "unrecognized format: {}".format(knight_kind)
             raise ValueError(s)
         
         image_path = os.path.join("levels", "images")

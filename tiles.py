@@ -21,6 +21,8 @@ class Tile:
         elif kind_of_tile == "d" : filename = floor.DARK
         elif kind_of_tile == "k" : filename = floor.KNIGHT_DARK_BACKGROUND
         elif kind_of_tile == "s" : filename = floor.SPIDER_DARK_BACKGROUND
+        elif kind_of_tile == "hs" : filename = floor.HIDDEN_SPIDER
+        elif kind_of_tile == "ht" : filename = floor.HIDDEN_TORCH
         else: raise ValueError("Error, unkown tile: ", kind_of_tile)
         # ---------------------
         self.rect = pygame.Rect(self.x * TILESIZE, self.y * TILESIZE, TILESIZE, TILESIZE)
