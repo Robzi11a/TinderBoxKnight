@@ -6,6 +6,10 @@ KIND_OF_TILES += ["MovementUp", "MovementRight", "MovementDown"]
 KIND_OF_TILES += ["MovementLeft", "MatchButton", "ScanButton"]
 KIND_OF_TILES += ["QuitButton"]
 
+# BG Colour 
+
+DARK_PURPLE = (3.5, 3.9, 7.8)
+
 # Dark tile = ["d"]
 
 DARK_TILE_EMPTY = "DarkTile.png"
@@ -42,7 +46,7 @@ VISIBLE_LIT_TORCH = "LitLightTorch.png"
 
 SCAN_KNIGHT = "KnightScanBackground.png"
 
-SCAN_TILE - "ScanTile.png"
+SCAN_TILE = "ScanTile.png"
 
 # Button tiles = ["mu, mr, md, ml, mb, sb"]
  
@@ -56,7 +60,7 @@ MOVEMENT_LEFT = "MovementLeft.png"
 
 MATCH_BUTTON = "MatchButton.png"
 
-SCAN_BUTTON = "ScanButton"
+SCAN_BUTTON = "ScanButton.png"
 
 # Info Tiles = ["qc"] 
 

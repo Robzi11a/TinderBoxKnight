@@ -32,7 +32,8 @@ class Tile:
         elif kind_of_tile == "mu" : filename = floor.MOVEMENT_UP
         elif kind_of_tile == "mr" : filename = floor.MOVEMENT_RIGHT
         elif kind_of_tile == "md" : filename = floor.MOVEMENT_DOWN
-        elif kind_of_tile == "ml" : filename = floor.MOVEMENT_LEFT 
+        elif kind_of_tile == "ml" : filename = floor.MOVEMENT_LEFT
+        elif kind_of_tile == "mb" : filename = floor.MATCH_BUTTON
         elif kind_of_tile == "sb" : filename = floor.SCAN_BUTTON
         elif kind_of_tile == "qc" : filename = floor.QUIT_CONTROL 
         else: raise ValueError("Error, unkown tile: ", kind_of_tile)
