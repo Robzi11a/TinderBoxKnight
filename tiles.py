@@ -17,12 +17,24 @@ class Tile:
         self.y = int(y)
         self.kind_of_tile = kind_of_tile
         # ----
-        if kind_of_tile == "t": filename = floor.UNLIT_TORCH
-        elif kind_of_tile == "d" : filename = floor.DARK
-        elif kind_of_tile == "k" : filename = floor.KNIGHT_DARK_BACKGROUND
-        elif kind_of_tile == "s" : filename = floor.SPIDER_DARK_BACKGROUND
-        elif kind_of_tile == "hs" : filename = floor.HIDDEN_SPIDER
+        if kind_of_tile == "d": filename = floor.DARK_TILE_EMPTY
+        elif kind_of_tile == "l" : filename = floor.LIGHT_TILE_EMPTY
+        elif kind_of_tile == "kd" : filename = floor.KNIGHT_DARK_BACKGROUND
+        elif kind_of_tile == "kl" : filename = floor.KNIGHT_LIGHT_BACKGROUND
         elif kind_of_tile == "ht" : filename = floor.HIDDEN_TORCH
+        elif kind_of_tile == "hs" : filename = floor.HIDDEN_SPIDER
+        elif kind_of_tile == "hcu" : filename = floor.HIDDEN_CLUE_UP
+        elif kind_of_tile == "hcd" : filename = floor.HIDDEN_CLUE_DIAGONAL
+        elif kind_of_tile == "vut" : filename = floor.VISIBLE_UNLIT_TORCH
+        elif kind_of_tile == "vlt" : filename = floor.VISIBLE_LIT_TORCH
+        elif kind_of_tile == "sk" : filename = floor.SCAN_KNIGHT
+        elif kind_of_tile == "st" : filename = floor.SCAN_TILE
+        elif kind_of_tile == "mu" : filename = floor.MOVEMENT_UP
+        elif kind_of_tile == "mr" : filename = floor.MOVEMENT_RIGHT
+        elif kind_of_tile == "md" : filename = floor.MOVEMENT_DOWN
+        elif kind_of_tile == "ml" : filename = floor.MOVEMENT_LEFT 
+        elif kind_of_tile == "sb" : filename = floor.SCAN_BUTTON
+        elif kind_of_tile == "qc" : filename = floor.QUIT_CONTROL 
         else: raise ValueError("Error, unkown tile: ", kind_of_tile)
         # ---------------------
         self.rect = pygame.Rect(self.x * TILESIZE, self.y * TILESIZE, TILESIZE, TILESIZE)
@@ -57,19 +69,6 @@ class Tiles:
                 self.inner.append(new_tile)
                 id += 1
 
-    def get_tile(self, x, y):
-        for elem in self.inner:
-            if elem.x == x:
-                if elem.y == y:
-                    return elem
-        return None
-
-    def has_collided(self, mouse_pos):
-        for elem in self.inner:
-            if elem.rect.collidepoint(mouse_pos) == 1:
-                return elem.x, elem.y
-        return None, None
-    
     def draw(self, surface):
         if len(self.inner) == 0:
             raise ValueError("Specify tile to display")
