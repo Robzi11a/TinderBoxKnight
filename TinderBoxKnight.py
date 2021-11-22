@@ -10,6 +10,7 @@ from knight import KnightPlacement
 
 TITLE = "Tinder Box Knight"
 
+#Main game object
 class Tinder_Box_Knight:
     def __init__(self):
         pygame.init()
@@ -22,8 +23,10 @@ class Tinder_Box_Knight:
         self.BG_COLOR = floor.DARK_PURPLE
         self.keep_looping = True
 
+        #Create list of tiles
         self.tiles = Tiles(self.surface)
 
+    # Read user input
     def keydown_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -35,6 +38,7 @@ class Tinder_Box_Knight:
     def update(self):
         pass
 
+# Draw new assets to screen
     def draw(self):
         self.surface.fill(self.BG_COLOR)
         self.tiles.draw(self.surface)

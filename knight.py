@@ -49,6 +49,7 @@ class Knight:
         s = "id: {}, x: {}, y: {}".format(self.id, self.x, self.y)
         print(s)
 
+# Legacy code for moving knight with mouse 
 class KnightPlacement:
     def __init__(self, surface):
         self.surface = surface

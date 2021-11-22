@@ -4,10 +4,11 @@ import os
 
 TILES_HORIZONTAL = 7
 TILES_VERTICAL = 10
-TILESIZE = 100
+TILESIZE = 100 
 WINDOW_WIDTH = TILESIZE * TILES_HORIZONTAL
 WINDOW_HEIGHT = TILESIZE * TILES_VERTICAL
 
+# Class for each individual tile
 class Tile:
     """A class to store all settings for Tinder Box Knight Tiles."""
     def __init__(self, id, x, y, kind_of_tile):
@@ -48,6 +49,7 @@ class Tile:
         s = s.format(self.id, self.x, self.y, self.kind_of_tile)
         print(s)
 
+# Class for all tiles
 class Tiles:
     def __init__(self, screen):
         self.screen = screen
@@ -55,6 +57,7 @@ class Tiles:
         self.current_tile = None
         self._load_data()
 
+    # Load list of all tiles in game - list is one level.
     def _load_data(self):
         self.inner = []
         filepath = os.path.join("levels", "demolvl.txt")
@@ -70,6 +73,7 @@ class Tiles:
                 self.inner.append(new_tile)
                 id += 1
 
+    # Draw tiles on to screen
     def draw(self, surface):
         if len(self.inner) == 0:
             raise ValueError("Specify tile to display")
