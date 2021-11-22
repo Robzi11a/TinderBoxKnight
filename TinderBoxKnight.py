@@ -120,6 +120,7 @@ class Tinder_Box_Knight:
             csv_reader = csv.reader(f, delimiter=';')
             self.level_array = list(csv_reader)
             self.level_array = [x for x in self.level_array if x != []]
+            self.original_array = copy.deepcopy(self.level_array)
         self.knight = Knight(9, 0)
 
         while self.keep_looping:
