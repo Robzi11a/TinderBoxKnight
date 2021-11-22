@@ -2,12 +2,12 @@ import pygame
 
 
 class Knight:
-    # Initilise knight to store the knight's starting row and column
+    # Initialise knight to store the knight's starting row and column
     def __init__(self, row, column):
         self.row = row
         self.column = column
 
-    #Updates the row and column stored for the knight. Called whenever the knight moves to new position.
+    # Updates the row and column stored for the knight. Called whenever the knight moves to new position.
     def update_position(self, row, column):
         self.row = row
         self.column = column
@@ -15,7 +15,7 @@ class Knight:
     def return_position(self):
         return self.row, self.column
     
-    #Check that the knight is not moving into an enemy or other barrier
+    # Check that the knight is not moving into an enemy or other barrier
     def check_move(self, direction, level_array):
         if direction == "right":
             if level_array[self.row][self.column+1] == 'd':
