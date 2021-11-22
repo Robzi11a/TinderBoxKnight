@@ -68,6 +68,6 @@ SCAN_BUTTON = "ScanButton.png"
 QUIT_CONTROL = "QuitButton.png"
 
 # Lit enemy tiles = ["ls"]
-
+ 
 LIT_SPIDER = "LitSpider.png"
 

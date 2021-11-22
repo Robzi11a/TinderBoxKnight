@@ -1,5 +1,5 @@
 import pygame
-
+ 
 
 class Knight:
     # Initialise knight to store the knight's starting row and column

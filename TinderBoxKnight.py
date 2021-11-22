@@ -4,8 +4,7 @@ import os
 import csv
 import time
 
-from tiles import Tile 
-from tiles import Tiles
+from tiles import Tile, Tiles
 from tiles import TILES_VERTICAL, TILES_HORIZONTAL
 
 from knight import Knight
