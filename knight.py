@@ -12,7 +12,31 @@ TILES_VERTICAL = 10
 TILESIZE = 100
 
 class Knight:
-    def __init__(self, id, x, y, knight_kind):
+    # Initilise knight to store the knight's starting row and column
+    def __init__(self, row, column):
+        self.row = row
+        self.column = column
+
+    #Updates the row and column stored for the knight. Called whenever the knight moves to new position.
+    def update_position(self, row, column):
+        self.row = row
+        self.column = column
+        print(self.row, self.column)
+    
+    def return_position(self):
+        return self.row, self.column
+    
+    #Check that the knight is not moving into a barrier
+    def check_move():
+        return 0
+
+
+        
+        
+
+# not sure what this code is doing - left it in just in case        
+
+"""        
         self.id = id
         self.x, self.y = int(x+6), int(y)
         self.myinc = .05
@@ -48,51 +72,4 @@ class Knight:
     def debug_print(self):
         s = "id: {}, x: {}, y: {}".format(self.id, self.x, self.y)
         print(s)
-
-# Legacy code for moving knight with mouse 
-class KnightPlacement:
-    def __init__(self, surface):
-        self.surface = surface
-        self.inner = [] 
-        self.current_knight = None
-
-        id = 0
-        filepath = os.path.join("levels", "demolvl.txt")
-        with open(filepath, "r") as f:
-            mylines = f.readlines()
-            mylines = [i.strip() for i in mylines if len(i.strip()) > 0]
-        for count_i, line in enumerate(mylines):
-            for count_j, elem in enumerate(line):
-                if elem == "k":
-                    new_knight = Knight(id, count_j, count_i, elem)
-                    self.inner.append(new_knight)
-                    id += 1
-
-    def get_knight(self, x, y):
-        for elem in self.inner:
-            if elem.x == x and elem.y == y:
-                return elem
-        return None
-
-    def format_xy(self):
-        for elem in self.inner:
-            elem.x = round(elem.x)
-            elem.y = round(elem.y)
-
-    def has_collided(self, mouse_pos):
-        for elem in self.inner:
-            myrect = pygame.Rect(elem.x * TILESIZE, elem.y * TILESIZE, TILESIZE, TILESIZE)
-            if myrect.collidepoint(mouse_pos[0], mouse_pos[1]) == 1:
-                return elem.x, elem.y
-        return None, None
-
-    def draw(self, surface):
-        if len(self.inner) == 0:
-            raise ValueError("Error, unkown tile")
-        for elem in self.inner:
-            myrect = pygame.Rect(elem.x * TILESIZE, elem.y * TILESIZE, TILESIZE, TILESIZE)
-            self.surface.blit(elem.image, myrect)
-
-    def debug_print(self):
-        for elem in self.inner:
-            elem.debug_print()
+"""

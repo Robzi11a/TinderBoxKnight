@@ -5,9 +5,9 @@ import csv
 
 from tiles import Tile 
 from tiles import Tiles
+from tiles import TILES_VERTICAL, TILES_HORIZONTAL
 
-from knight import Knight 
-from knight import KnightPlacement
+from knight import Knight
 
 TITLE = "Tinder Box Knight"
 
@@ -28,8 +28,7 @@ class Tinder_Box_Knight:
             csv_reader = csv.reader(f, delimiter=';')
             self.level_array = list(csv_reader)
             self.level_array = [x for x in self.level_array if x != []]
-        self.tiles = Tiles(self.surface, self.level_array)
-        self.knight_position = [10, 0]
+        self.knight = Knight(9, 0)
 
     # Read user input
     def keydown_events(self):
@@ -38,14 +37,41 @@ class Tinder_Box_Knight:
                 self.keep_looping = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
-                    self.keep_looping = False
+                    self.keep_looping = False            
+                # Move right
+                if event.key == pygame.K_RIGHT:
+                    # kp_y is knight's row, kp_y is knight's column
+                    kp_y, kp_x = self.knight.return_position()
+                    if kp_x+1 < TILES_HORIZONTAL: 
+                        self.level_array[kp_y][kp_x], self.level_array[kp_y][kp_x+1] = self.level_array[kp_y][kp_x+1], self.level_array[kp_y][kp_x]
+                        self.knight.update_position(kp_y, kp_x+1)
+                # Move left 
+                if event.key == pygame.K_LEFT:
+                    kp_y, kp_x = self.knight.return_position()
+                    if kp_x-1 >= 0: 
+                        self.level_array[kp_y][kp_x], self.level_array[kp_y][kp_x-1] = self.level_array[kp_y][kp_x-1], self.level_array[kp_y][kp_x]
+                        self.knight.update_position(kp_y, kp_x-1)  
 
+                # Move up 
+                if event.key == pygame.K_UP:
+                    kp_y, kp_x = self.knight.return_position()
+                    if kp_y - 1 >= 0: 
+                        self.level_array[kp_y][kp_x], self.level_array[kp_y-1][kp_x] = self.level_array[kp_y-1][kp_x], self.level_array[kp_y][kp_x]
+                        self.knight.update_position(kp_y-1, kp_x)
+
+                # Move down 
+                if event.key == pygame.K_DOWN:
+                    kp_y, kp_x = self.knight.return_position()
+                    if kp_y + 1 < TILES_VERTICAL: 
+                        self.level_array[kp_y][kp_x], self.level_array[kp_y+1][kp_x] = self.level_array[kp_y+1][kp_x], self.level_array[kp_y][kp_x]
+                        self.knight.update_position(kp_y+1, kp_x)
     def update(self):
         pass
 
 # Draw new assets to screen
     def draw(self):
         self.surface.fill(self.BG_COLOR)
+        self.tiles = Tiles(self.surface, self.level_array)
         self.tiles.draw(self.surface)
         pygame.display.update()
 
