@@ -38,6 +38,7 @@ class Tile:
         elif kind_of_tile == "mb" : filename = floor.MATCH_BUTTON
         elif kind_of_tile == "sb" : filename = floor.SCAN_BUTTON
         elif kind_of_tile == "qc" : filename = floor.QUIT_CONTROL 
+        elif kind_of_tile == "c" : filename = floor.CONTROLS
         else: raise ValueError("Error, unkown tile: ", kind_of_tile)
         # ---------------------
         self.rect = pygame.Rect(self.x * TILESIZE, self.y * TILESIZE, TILESIZE, TILESIZE)
@@ -68,6 +69,21 @@ class Tiles:
                 new_tile = Tile(id, count_j, count_i, elem)
                 self.inner.append(new_tile)
                 id += 1
+
+    def get_tile(self, x, y):
+        for elem in self.inner:
+            if elem.x == x:
+                if elem.y == y:
+                    return elem
+        return None
+
+    def has_collided(self, mouse_pos):
+        for elem in self.inner:
+            if elem.rect.collidepoint(mouse_pos) == 1:
+                # print("**** YES !!!!!! ****")
+                # if s.rect.collidepoint(mouse_pos):
+                return elem.x, elem.y
+        return None, None
 
     # Draw tiles on to screen
     def draw(self, surface):

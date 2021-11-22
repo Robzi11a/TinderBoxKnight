@@ -38,32 +38,31 @@ class Tinder_Box_Knight:
             elif event.type == pygame.KEYDOWN:
                 self.is_scanned = False
                 if event.key == pygame.K_q:
-                    self.keep_looping = False
-
-                    # Move right
+                    self.keep_looping = False            
+                
+                # Move right
                 if event.key == pygame.K_RIGHT:
-                    kp_y, kp_x = self.knight.return_position()  # kp_y is knight's row, kp_y is knight's column
-                    if kp_x + 1 < TILES_HORIZONTAL:  # Check that the knight is not moving into a wall
-                        movement_code = self.knight.check_move("right",
-                                                               self.level_array)  # Check that the knight is making a valid move.
-                        #  check_move returns 0 if the move is valid, 1 if the player has hit an enemy, and 2 if there is an object in the way.
-                        if movement_code == 0:
-                            self.level_array[kp_y][kp_x], self.level_array[kp_y][kp_x + 1] = "d", self.level_array[kp_y][kp_x]
-                            self.knight.update_position(kp_y, kp_x + 1)
+                    kp_y, kp_x = self.knight.return_position() # kp_y is knight's row, kp_y is knight's column
+                    if kp_x+1 < TILES_HORIZONTAL: # Check that the knight is not moving into a wall
+                        movement_code = self.knight.check_move("right", self.level_array) #Check that the knight is making a valid move.
+                         #  check_move returns 0 if the move is valid, 1 if the player has hit an enemy, and 2 if there is an object in the way.
+                        if movement_code == 0: 
+                            self.level_array[kp_y][kp_x], self.level_array[kp_y][kp_x+1] = "d", self.level_array[kp_y][kp_x]
+                            self.knight.update_position(kp_y, kp_x+1)
                         elif movement_code == 1:
-                            self.level_array[kp_y][kp_x + 1] = 'ls'
+                            self.level_array[kp_y][kp_x+1] = 'ls'
                             self.reset_knight(kp_y, kp_x)
-
-                # Move left
+                
+                # Move left 
                 if event.key == pygame.K_LEFT:
                     kp_y, kp_x = self.knight.return_position()
-                    if kp_x - 1 >= 0:
+                    if kp_x-1 >= 0: 
                         movement_code = self.knight.check_move("left", self.level_array)
                         if movement_code == 0:
-                            self.level_array[kp_y][kp_x], self.level_array[kp_y][kp_x - 1] = "d", self.level_array[kp_y][kp_x]
-                            self.knight.update_position(kp_y, kp_x - 1)
+                            self.level_array[kp_y][kp_x], self.level_array[kp_y][kp_x-1] = "d", self.level_array[kp_y][kp_x]
+                            self.knight.update_position(kp_y, kp_x-1)  
                         elif movement_code == 1:
-                            self.level_array[kp_y][kp_x - 1] = 'ls'
+                            self.level_array[kp_y][kp_x-1] = 'ls'
                             self.reset_knight(kp_y, kp_x)
 
                 # Move up
@@ -102,7 +101,7 @@ class Tinder_Box_Knight:
         self.knight.update_position(9, 0)
         self.level_array[kp_y][kp_x], self.level_array[9][0] = self.level_array[9][0], self.level_array[kp_y][kp_x]
 
-    # Draw new assets to screen
+# Draw new assets to screen
     def draw(self):
         self.surface.fill(self.BG_COLOR)
         self.tiles = Tiles(self.surface, self.level_array)
@@ -123,6 +122,7 @@ class Tinder_Box_Knight:
             self.level_array = list(csv_reader)
             self.level_array = [x for x in self.level_array if x != []]
             self.original_array = copy.deepcopy(self.level_array)
+
         self.knight = Knight(9, 0)
 
         while self.keep_looping:
@@ -135,3 +135,4 @@ class Tinder_Box_Knight:
 if __name__ == "__main__":
     mygame = Tinder_Box_Knight()
     mygame.main()
+

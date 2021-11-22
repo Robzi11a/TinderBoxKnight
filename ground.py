@@ -4,6 +4,7 @@ KIND_OF_TILES += ["HiddenClueUp", "HiddenClueDiagonal", "VisibleUnlitTorch"]
 KIND_OF_TILES += ["VisibleLitTorch", "KnightScanBackground", "ScanTile"]
 KIND_OF_TILES += ["MovementUp", "MovementRight", "MovementDown"]
 KIND_OF_TILES += ["MovementLeft", "MatchButton", "ScanButton"]
+KIND_OF_TILES += ["QuitButton", "Controls"]
 KIND_OF_TILES += ["QuitButton"]
 KIND_OF_TILES += ["LitSpider"]
 
@@ -67,7 +68,8 @@ SCAN_BUTTON = "ScanButton.png"
 
 QUIT_CONTROL = "QuitButton.png"
 
-# Lit enemy tiles = ["ls"]
- 
+CONTROLS = "Controls.png"
+# Lit monster tiles
+
 LIT_SPIDER = "LitSpider.png"
 
