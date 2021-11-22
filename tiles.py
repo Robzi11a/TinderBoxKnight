@@ -37,6 +37,7 @@ class Tile:
         elif kind_of_tile == "mb" : filename = floor.MATCH_BUTTON
         elif kind_of_tile == "sb" : filename = floor.SCAN_BUTTON
         elif kind_of_tile == "qc" : filename = floor.QUIT_CONTROL 
+        elif kind_of_tile == "c" : filename - floor.CONTROLS
         else: raise ValueError("Error, unkown tile: ", kind_of_tile)
         # ---------------------
         self.rect = pygame.Rect(self.x * TILESIZE, self.y * TILESIZE, TILESIZE, TILESIZE)
