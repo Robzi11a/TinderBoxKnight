@@ -1,9 +1,12 @@
+import copy
+
 import pygame
 import ground as floor
 import os
 import csv
 
-from tiles import Tile 
+from scan import Scanner
+from tiles import Tile
 from tiles import Tiles
 from tiles import TILES_VERTICAL, TILES_HORIZONTAL
 
@@ -28,7 +31,9 @@ class Tinder_Box_Knight:
             csv_reader = csv.reader(f, delimiter=';')
             self.level_array = list(csv_reader)
             self.level_array = [x for x in self.level_array if x != []]
+            self.original_array = copy.deepcopy(self.level_array)
         self.knight = Knight(9, 0)
+        self.isScanned = False
 
     # Read user input
     def keydown_events(self):
@@ -45,12 +50,14 @@ class Tinder_Box_Knight:
                     if kp_x+1 < TILES_HORIZONTAL: 
                         self.level_array[kp_y][kp_x], self.level_array[kp_y][kp_x+1] = self.level_array[kp_y][kp_x+1], self.level_array[kp_y][kp_x]
                         self.knight.update_position(kp_y, kp_x+1)
+                        self.isScanned = False
                 # Move left 
                 if event.key == pygame.K_LEFT:
                     kp_y, kp_x = self.knight.return_position()
                     if kp_x-1 >= 0: 
                         self.level_array[kp_y][kp_x], self.level_array[kp_y][kp_x-1] = self.level_array[kp_y][kp_x-1], self.level_array[kp_y][kp_x]
-                        self.knight.update_position(kp_y, kp_x-1)  
+                        self.knight.update_position(kp_y, kp_x-1)
+                        self.isScanned = False
 
                 # Move up 
                 if event.key == pygame.K_UP:
@@ -58,6 +65,7 @@ class Tinder_Box_Knight:
                     if kp_y - 1 >= 0: 
                         self.level_array[kp_y][kp_x], self.level_array[kp_y-1][kp_x] = self.level_array[kp_y-1][kp_x], self.level_array[kp_y][kp_x]
                         self.knight.update_position(kp_y-1, kp_x)
+                        self.isScanned = False
 
                 # Move down 
                 if event.key == pygame.K_DOWN:
@@ -65,6 +73,12 @@ class Tinder_Box_Knight:
                     if kp_y + 1 < TILES_VERTICAL: 
                         self.level_array[kp_y][kp_x], self.level_array[kp_y+1][kp_x] = self.level_array[kp_y+1][kp_x], self.level_array[kp_y][kp_x]
                         self.knight.update_position(kp_y+1, kp_x)
+                        self.isScanned = False
+
+                # Scan
+                if event.key == pygame.K_s:
+                    self.scanner = Scanner(self.level_array, self.original_array, self.knight.return_position(), self.surface)
+                    self.isScanned = True
     def update(self):
         pass
 
@@ -73,6 +87,8 @@ class Tinder_Box_Knight:
         self.surface.fill(self.BG_COLOR)
         self.tiles = Tiles(self.surface, self.level_array)
         self.tiles.draw(self.surface)
+        if self.isScanned:
+            self.scanner.draw(self.surface)
         pygame.display.update()
 
     def main(self):
