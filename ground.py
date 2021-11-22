@@ -5,6 +5,7 @@ KIND_OF_TILES += ["VisibleLitTorch", "KnightScanBackground", "ScanTile"]
 KIND_OF_TILES += ["MovementUp", "MovementRight", "MovementDown"]
 KIND_OF_TILES += ["MovementLeft", "MatchButton", "ScanButton"]
 KIND_OF_TILES += ["QuitButton"]
+KIND_OF_TILES += ["LitSpider"]
 
 # BG Colour 
 
@@ -65,6 +66,10 @@ SCAN_BUTTON = "ScanButton.png"
 # Info Tiles = ["qc"] 
 
 QUIT_CONTROL = "QuitButton.png"
+
+# Lit monster tiles
+
+LIT_SPIDER = "LitSpider.png"
 
 
 
