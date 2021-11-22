@@ -1,12 +1,13 @@
 import pygame
 import ground as floor
 import os
+import csv
 
 from tiles import Tile 
 from tiles import Tiles
+from tiles import TILES_VERTICAL, TILES_HORIZONTAL
 
-from knight import Knight 
-from knight import KnightPlacement
+from knight import Knight
 
 TITLE = "Tinder Box Knight"
 
@@ -22,15 +23,12 @@ class Tinder_Box_Knight:
         self.surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.BG_COLOR = floor.DARK_PURPLE
         self.keep_looping = True
-        self.MOVEMENT_UP = floor.MOVEMENT_UP
-        self.MOVEMENT_RIGHT = floor.MOVEMENT_RIGHT
-        self.MOVEMENT_DOWN = floor.MOVEMENT_DOWN
-        self.MOVEMENT_LEFT = floor.MOVEMENT_LEFT
-        self.MATCH_BUTTON = floor.MATCH_BUTTON
-        self.SCAN_BUTTON = floor.SCAN_BUTTON
-        self.inner = []
-        #Create list of tiles
-        self.tiles = Tiles(self.surface)
+        filepath = os.path.join("levels", "demolvl.txt")
+        with open(filepath, "r") as f:
+            csv_reader = csv.reader(f, delimiter=';')
+            self.level_array = list(csv_reader)
+            self.level_array = [x for x in self.level_array if x != []]
+        self.knight = Knight(9, 0)
 
     # Read user input
     def keydown_events(self):
@@ -39,71 +37,41 @@ class Tinder_Box_Knight:
                 self.keep_looping = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
-                    self.keep_looping = False
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                mouse_pos = pygame.mouse.get_pos()
-                self._check_up_button(mouse_pos)
-                self._check_right_button(mouse_pos)
-                self._check_down_button(mouse_pos)
-                self._check_left_button(mouse_pos)
-                self._check_light_button(mouse_pos)
-                self._check_scan_button(mouse_pos)
+                    self.keep_looping = False            
+                # Move right
+                if event.key == pygame.K_RIGHT:
+                    # kp_y is knight's row, kp_y is knight's column
+                    kp_y, kp_x = self.knight.return_position()
+                    if kp_x+1 < TILES_HORIZONTAL: 
+                        self.level_array[kp_y][kp_x], self.level_array[kp_y][kp_x+1] = self.level_array[kp_y][kp_x+1], self.level_array[kp_y][kp_x]
+                        self.knight.update_position(kp_y, kp_x+1)
+                # Move left 
+                if event.key == pygame.K_LEFT:
+                    kp_y, kp_x = self.knight.return_position()
+                    if kp_x-1 >= 0: 
+                        self.level_array[kp_y][kp_x], self.level_array[kp_y][kp_x-1] = self.level_array[kp_y][kp_x-1], self.level_array[kp_y][kp_x]
+                        self.knight.update_position(kp_y, kp_x-1)  
 
+                # Move up 
+                if event.key == pygame.K_UP:
+                    kp_y, kp_x = self.knight.return_position()
+                    if kp_y - 1 >= 0: 
+                        self.level_array[kp_y][kp_x], self.level_array[kp_y-1][kp_x] = self.level_array[kp_y-1][kp_x], self.level_array[kp_y][kp_x]
+                        self.knight.update_position(kp_y-1, kp_x)
 
-    def get_tile(self, x, y):
-        for elem in self.inner:
-            if elem.x == x:
-                if elem.y == y:
-                    return elem
-        return None
-
-    def _check_up_button(self, mouse_pos):
-        """player movement up"""
-        button_clicked = self.MOVEMENT_UP.rect.collidepoint(mouse_pos)
-
-
-    def _check_right_button(self, mouse_pos, surface):
-        """player movement right"""
-        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
-
-
-    def _check_down_button(self, mouse_pos, surface):
-        """player movement down"""
-        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
-
-
-    def _check_left_button(self, mouse_pos, surface):
-        """player movement left"""
-        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
-
-
-    def _check_light_button(self, mouse_pos, surface):
-        """player light tiles"""
-        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
-
-
-    def _check_scan_button(self, mouse_pos, surface):
-        """player scan tiles"""
-        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
-
-    def format_xy(self):
-        for elem in self.inner:
-            elem.x = round(elem.x)
-            elem.y = round(elem.y)
-
-    def has_collided(self, mouse_pos):
-        for elem in self.inner:
-            myrect = pygame.Rect(elem.x * TILESIZE, elem.y * TILESIZE, TILESIZE, TILESIZE)
-            if myrect.collidepoint(mouse_pos[0], mouse_pos[1]) == 1:
-                return elem.x, elem.y
-        return None, None
-
+                # Move down 
+                if event.key == pygame.K_DOWN:
+                    kp_y, kp_x = self.knight.return_position()
+                    if kp_y + 1 < TILES_VERTICAL: 
+                        self.level_array[kp_y][kp_x], self.level_array[kp_y+1][kp_x] = self.level_array[kp_y+1][kp_x], self.level_array[kp_y][kp_x]
+                        self.knight.update_position(kp_y+1, kp_x)
     def update(self):
         pass
 
 # Draw new assets to screen
     def draw(self):
         self.surface.fill(self.BG_COLOR)
+        self.tiles = Tiles(self.surface, self.level_array)
         self.tiles.draw(self.surface)
         pygame.display.update()
 

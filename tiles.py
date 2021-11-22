@@ -4,7 +4,7 @@ import os
 
 TILES_HORIZONTAL = 7
 TILES_VERTICAL = 10
-TILESIZE = 100 
+TILESIZE = 100
 WINDOW_WIDTH = TILESIZE * TILES_HORIZONTAL
 WINDOW_HEIGHT = TILESIZE * TILES_VERTICAL
 
@@ -51,8 +51,9 @@ class Tile:
 
 # Class for all tiles
 class Tiles:
-    def __init__(self, screen):
+    def __init__(self, screen, level_array):
         self.screen = screen
+        self.level_array = level_array
         self.inner = []
         self.current_tile = None
         self._load_data()
@@ -60,15 +61,9 @@ class Tiles:
     # Load list of all tiles in game - list is one level.
     def _load_data(self):
         self.inner = []
-        filepath = os.path.join("levels", "demolvl.txt")
-        with open(filepath, "r") as f:
-            mylines = f.readlines()
-            mylines = [i.strip() for i in mylines if len(i.strip()) > 0]
         id = 0
-        for count_i, myline in enumerate(mylines):
-            temp_list = myline.split(";")
-            temp_list = [i.strip() for i in temp_list if len(i.strip()) > 0]
-            for count_j, elem in enumerate(temp_list):
+        for count_i, myline in enumerate(self.level_array):
+            for count_j, elem in enumerate(myline):
                 new_tile = Tile(id, count_j, count_i, elem)
                 self.inner.append(new_tile)
                 id += 1
