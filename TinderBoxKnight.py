@@ -45,7 +45,8 @@ class Tinder_Box_Knight:
                             self.level_array[kp_y][kp_x], self.level_array[kp_y][kp_x+1] = "d", self.level_array[kp_y][kp_x]
                             self.knight.update_position(kp_y, kp_x+1)
                         elif movement_code == 1:
-                            self.end_game()
+                            self.level_array[kp_y][kp_x+1] = 'ls'
+                            self.reset_knight(kp_y, kp_x)
                 
                 # Move left 
                 if event.key == pygame.K_LEFT:
@@ -56,7 +57,8 @@ class Tinder_Box_Knight:
                             self.level_array[kp_y][kp_x], self.level_array[kp_y][kp_x-1] = "d", self.level_array[kp_y][kp_x]
                             self.knight.update_position(kp_y, kp_x-1)  
                         elif movement_code == 1:
-                            self.end_game()
+                            self.level_array[kp_y][kp_x-1] = 'ls'
+                            self.reset_knight(kp_y, kp_x)
 
                 # Move up 
                 if event.key == pygame.K_UP:
@@ -67,7 +69,8 @@ class Tinder_Box_Knight:
                             self.level_array[kp_y][kp_x], self.level_array[kp_y-1][kp_x] = 'd', self.level_array[kp_y][kp_x]
                             self.knight.update_position(kp_y-1, kp_x)
                         elif movement_code == 1:
-                            self.end_game()
+                            self.level_array[kp_y-1][kp_x] = 'ls'
+                            self.reset_knight(kp_y, kp_x)
                                 
                 # Move down 
                 if event.key == pygame.K_DOWN:
@@ -78,13 +81,16 @@ class Tinder_Box_Knight:
                             self.level_array[kp_y][kp_x], self.level_array[kp_y+1][kp_x] = 'd', self.level_array[kp_y][kp_x]
                             self.knight.update_position(kp_y+1, kp_x)
                         elif movement_code == 1:
-                            self.end_game()
+                            self.level_array[kp_y+1][kp_x] = 'ls'
+                            self.reset_knight(kp_y, kp_x)
                             
     def update(self):
         pass
 
-    def end_game(self):
-        self.main()
+    def reset_knight(self, kp_y, kp_x):
+        self.knight.update_position(9, 0)
+        self.level_array[kp_y][kp_x], self.level_array[9][0] = self.level_array[9][0], self.level_array[kp_y][kp_x]
+
 
 # Draw new assets to screen
     def draw(self):
