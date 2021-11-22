@@ -1,34 +1,58 @@
 import pygame
-import ground as floor
-import os
-import ground as floor
-import utils
-
-from tiles import Tile 
-from tiles import Tiles
-
-TILES_HORIZONTAL = 7
-TILES_VERTICAL = 10
-TILESIZE = 100
+ 
 
 class Knight:
-    # Initilise knight to store the knight's starting row and column
+    # Initialise knight to store the knight's starting row and column
     def __init__(self, row, column):
         self.row = row
         self.column = column
 
-    #Updates the row and column stored for the knight. Called whenever the knight moves to new position.
+    # Updates the row and column stored for the knight. Called whenever the knight moves to new position.
     def update_position(self, row, column):
         self.row = row
         self.column = column
-        print(self.row, self.column)
     
     def return_position(self):
         return self.row, self.column
     
-    #Check that the knight is not moving into a barrier
-    def check_move():
-        return 0
+    # Check that the knight is not moving into an enemy or other barrier
+    def check_move(self, direction, level_array):
+        if direction == "right":
+            if level_array[self.row][self.column+1] == 'd':
+                return 0
+            elif self.check_for_enemy(level_array[self.row][self.column+1]): 
+                return 1 
+            else:
+                return 2
+        if direction == "up":
+            if level_array[self.row-1][self.column] == 'd':
+                return 0
+            elif self.check_for_enemy(level_array[self.row-1][self.column]):
+                return 1
+            else: 
+                return 2
+
+        if direction == "left":
+            if level_array[self.row][self.column-1] == 'd':
+                return 0
+            elif self.check_for_enemy(level_array[self.row][self.column-1]):
+                return 1
+            else:
+                return 2
+
+        if direction == "down":
+            if level_array[self.row+1][self.column] == 'd':
+                return 0
+            elif self.check_for_enemy(level_array[self.row+1][self.column]):
+                return 1 
+            else: 
+                return 2
+
+    def check_for_enemy(self, square):
+        if square == 'hs':
+            return True
+        return False
+
 
 
         

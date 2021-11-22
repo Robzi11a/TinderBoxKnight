@@ -1,7 +1,7 @@
 import pygame
 import ground as floor
 import os
-
+ 
 TILES_HORIZONTAL = 7
 TILES_VERTICAL = 10
 TILESIZE = 100
@@ -24,6 +24,7 @@ class Tile:
         elif kind_of_tile == "kl" : filename = floor.KNIGHT_LIGHT_BACKGROUND
         elif kind_of_tile == "ht" : filename = floor.HIDDEN_TORCH
         elif kind_of_tile == "hs" : filename = floor.HIDDEN_SPIDER
+        elif kind_of_tile == 'ls' : filename = floor.LIT_SPIDER
         elif kind_of_tile == "hcu" : filename = floor.HIDDEN_CLUE_UP
         elif kind_of_tile == "hcd" : filename = floor.HIDDEN_CLUE_DIAGONAL
         elif kind_of_tile == "vut" : filename = floor.VISIBLE_UNLIT_TORCH
