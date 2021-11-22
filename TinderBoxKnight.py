@@ -1,6 +1,7 @@
 import pygame
 import ground as floor
 import os
+import csv
 
 from tiles import Tile 
 from tiles import Tiles
@@ -22,9 +23,13 @@ class Tinder_Box_Knight:
         self.surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.BG_COLOR = floor.DARK_PURPLE
         self.keep_looping = True
-
-        #Create list of tiles
-        self.tiles = Tiles(self.surface)
+        filepath = os.path.join("levels", "demolvl.txt")
+        with open(filepath, "r") as f:
+            csv_reader = csv.reader(f, delimiter=';')
+            self.level_array = list(csv_reader)
+            self.level_array = [x for x in self.level_array if x != []]
+        self.tiles = Tiles(self.surface, self.level_array)
+        self.knight_position = [10, 0]
 
     # Read user input
     def keydown_events(self):
