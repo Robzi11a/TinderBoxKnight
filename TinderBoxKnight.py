@@ -13,6 +13,7 @@ from tiles import TILES_VERTICAL, TILES_HORIZONTAL
 from knight import Knight
 
 TITLE = "Tinder Box Knight"
+WHITE = (255, 255, 255)
 
 # Main game object
 class Tinder_Box_Knight:
@@ -95,7 +96,15 @@ class Tinder_Box_Knight:
     def update(self):
         pass
 
+# Move knight back to starting square when they hit a spider 
     def reset_knight(self, kp_y, kp_x):
+        font = pygame.font.SysFont("arial", 20)
+        caption = font.render("You hit a spider!", True , WHITE)
+        '''self.screen.fill((0,0,0))'''
+        '''self.screen.blit(caption,[self.wINDOW_WIDTH/2,self.wINDOW_HEIGHT/2])'''
+        self.screen.blit(caption,[100,100])
+        pygame.display.flip()
+        pygame.time.wait(1000)
         self.knight.update_position(9, 0)
         self.level_array[kp_y][kp_x], self.level_array[9][0] = self.level_array[9][0], self.level_array[kp_y][kp_x]
 
