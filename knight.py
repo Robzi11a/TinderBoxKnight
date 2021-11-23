@@ -53,9 +53,6 @@ class Knight:
             return True
         return False
 
-
-
-        
         
 
 # not sure what this code is doing - left it in just in case        

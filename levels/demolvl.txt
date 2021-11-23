@@ -1,13 +1,13 @@
 d;d;d;ht;d;d;d
 d;hs;d;d;d;hs;d
-d;hcd;d;d;d;d;d
+d;d;d;d;d;d;d
 hs;d;d;d;d;d;d
 d;d;d;d;hs;d;d
 d;d;d;d;d;d;d
 d;hs;d;d;d;d;d
 d;d;d;d;d;d;d
-d;d;d;hcu;d;d;d
+d;d;d;d;d;d;d
 kd;d;d;d;d;d;d
 
 
-mu;mr;md;ml;mb;sb;qc
+mu;mr;md;ml;sb;mb;c

@@ -1,3 +1,5 @@
+import copy
+
 import pygame
 import ground as floor
 import os
@@ -5,12 +7,13 @@ import csv
 import time
 
 from tiles import Tile, Tiles
+from scan import Scanner
 from tiles import TILES_VERTICAL, TILES_HORIZONTAL
 from knight import Knight
 from bigtorch import BigTorch
 
 TITLE = "Tinder Box Knight"
-
+WHITE = (255, 255, 255)
 
 # Main game object
 class Tinder_Box_Knight:
@@ -24,6 +27,8 @@ class Tinder_Box_Knight:
         self.surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.BG_COLOR = floor.DARK_PURPLE
         self.keep_looping = True
+        self.is_scanned = False
+        self.scanned_tiles = []
 
     # Read user input
     def keydown_events(self):
@@ -31,67 +36,63 @@ class Tinder_Box_Knight:
             if event.type == pygame.QUIT:
                 self.keep_looping = False
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q:
-                    self.keep_looping = False
-                
-                    # Move right
+                self.is_scanned = False
+                if event.key == pygame.K_q: 
+                  self.keep_looping = False
+
+                # Move right
                 if event.key == pygame.K_RIGHT:
-                    kp_y, kp_x = self.knight.return_position()  # kp_y is knight's row, kp_y is knight's column
-                    if kp_x + 1 < TILES_HORIZONTAL:  # Check that the knight is not moving into a wall
-                        movement_code = self.knight.check_move("right",
-                                                               self.level_array)  # Check that the knight is making a valid move.
-                        #  check_move returns 0 if the move is valid, 1 if the player has hit an enemy, and 2 if there is an object in the way.
+                    kp_y, kp_x = self.knight.return_position() # kp_y is knight's row, kp_y is knight's column
+                    if kp_x+1 < TILES_HORIZONTAL: # Check that the knight is not moving into a wall
+                        movement_code = self.knight.check_move("right", self.level_array) #Check that the knight is making a valid move.
+                         #  check_move returns 0 if the move is valid, 1 if the player has hit an enemy, and 2 if there is an object in the way.
                         if movement_code == 0:
-                            self.level_array[kp_y][kp_x], self.level_array[kp_y][kp_x + 1] = "d", \
-                                                                                             self.level_array[kp_y][
-                                                                                                 kp_x]
-                            self.knight.update_position(kp_y, kp_x + 1)
+                            self.level_array[kp_y][kp_x], self.level_array[kp_y][kp_x+1] = "d", self.level_array[kp_y][kp_x]
+                            self.knight.update_position(kp_y, kp_x+1)
                         elif movement_code == 1:
-                            self.level_array[kp_y][kp_x + 1] = 'ls'
+                            self.level_array[kp_y][kp_x+1] = 'ls'
                             self.reset_knight(kp_y, kp_x)
 
-                # Move left
+                # Move left 
                 if event.key == pygame.K_LEFT:
                     kp_y, kp_x = self.knight.return_position()
-                    if kp_x - 1 >= 0:
+                    if kp_x-1 >= 0: 
                         movement_code = self.knight.check_move("left", self.level_array)
                         if movement_code == 0:
-                            self.level_array[kp_y][kp_x], self.level_array[kp_y][kp_x - 1] = "d", \
-                                                                                             self.level_array[kp_y][
-                                                                                                 kp_x]
-                            self.knight.update_position(kp_y, kp_x - 1)
+                            self.level_array[kp_y][kp_x], self.level_array[kp_y][kp_x-1] = "d", self.level_array[kp_y][kp_x]
+                            self.knight.update_position(kp_y, kp_x-1)
                         elif movement_code == 1:
-                            self.level_array[kp_y][kp_x - 1] = 'ls'
+                            self.level_array[kp_y][kp_x-1] = 'ls'
                             self.reset_knight(kp_y, kp_x)
                    
 
-                # Move up
+                # Move up 
                 if event.key == pygame.K_UP:
                     kp_y, kp_x = self.knight.return_position()
-                    if kp_y - 1 >= 0:
+                    if kp_y - 1 >= 0: 
                         movement_code = self.knight.check_move("up", self.level_array)
                         if movement_code == 0:
-                            self.level_array[kp_y][kp_x], self.level_array[kp_y - 1][kp_x] = 'd', \
-                                                                                             self.level_array[kp_y][
-                                                                                                 kp_x]
-                            self.knight.update_position(kp_y - 1, kp_x)
+                            self.level_array[kp_y][kp_x], self.level_array[kp_y-1][kp_x] = 'd', self.level_array[kp_y][kp_x]
+                            self.knight.update_position(kp_y-1, kp_x)
                         elif movement_code == 1:
-                            self.level_array[kp_y - 1][kp_x] = 'ls'
+                            self.level_array[kp_y-1][kp_x] = 'ls'
                             self.reset_knight(kp_y, kp_x)
 
-                # Move down
+                # Move down 
                 if event.key == pygame.K_DOWN:
                     kp_y, kp_x = self.knight.return_position()
-                    if kp_y + 1 < TILES_VERTICAL:
+                    if kp_y + 1 < TILES_VERTICAL: 
                         movement_code = self.knight.check_move("down", self.level_array)
                         if movement_code == 0:
-                            self.level_array[kp_y][kp_x], self.level_array[kp_y + 1][kp_x] = 'd', \
-                                                                                             self.level_array[kp_y][
-                                                                                                 kp_x]
-                            self.knight.update_position(kp_y + 1, kp_x)
+                            self.level_array[kp_y][kp_x], self.level_array[kp_y+1][kp_x] = 'd', self.level_array[kp_y][kp_x]
+                            self.knight.update_position(kp_y+1, kp_x)
                         elif movement_code == 1:
-                            self.level_array[kp_y + 1][kp_x] = 'ls'
+                            self.level_array[kp_y+1][kp_x] = 'ls'
                             self.reset_knight(kp_y, kp_x)
+               # Scan
+                if event.key == pygame.K_s:
+                    self.scanner = Scanner(self.level_array, self.original_array, self.scanned_tiles, self.knight.return_position())
+                    self.is_scanned = True
 
                 # press SPACE to interactive with torch
                 if event.key == pygame.K_SPACE:
@@ -107,15 +108,30 @@ class Tinder_Box_Knight:
     def update(self):
         pass
 
+# Move knight back to starting square when they hit a spider 
     def reset_knight(self, kp_y, kp_x):
+        font = pygame.font.SysFont("arial", 20)
+        caption = font.render("You hit a spider!", True , WHITE)
+        '''self.screen.fill((0,0,0))'''
+        '''self.screen.blit(caption,[self.wINDOW_WIDTH/2,self.wINDOW_HEIGHT/2])'''
+        self.screen.blit(caption,[100,100])
+        pygame.display.flip()
+        pygame.time.wait(1000)
         self.knight.update_position(9, 0)
         self.level_array[kp_y][kp_x], self.level_array[9][0] = self.level_array[9][0], self.level_array[kp_y][kp_x]
 
-    # Draw new assets to screen
+
+# Draw new assets to screen
     def draw(self):
         self.surface.fill(self.BG_COLOR)
         self.tiles = Tiles(self.surface, self.level_array)
         self.tiles.draw(self.surface)
+        if self.is_scanned:
+            self.scanner.draw(self.surface)
+        font = pygame.font.SysFont('arial', 20)
+        for scanned in self.scanned_tiles:
+            text = font.render(str(scanned[1]), True, (255, 255, 255))
+            self.surface.blit(text, scanned[0])
         pygame.display.update()
 
     def main(self):
@@ -125,6 +141,7 @@ class Tinder_Box_Knight:
             csv_reader = csv.reader(f, delimiter=';')
             self.level_array = list(csv_reader)
             self.level_array = [x for x in self.level_array if x != []]
+            self.original_array = copy.deepcopy(self.level_array)
         self.knight = Knight(9, 0)
 
         while self.keep_looping:
@@ -132,7 +149,6 @@ class Tinder_Box_Knight:
             self.keydown_events()
             self.update()
             self.draw()
-
 
 if __name__ == "__main__":
     mygame = Tinder_Box_Knight()
