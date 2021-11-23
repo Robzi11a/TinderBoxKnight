@@ -29,8 +29,8 @@ class Light:
         print("now position:", self.position)
         self.tip = pygame.Rect((kp_y + 6.4) * TILESIZE, (kp_x + 0.4) * TILESIZE, TILESIZE, TILESIZE)
         self.rect = pygame.Rect((kp_y + 6) * TILESIZE, kp_x * TILESIZE, TILESIZE, TILESIZE)
-        for xIndex in range(kp_x - 1, kp_x + 1):
-            for yIndex in range(kp_y - 1, kp_y + 1):
+        for xIndex in range(kp_x - 1, kp_x + 2):
+            for yIndex in range(kp_y - 1, kp_y + 2):
                     if self.original_array[xIndex][yIndex] == 'd':
                         self.tiles[xIndex][yIndex] = 'l'
                     elif self.original_array[xIndex][yIndex] == 'hs':
