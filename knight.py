@@ -19,7 +19,7 @@ class Knight:
     def check_move(self, direction, level_array):
         if direction == "right":
             square = level_array[self.row][self.column+1] 
-            if right_square == 'd' or right_square == 'l'
+            if square == 'd' or square == 'l':
                 return 0
             elif self.check_for_enemy(level_array[self.row][self.column+1]): 
                 return 1 
@@ -27,7 +27,7 @@ class Knight:
                 return 2
         if direction == "up":
             square = level_array[self.row-1][self.column] 
-            if square == 'd' or square == 'l'
+            if square == 'd' or square == 'l':
                 return 0
             elif self.check_for_enemy(level_array[self.row-1][self.column]):
                 return 1
