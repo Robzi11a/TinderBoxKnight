@@ -137,8 +137,8 @@ class Tinder_Box_Knight:
         self.surface.fill(self.BG_COLOR)
         self.tiles = Tiles(self.surface, self.level_array)
         self.tiles.draw(self.surface)
-        if self.is_lit:
-            self.light.draw(self.surface)
+        # if self.is_lit:
+        #     self.light.draw(self.surface)
         if self.is_scanned:
             self.scanner.draw(self.surface)
         font = pygame.font.SysFont('arial', 20)

@@ -32,13 +32,13 @@ class Light:
         for xIndex in range(kp_x - 1, kp_x + 1):
             for yIndex in range(kp_y - 1, kp_y + 1):
                     if self.original_array[xIndex][yIndex] == 'd':
-                        self.original_array[xIndex][yIndex] == 'l'
+                        self.tiles[xIndex][yIndex] = 'l'
                     elif self.original_array[xIndex][yIndex] == 'hs':
-                        self.original_array[xIndex][yIndex] == 'ls'
-                    elif self.original_array[xIndex][yIndex] == 'kd':
-                        self.original_array[xIndex][yIndex] == 'kl'    
+                        self.tiles[xIndex][yIndex] = 'ls'
+                    # elif self.original_array[xIndex][yIndex] == 'kd':
+                    #     self.tiles[xIndex][yIndex] = 'kl'
                     elif self.tiles[xIndex][yIndex] == 'ht':
-                        self.original_array[xIndex][yIndex] == 'vlt'
+                        self.tiles[xIndex][yIndex] = 'vlt'
                     continue
                     # self.tiles[xIndex][yIndex] = 'st'
         self.lit_tiles.append([self.tip, self.count])
