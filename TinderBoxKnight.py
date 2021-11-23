@@ -8,6 +8,7 @@ import time
 
 from tiles import Tile, Tiles
 from scan import Scanner
+from light import Light
 from tiles import TILES_VERTICAL, TILES_HORIZONTAL
 from knight import Knight
 from bigtorch import BigTorch
@@ -29,6 +30,8 @@ class Tinder_Box_Knight:
         self.keep_looping = True
         self.is_scanned = False
         self.scanned_tiles = []
+        self.is_lit = False
+        self.lit_tiles = []
 
     # Read user input
     def keydown_events(self):
@@ -37,6 +40,7 @@ class Tinder_Box_Knight:
                 self.keep_looping = False
             elif event.type == pygame.KEYDOWN:
                 self.is_scanned = False
+                self.is_lit = False
                 if event.key == pygame.K_q: 
                   self.keep_looping = False
 
@@ -89,10 +93,17 @@ class Tinder_Box_Knight:
                         elif movement_code == 1:
                             self.level_array[kp_y+1][kp_x] = 'ls'
                             self.reset_knight(kp_y, kp_x)
-               # Scan
+                # Scan
                 if event.key == pygame.K_s:
                     self.scanner = Scanner(self.level_array, self.original_array, self.scanned_tiles, self.knight.return_position())
                     self.is_scanned = True
+                
+                # Light
+                if event.key == pygame.K_f:
+                    kp_y, kp_x = self.knight.return_position() 
+                    self.light = Light(self.level_array, self.original_array, self.lit_tiles, self.knight.return_position())
+                    self.is_lit = True
+
 
                 # press SPACE to interactive with torch
                 if event.key == pygame.K_SPACE:
@@ -126,6 +137,8 @@ class Tinder_Box_Knight:
         self.surface.fill(self.BG_COLOR)
         self.tiles = Tiles(self.surface, self.level_array)
         self.tiles.draw(self.surface)
+        if self.is_lit:
+            self.light.draw(self.surface)
         if self.is_scanned:
             self.scanner.draw(self.surface)
         font = pygame.font.SysFont('arial', 20)
