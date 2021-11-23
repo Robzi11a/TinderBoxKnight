@@ -6,8 +6,8 @@ import time
 
 from tiles import Tile, Tiles
 from tiles import TILES_VERTICAL, TILES_HORIZONTAL
-
 from knight import Knight
+from bigtorch import BigTorch
 
 TITLE = "Tinder Box Knight"
 
@@ -33,7 +33,7 @@ class Tinder_Box_Knight:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     self.keep_looping = False
-
+                
                     # Move right
                 if event.key == pygame.K_RIGHT:
                     kp_y, kp_x = self.knight.return_position()  # kp_y is knight's row, kp_y is knight's column
@@ -63,6 +63,7 @@ class Tinder_Box_Knight:
                         elif movement_code == 1:
                             self.level_array[kp_y][kp_x - 1] = 'ls'
                             self.reset_knight(kp_y, kp_x)
+                   
 
                 # Move up
                 if event.key == pygame.K_UP:
@@ -91,6 +92,17 @@ class Tinder_Box_Knight:
                         elif movement_code == 1:
                             self.level_array[kp_y + 1][kp_x] = 'ls'
                             self.reset_knight(kp_y, kp_x)
+
+                # press SPACE to interactive with torch
+                if event.key == pygame.K_SPACE:
+                    kp_y, kp_x = self.knight.return_position()  # kp_y is knight's row, kp_y is knight's column
+                    xlocation_torch,ylocation_torch,sate_torch = BigTorch().is_torch_lit(self.level_array) # check and retrun the state of troch, also retrun torch's row and column
+                    flag_isnearby=BigTorch().is_near_torch(xlocation_torch,ylocation_torch,kp_x, kp_y) #check eligibility to interact with the torch
+                    flag_finaltorch=BigTorch().change_torch_state (sate_torch,xlocation_torch,ylocation_torch,self.level_array,flag_isnearby) #change torch's pictures
+                    if (flag_finaltorch==True): # if lit torch, play a related cutscene
+                        BigTorch().play_lightcutscene()
+                    # missing: all tiles change into visible
+
 
     def update(self):
         pass
