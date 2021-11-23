@@ -18,14 +18,16 @@ class Knight:
     # Check that the knight is not moving into an enemy or other barrier
     def check_move(self, direction, level_array):
         if direction == "right":
-            if level_array[self.row][self.column+1] == 'd':
+            square = level_array[self.row][self.column+1] 
+            if right_square == 'd' or right_square == 'l'
                 return 0
             elif self.check_for_enemy(level_array[self.row][self.column+1]): 
                 return 1 
             else:
                 return 2
         if direction == "up":
-            if level_array[self.row-1][self.column] == 'd':
+            square = level_array[self.row-1][self.column] 
+            if square == 'd' or square == 'l'
                 return 0
             elif self.check_for_enemy(level_array[self.row-1][self.column]):
                 return 1
@@ -33,7 +35,8 @@ class Knight:
                 return 2
 
         if direction == "left":
-            if level_array[self.row][self.column-1] == 'd':
+            square = level_array[self.row][self.column-1]
+            if square == 'd' or square == 'l':
                 return 0
             elif self.check_for_enemy(level_array[self.row][self.column-1]):
                 return 1
@@ -41,7 +44,8 @@ class Knight:
                 return 2
 
         if direction == "down":
-            if level_array[self.row+1][self.column] == 'd':
+            square = level_array[self.row+1][self.column]
+            if square == 'd' or square == 'l':
                 return 0
             elif self.check_for_enemy(level_array[self.row+1][self.column]):
                 return 1 
