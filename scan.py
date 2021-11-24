@@ -29,6 +29,8 @@ class Scanner:
                     print("yes, ", xIndex, " < ", TILES_VERTICAL, " ", yIndex, " < ", TILES_HORIZONTAL)
                     if self.original_array[xIndex][yIndex] == 'hs':
                         self.count += 1
+                    if self.original_array[xIndex][yIndex] == 'ht':
+                        self.count += 10
                     if self.tiles[xIndex][yIndex] == 'ls':
                         continue
                     # self.tiles[xIndex][yIndex] = 'st'
@@ -42,6 +44,8 @@ class Scanner:
         label = ""
         if self.count > 1:
             label = "There are " + str(self.count) + " enemies around."
+        if self.count > 1:
+            label = "You found the torch, well done!"
         else:
             label = "There is " + str(self.count) + " enemy around."
 
