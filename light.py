@@ -29,18 +29,29 @@ class Light:
         print("now position:", self.position)
         self.tip = pygame.Rect((kp_y + 6.4) * TILESIZE, (kp_x + 0.4) * TILESIZE, TILESIZE, TILESIZE)
         self.rect = pygame.Rect((kp_y + 6) * TILESIZE, kp_x * TILESIZE, TILESIZE, TILESIZE)
-        for xIndex in range(kp_x - 1, kp_x + 2):
-            for yIndex in range(kp_y - 1, kp_y + 2):
-                    if self.original_array[xIndex][yIndex] == 'd':
-                        self.tiles[xIndex][yIndex] = 'l'
-                    elif self.original_array[xIndex][yIndex] == 'hs':
-                        self.tiles[xIndex][yIndex] = 'ls'
-                    # elif self.original_array[xIndex][yIndex] == 'kd':
-                    #     self.tiles[xIndex][yIndex] = 'kl'
-                    elif self.tiles[xIndex][yIndex] == 'ht':
-                        self.tiles[xIndex][yIndex] = 'vlt'
+        
+        for xIndex in range(kp_x-1 , kp_x +2):
+            for yIndex in range(kp_y -1, kp_y+2):
+                if kp_x == xIndex and kp_y == yIndex:
                     continue
-                    # self.tiles[xIndex][yIndex] = 'st'
+
+                #elif self.original_array[xIndex][yIndex] == 'kd':
+                #    self.tiles[xIndex][yIndex] = 'kd'
+                    #if xIndex == kp_x or yIndex == kp_y:
+                    #    return 0 
+                        
+                elif self.original_array[xIndex][yIndex] == 'd':
+                    self.tiles[xIndex][yIndex] = 'l'
+                elif self.original_array[xIndex][yIndex] == 'hs':
+                    self.tiles[xIndex][yIndex] = 'ls'
+                    #elif self.original_array[xIndex][yIndex] == 'kd':
+                    #    self.tiles[xIndex][yIndex] = 'kd'
+                elif self.tiles[xIndex][yIndex] == 'ht':
+                        self.tiles[xIndex][yIndex] = 'vlt'
+                        
+                        continue
+                     #self.tiles[xIndex][yIndex] = 'st'
+     
         self.lit_tiles.append([self.tip, self.count])
 
     def update(self):
