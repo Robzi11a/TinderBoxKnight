@@ -2,6 +2,8 @@ import pygame.font
 
 from tiles import TILES_VERTICAL, TILES_HORIZONTAL, TILESIZE
 
+WHITE = (255, 255, 255)
+
 pygame.font.init()
 
 
@@ -45,6 +47,6 @@ class Scanner:
         else:
             label = "There is " + str(self.count) + " enemy around."
 
-        text = font.render(label, True, (255, 255, 255))
+        text = font.render(label, True, WHITE)
 
         surface.blit(text, self.rect)

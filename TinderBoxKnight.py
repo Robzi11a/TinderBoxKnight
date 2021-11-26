@@ -7,14 +7,13 @@ import csv
 import time
 
 from tiles import Tile, Tiles
-from scan import Scanner
+from scan import Scanner, WHITE
 from light import Light
-from tiles import TILES_VERTICAL, TILES_HORIZONTAL
+from tiles import TILES_VERTICAL, TILES_HORIZONTAL, TILESIZE
 from knight import Knight
 from bigtorch import BigTorch
 
 TITLE = "Tinder Box Knight"
-WHITE = (255, 255, 255)
 
 # Main game object
 class Tinder_Box_Knight:
@@ -32,6 +31,7 @@ class Tinder_Box_Knight:
         self.scanned_tiles = []
         self.is_lit = False
         self.lit_tiles = []
+        
 
     # Read user input
     def keydown_events(self):
@@ -45,54 +45,33 @@ class Tinder_Box_Knight:
                   self.keep_looping = False
 
                 # Move right
-                if event.key == pygame.K_RIGHT:
-                    kp_y, kp_x = self.knight.return_position() # kp_y is knight's row, kp_y is knight's column
-                    if kp_x+1 < TILES_HORIZONTAL: # Check that the knight is not moving into a wall
-                        movement_code = self.knight.check_move("right", self.level_array) #Check that the knight is making a valid move.
-                         #  check_move returns 0 if the move is valid, 1 if the player has hit an enemy, and 2 if there is an object in the way.
-                        if movement_code == 0:
-                            self.level_array[kp_y][kp_x], self.level_array[kp_y][kp_x+1] = "d", self.level_array[kp_y][kp_x]
-                            self.knight.update_position(kp_y, kp_x+1)
-                        elif movement_code == 1:
-                            self.level_array[kp_y][kp_x+1] = 'ls'
-                            self.reset_knight(kp_y, kp_x)
+                if event.key == pygame.K_RIGHT: 
+                    safe_move = self.knight.move_right(self.level_array)
+                    if not safe_move:
+                        kp_y, kp_x = self.knight.return_position()
+                        self.reset_knight(kp_y, kp_x)                            
 
                 # Move left 
                 if event.key == pygame.K_LEFT:
-                    kp_y, kp_x = self.knight.return_position()
-                    if kp_x-1 >= 0: 
-                        movement_code = self.knight.check_move("left", self.level_array)
-                        if movement_code == 0:
-                            self.level_array[kp_y][kp_x], self.level_array[kp_y][kp_x-1] = "d", self.level_array[kp_y][kp_x]
-                            self.knight.update_position(kp_y, kp_x-1)
-                        elif movement_code == 1:
-                            self.level_array[kp_y][kp_x-1] = 'ls'
-                            self.reset_knight(kp_y, kp_x)
-                   
+                    safe_move = self.knight.move_left(self.level_array)
+                    if not safe_move:
+                        kp_y, kp_x = self.knight.return_position()
+                        self.reset_knight(kp_y, kp_x)                  
 
                 # Move up 
                 if event.key == pygame.K_UP:
-                    kp_y, kp_x = self.knight.return_position()
-                    if kp_y - 1 >= 0: 
-                        movement_code = self.knight.check_move("up", self.level_array)
-                        if movement_code == 0:
-                            self.level_array[kp_y][kp_x], self.level_array[kp_y-1][kp_x] = 'd', self.level_array[kp_y][kp_x]
-                            self.knight.update_position(kp_y-1, kp_x)
-                        elif movement_code == 1:
-                            self.level_array[kp_y-1][kp_x] = 'ls'
-                            self.reset_knight(kp_y, kp_x)
-
+                    safe_move = self.knight.move_up(self.level_array)
+                    if not safe_move:
+                        kp_y, kp_x = self.knight.return_position()
+                        self.reset_knight(kp_y, kp_x)
+                
                 # Move down 
                 if event.key == pygame.K_DOWN:
-                    kp_y, kp_x = self.knight.return_position()
-                    if kp_y + 1 < TILES_VERTICAL: 
-                        movement_code = self.knight.check_move("down", self.level_array)
-                        if movement_code == 0:
-                            self.level_array[kp_y][kp_x], self.level_array[kp_y+1][kp_x] = 'd', self.level_array[kp_y][kp_x]
-                            self.knight.update_position(kp_y+1, kp_x)
-                        elif movement_code == 1:
-                            self.level_array[kp_y+1][kp_x] = 'ls'
-                            self.reset_knight(kp_y, kp_x)
+                    safe_move = self.knight.move_down(self.level_array)
+                    if not safe_move:
+                        kp_y, kp_x = self.knight.return_position()
+                        self.reset_knight(kp_y, kp_x)
+                
                 # Scan
                 if event.key == pygame.K_s:
                     self.scanner = Scanner(self.level_array, self.original_array, self.scanned_tiles, self.knight.return_position())
@@ -121,11 +100,12 @@ class Tinder_Box_Knight:
 
 # Move knight back to starting square when they hit a spider 
     def reset_knight(self, kp_y, kp_x):
-        font = pygame.font.SysFont("arial", 20)
+        font = pygame.font.SysFont("arial", 16)
         caption = font.render("You hit a spider!", True , WHITE)
         '''self.screen.fill((0,0,0))'''
         '''self.screen.blit(caption,[self.wINDOW_WIDTH/2,self.wINDOW_HEIGHT/2])'''
-        self.screen.blit(caption,[100,100])
+        self.caption_rect = pygame.Rect((kp_x + 6) * TILESIZE, kp_y * TILESIZE, TILESIZE, TILESIZE)
+        self.screen.blit(caption, self.caption_rect)
         pygame.display.flip()
         pygame.time.wait(1000)
         self.knight.update_position(9, 0)
