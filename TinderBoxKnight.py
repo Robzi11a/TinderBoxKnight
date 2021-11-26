@@ -7,11 +7,12 @@ import csv
 import time
 
 from tiles import Tile, Tiles
-from scan import Scanner, WHITE
+from scan import Scanner
 from light import Light
 from tiles import TILES_VERTICAL, TILES_HORIZONTAL, TILESIZE
 from knight import Knight
 from bigtorch import BigTorch
+from utils import WHITE
 
 TITLE = "Tinder Box Knight"
 
@@ -81,6 +82,9 @@ class Tinder_Box_Knight:
                 if event.key == pygame.K_f:
                     kp_y, kp_x = self.knight.return_position() 
                     self.light = Light(self.level_array, self.original_array, self.lit_tiles, self.knight.return_position())
+                    self.level_array[kp_y][kp_x] = 'kl'
+                    self.knight.next_tile = 'l'
+                    self.knight.previous_tile = 'l'
                     self.is_lit = True
 
 
@@ -101,15 +105,14 @@ class Tinder_Box_Knight:
 # Move knight back to starting square when they hit a spider 
     def reset_knight(self, kp_y, kp_x):
         font = pygame.font.SysFont("arial", 16)
-        caption = font.render("You hit a spider!", True , WHITE)
+        caption = font.render("You hit a spider!", True, WHITE)
         '''self.screen.fill((0,0,0))'''
         '''self.screen.blit(caption,[self.wINDOW_WIDTH/2,self.wINDOW_HEIGHT/2])'''
         self.caption_rect = pygame.Rect((kp_x + 6) * TILESIZE, kp_y * TILESIZE, TILESIZE, TILESIZE)
         self.screen.blit(caption, self.caption_rect)
         pygame.display.flip()
         pygame.time.wait(1000)
-        self.knight.update_position(9, 0)
-        self.level_array[kp_y][kp_x], self.level_array[9][0] = self.level_array[9][0], self.level_array[kp_y][kp_x]
+        self.knight.reset_knight_position(self.level_array)
 
 
 # Draw new assets to screen

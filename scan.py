@@ -1,8 +1,7 @@
 import pygame.font
 
 from tiles import TILES_VERTICAL, TILES_HORIZONTAL, TILESIZE
-
-WHITE = (255, 255, 255)
+from utils import WHITE
 
 pygame.font.init()
 
