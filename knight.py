@@ -105,9 +105,9 @@ class Knight:
     def check_move(self, direction, level_array):
         if direction == "right":
             square = level_array[self.row][self.column+1] 
-            if square == 'd':
+            if 'd' in square:
                 return 0
-            elif square == 'l':
+            elif 'l' in square:
                 return 1
             elif self.check_for_enemy(level_array[self.row][self.column+1]): 
                 return 2 
@@ -115,9 +115,9 @@ class Knight:
                 return 3
         if direction == "up":
             square = level_array[self.row-1][self.column] 
-            if square == 'd': 
+            if 'd' in square: 
                 return 0
-            elif square == 'l':
+            elif 'l' in square:
                 return 1
             elif self.check_for_enemy(level_array[self.row-1][self.column]):
                 return 2
@@ -126,9 +126,9 @@ class Knight:
 
         if direction == "left":
             square = level_array[self.row][self.column-1]
-            if square == 'd': 
+            if 'd' in square: 
                 return 0
-            elif square == 'l':
+            elif 'l' in square:
                 return 1
             elif self.check_for_enemy(level_array[self.row][self.column-1]):
                 return 2
@@ -137,9 +137,9 @@ class Knight:
 
         if direction == "down":
             square = level_array[self.row+1][self.column]
-            if square == 'd':
+            if 'd' in square:
                 return 0
-            elif square == 'l':
+            elif 'l' in square:
                 return 1
             elif self.check_for_enemy(level_array[self.row+1][self.column]):
                 return 2 
@@ -147,7 +147,7 @@ class Knight:
                 return 3
 
     def check_for_enemy(self, square):
-        if square == 'hs':
+        if square == 'hs' or square == 'hre':
             return True
         return False
 

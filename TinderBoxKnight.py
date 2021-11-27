@@ -114,6 +114,17 @@ class Tinder_Box_Knight:
         pygame.time.wait(1000)
         self.knight.reset_knight_position(self.level_array)
 
+    # Read in level is its own function so that we can call it to read in different levels.
+    def read_in_level(self, level_number):
+        filepath = os.path.join("levels", self.levels[level_number])
+        with open(filepath, "r") as f:
+            csv_reader = csv.reader(f, delimiter=';')
+            self.level_array = list(csv_reader)
+            self.level_array = [x for x in self.level_array if x != []]
+            self.original_array = copy.deepcopy(self.level_array)
+        self.knight = Knight(9, 0)
+
+
 
 # Draw new assets to screen
     def draw(self):
@@ -130,16 +141,11 @@ class Tinder_Box_Knight:
             self.surface.blit(text, scanned[0])
         pygame.display.update()
 
-    def main(self):
-        # Read in the level file. This is placed in main rather than init so that the game can be reset.
-        filepath = os.path.join("levels", "demolvl.txt")
-        with open(filepath, "r") as f:
-            csv_reader = csv.reader(f, delimiter=';')
-            self.level_array = list(csv_reader)
-            self.level_array = [x for x in self.level_array if x != []]
-            self.original_array = copy.deepcopy(self.level_array)
-        self.knight = Knight(9, 0)
-
+    def main(self):   
+        #Level names are stored in a list
+        self.levels = ['demolvl.txt']     
+        #Call read_in_level with the index of the level that should be loaded.
+        self.read_in_level(0)
         while self.keep_looping:
             self.clock.tick(30)
             self.keydown_events()
