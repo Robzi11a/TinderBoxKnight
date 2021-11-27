@@ -96,6 +96,8 @@ HIDDEN_PRESSUREPLATE = "DarkTile.png"
 
 HIDDEN_CLOSED_GATE = "DarkTile.png"
 
+HIDDEN_WALL = "DarkTile.png"
+
 # Torch tiles in the light = ["vut, vlt"]
 
 VISIBLE_UNLIT_TORCH = "UnlitLightTorch.png"

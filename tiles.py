@@ -4,7 +4,7 @@ import os
  
 TILES_HORIZONTAL = 7
 TILES_VERTICAL = 10
-TILESIZE = 50
+TILESIZE = 100
 WINDOW_WIDTH = TILESIZE * TILES_HORIZONTAL
 WINDOW_HEIGHT = TILESIZE * TILES_VERTICAL
 
@@ -45,6 +45,7 @@ class Tile:
         elif kind_of_tile == "ht" : filename = floor.HIDDEN_TORCH
         elif kind_of_tile == "hs" : filename = floor.HIDDEN_SPIDER
         elif kind_of_tile == "hcg" : filename = floor.HIDDEN_CLOSED_GATE
+        elif kind_of_tile == "hw" : filename = floor.HIDDEN_WALL
         elif kind_of_tile == 'ls' : filename = floor.LIT_SPIDER
         elif kind_of_tile == "hcu" : filename = floor.HIDDEN_CLUE_UP
         elif kind_of_tile == "hcd" : filename = floor.HIDDEN_CLUE_DIAGONAL
