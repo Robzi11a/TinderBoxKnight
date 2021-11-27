@@ -4,7 +4,7 @@ import os
  
 TILES_HORIZONTAL = 7
 TILES_VERTICAL = 10
-TILESIZE = 100
+TILESIZE = 50
 WINDOW_WIDTH = TILESIZE * TILES_HORIZONTAL
 WINDOW_HEIGHT = TILESIZE * TILES_VERTICAL
 
@@ -22,7 +22,7 @@ class Tile:
         elif kind_of_tile == "l" : filename = floor.LIGHT_TILE_EMPTY
         elif kind_of_tile == "kd" : filename = floor.KNIGHT_DARK_BACKGROUND
         elif kind_of_tile == "kl" : filename = floor.KNIGHT_LIGHT_BACKGROUND
-        elif kind_of_tile == "w" : filename = floor.DARK_PURPLE
+        elif kind_of_tile == "w" : filename = floor.WALL
         elif kind_of_tile == "lcg" : filename = floor.LIT_CLOSED_GATE
         elif kind_of_tile == "bl" : filename = floor.BROKEN_LAMP
         elif kind_of_tile == "lss" : filename = floor.LIT_SKELETON_SKULL

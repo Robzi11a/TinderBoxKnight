@@ -8,9 +8,11 @@ KIND_OF_TILES += ["QuitButton", "Controls"]
 KIND_OF_TILES += ["QuitButton"]
 KIND_OF_TILES += ["LitSpider"]
 
+DARK_PURPLE = (3.5, 3.9, 7.8)
+
 # Wall 
 
-DARK_PURPLE = (3.5, 3.9, 7.8)
+WALL = "Wall.png"
 
 # Dark tile = ["d"]
 
