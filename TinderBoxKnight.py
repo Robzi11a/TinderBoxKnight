@@ -82,9 +82,10 @@ class Tinder_Box_Knight:
                 if event.key == pygame.K_f:
                     kp_y, kp_x = self.knight.return_position() 
                     self.light = Light(self.level_array, self.original_array, self.lit_tiles, self.knight.return_position())
+                    self.knight.previous_tile = self.light.previous_tile
+                    print('previous tile: ', self.light.previous_tile)
                     self.level_array[kp_y][kp_x] = 'kl'
                     self.knight.next_tile = 'l'
-                    self.knight.previous_tile = 'l'
                     self.is_lit = True
 
 

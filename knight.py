@@ -16,8 +16,8 @@ class Knight:
         self.row = row
         self.column = column
     
-    def reset_tile_memory(self):
-        self.previous_tile = "d"
+    def reset_tile_memory(self, start):
+        self.previous_tile = 'd' if start == 'kd' else 'l'
         self.next_tile = ""
 
     def return_position(self):
@@ -161,4 +161,4 @@ class Knight:
         else: 
             level_array[self.row][self.column] = "l"
         self.row, self.column = 9, 0
-        self.reset_tile_memory()
+        self.reset_tile_memory(level_array[9][0])

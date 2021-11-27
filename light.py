@@ -22,30 +22,34 @@ class Light:
         self.lit_tiles = lit_tiles
         self.original_array = original_array
         self.count = 0
+        self.previous_tile = 'd'
         self.light()
 
     def light(self):
         kp_x, kp_y = self.position
-        print("now position:", self.position)
-        self.tip = pygame.Rect((kp_y + 6.4) * TILESIZE, (kp_x + 0.4) * TILESIZE, TILESIZE, TILESIZE)
-        self.rect = pygame.Rect((kp_y + 6) * TILESIZE, kp_x * TILESIZE, TILESIZE, TILESIZE)        
 
         for xIndex in range(kp_x - 1, kp_x + 2):
             for yIndex in range(kp_y - 1, kp_y + 2):
                 if -1 < xIndex < TILES_VERTICAL and -1 < yIndex < TILES_HORIZONTAL:
                     if kp_x == xIndex and kp_y == yIndex:
+                        if self.original_array[xIndex][yIndex].startswith('h'):
+                            self.previous_tile = self.original_array[xIndex][yIndex].replace('h', 'v', 1)
+                        elif self.original_array[xIndex][yIndex].startswith('d'):
+                            self.previous_tile = self.original_array[xIndex][yIndex].replace('d', 'l', 1)
+                        else:
+                            self.previous_tile = 'l'
+                        print('ppp', self.previous_tile)
                         self.tiles[xIndex][yIndex] = 'kl'
                         continue
-                    elif self.original_array[xIndex][yIndex] == 'd':
-                        self.tiles[xIndex][yIndex] = 'l'
-                    elif self.tiles[xIndex][yIndex].startswith('h'):
+                    if self.tiles[xIndex][yIndex].startswith('h'):
+                        print(xIndex, yIndex, 2)
                         self.tiles[xIndex][yIndex] = self.tiles[xIndex][yIndex].replace('h', 'v', 1)
                     elif self.tiles[xIndex][yIndex].startswith('d'):
+                        print(xIndex, yIndex, 3)
                         self.tiles[xIndex][yIndex] = self.tiles[xIndex][yIndex].replace('d', 'l', 1)
                     # elif self.tiles[xIndex][yIndex] == 'vs':
                     #     self.knight.update_position(9, 0)
                     #     self.level_array[kp_y][kp_x], self.level_array[9][0] = self.level_array[9][0], self.level_array[kp_y][kp_x]
-        self.lit_tiles.append([self.tip, self.count]) 
 
     #def reset_knight(self, kp_y, kp_x):
      #   font = pygame.font.SysFont("arial", 20)
