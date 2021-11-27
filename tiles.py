@@ -46,6 +46,7 @@ class Tile:
         elif kind_of_tile == "hre" : filename = floor.DARK_RANGED_ENEMY
         elif kind_of_tile == "hrea" : filename = floor.DARK_RANGED_ENEMY_ANGRY
         elif kind_of_tile == 'vs' : filename = floor.LIT_SPIDER
+        elif kind_of_tile == 'hs' : filename = floor.HIDDEN_SPIDER
         
         #Pressure plate tiles
         elif kind_of_tile == "lpp" : filename = floor.LIT_PRESSURE_PLATE
