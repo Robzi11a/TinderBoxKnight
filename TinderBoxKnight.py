@@ -114,7 +114,7 @@ class Tinder_Box_Knight:
         pygame.time.wait(1000)
         self.knight.reset_knight_position(self.level_array)
 
-    # Read in level is its own function so that we can call it to read in. R 
+    # Read in level is its own function so that we can call it to read in different levels.
     def read_in_level(self, level_number):
         filepath = os.path.join("levels", self.levels[level_number])
         with open(filepath, "r") as f:
