@@ -15,7 +15,7 @@ from knight import *
 from tiles import TILES_VERTICAL, TILES_HORIZONTAL, TILESIZE
 
 class Light:
-    def _init_(self, level_array, original_array, lit_tiles, position):
+    def __init__(self, level_array, original_array, lit_tiles, position):
         self.current = None
         self.tiles = level_array
         self.position = position
@@ -30,26 +30,21 @@ class Light:
         self.tip = pygame.Rect((kp_y + 6.4) * TILESIZE, (kp_x + 0.4) * TILESIZE, TILESIZE, TILESIZE)
         self.rect = pygame.Rect((kp_y + 6) * TILESIZE, kp_x * TILESIZE, TILESIZE, TILESIZE)        
 
-        for xIndex in range(kp_x -1 , kp_x +2):
-            for yIndex in range(kp_y -1, kp_y+2):
+        for xIndex in range(kp_x - 1, kp_x + 2):
+            for yIndex in range(kp_y - 1, kp_y + 2):
                     
-                if kp_x ==  xIndex and kp_y  == yIndex:
+                if kp_x == xIndex and kp_y == yIndex:
                     self.tiles[xIndex][yIndex] = 'kl'
                     continue   
                 elif self.original_array[xIndex][yIndex] == 'd':
-                    self.tiles[xIndex][yIndex] = 'l' 
-                elif self.original_array[xIndex][yIndex] == 'hs':
-                    self.tiles[xIndex][yIndex] = 'vs' 
-                elif self.tiles[xIndex][yIndex] == 'vs': 
-                    self.knight.update_position(9, 0)
-                    self.level_array[kp_y][kp_x], self.level_array[9][0] = self.level_array[9][0], self.level_array[kp_y][kp_x]   
-                        
-                elif self.tiles[xIndex][yIndex] == 'ht':
-                    self.tiles[xIndex][yIndex] = 'vlt'
-                    continue
-                    #elif self.original_array[xIndex][yIndex] == 'kd':
-                    #    self.tiles[xIndex][yIndex] = 'kd'
-                     #self.tiles[xIndex][yIndex] = 'st'
+                    self.tiles[xIndex][yIndex] = 'l'
+                elif self.tiles[xIndex][yIndex].startswith('h'):
+                    self.tiles[xIndex][yIndex] = self.tiles[xIndex][yIndex].replace('h', 'v', 1)
+                elif self.tiles[xIndex][yIndex].startswith('d'):
+                    self.tiles[xIndex][yIndex] = self.tiles[xIndex][yIndex].replace('d', 'l', 1)
+                # elif self.tiles[xIndex][yIndex] == 'vs':
+                #     self.knight.update_position(9, 0)
+                #     self.level_array[kp_y][kp_x], self.level_array[9][0] = self.level_array[9][0], self.level_array[kp_y][kp_x]
         self.lit_tiles.append([self.tip, self.count]) 
 
     #def reset_knight(self, kp_y, kp_x):
