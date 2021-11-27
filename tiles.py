@@ -27,7 +27,7 @@ class Tile:
         elif kind_of_tile == "kl" : filename = floor.KNIGHT_LIGHT_BACKGROUND
 
         #Wall and gate tiles
-        elif kind_of_tile == "w" : filename = floor.WALL
+        elif kind_of_tile == "vw" : filename = floor.WALL
         elif kind_of_tile == "hw" : filename = floor.HIDDEN_WALL
         elif kind_of_tile == "vcg" : filename = floor.LIT_CLOSED_GATE
         elif kind_of_tile == "hcg" : filename = floor.HIDDEN_CLOSED_GATE
