@@ -32,19 +32,19 @@ class Light:
 
         for xIndex in range(kp_x - 1, kp_x + 2):
             for yIndex in range(kp_y - 1, kp_y + 2):
-                    
-                if kp_x == xIndex and kp_y == yIndex:
-                    self.tiles[xIndex][yIndex] = 'kl'
-                    continue   
-                elif self.original_array[xIndex][yIndex] == 'd':
-                    self.tiles[xIndex][yIndex] = 'l'
-                elif self.tiles[xIndex][yIndex].startswith('h'):
-                    self.tiles[xIndex][yIndex] = self.tiles[xIndex][yIndex].replace('h', 'v', 1)
-                elif self.tiles[xIndex][yIndex].startswith('d'):
-                    self.tiles[xIndex][yIndex] = self.tiles[xIndex][yIndex].replace('d', 'l', 1)
-                # elif self.tiles[xIndex][yIndex] == 'vs':
-                #     self.knight.update_position(9, 0)
-                #     self.level_array[kp_y][kp_x], self.level_array[9][0] = self.level_array[9][0], self.level_array[kp_y][kp_x]
+                if -1 < xIndex < TILES_VERTICAL and -1 < yIndex < TILES_HORIZONTAL:
+                    if kp_x == xIndex and kp_y == yIndex:
+                        self.tiles[xIndex][yIndex] = 'kl'
+                        continue
+                    elif self.original_array[xIndex][yIndex] == 'd':
+                        self.tiles[xIndex][yIndex] = 'l'
+                    elif self.tiles[xIndex][yIndex].startswith('h'):
+                        self.tiles[xIndex][yIndex] = self.tiles[xIndex][yIndex].replace('h', 'v', 1)
+                    elif self.tiles[xIndex][yIndex].startswith('d'):
+                        self.tiles[xIndex][yIndex] = self.tiles[xIndex][yIndex].replace('d', 'l', 1)
+                    # elif self.tiles[xIndex][yIndex] == 'vs':
+                    #     self.knight.update_position(9, 0)
+                    #     self.level_array[kp_y][kp_x], self.level_array[9][0] = self.level_array[9][0], self.level_array[kp_y][kp_x]
         self.lit_tiles.append([self.tip, self.count]) 
 
     #def reset_knight(self, kp_y, kp_x):
