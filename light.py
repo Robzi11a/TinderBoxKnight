@@ -39,8 +39,8 @@ class Light:
                 elif self.original_array[xIndex][yIndex] == 'd':
                     self.tiles[xIndex][yIndex] = 'l' 
                 elif self.original_array[xIndex][yIndex] == 'hs':
-                    self.tiles[xIndex][yIndex] = 'ls' 
-                elif self.tiles[xIndex][yIndex] == 'ls': 
+                    self.tiles[xIndex][yIndex] = 'vs' 
+                elif self.tiles[xIndex][yIndex] == 'vs': 
                     self.knight.update_position(9, 0)
                     self.level_array[kp_y][kp_x], self.level_array[9][0] = self.level_array[9][0], self.level_array[kp_y][kp_x]   
                         

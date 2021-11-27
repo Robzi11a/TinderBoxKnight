@@ -39,7 +39,7 @@ class Knight:
                 self.previous_tile = self.next_tile
                 return True
             elif movement_code == 2:
-                level_array[self.row][self.column+1] = 'ls'
+                level_array[self.row][self.column+1] = 'vs'
                 return False       
         return True
 
@@ -58,7 +58,7 @@ class Knight:
                 self.column -= 1
                 return True
             elif movement_code == 2:
-                level_array[self.row][self.column-1] = 'ls'
+                level_array[self.row][self.column-1] = 'vs'
                 return False
         return True
 
@@ -77,7 +77,7 @@ class Knight:
                 self.row -= 1
                 return True
             elif movement_code == 2:
-                level_array[self.row-1][self.column] = 'ls'
+                level_array[self.row-1][self.column] = 'vs'
                 return False
         return True
 
@@ -96,7 +96,7 @@ class Knight:
                 self.row += 1
                 return True
             elif movement_code == 2:
-                level_array[self.row+1][self.column] = 'ls'
+                level_array[self.row+1][self.column] = 'vs'
                 return False
         return True
 

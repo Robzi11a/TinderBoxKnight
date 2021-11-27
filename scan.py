@@ -30,7 +30,7 @@ class Scanner:
                     print("yes, ", xIndex, " < ", TILES_VERTICAL, " ", yIndex, " < ", TILES_HORIZONTAL)
                     if self.original_array[xIndex][yIndex] == 'hs':
                         self.count += 1
-                    if self.tiles[xIndex][yIndex] == 'ls':
+                    if self.tiles[xIndex][yIndex] == 'vs':
                         continue
                     # self.tiles[xIndex][yIndex] = 'st'
         self.scanned_tiles.append([self.tip, self.count])
