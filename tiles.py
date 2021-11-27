@@ -56,7 +56,7 @@ class Tile:
         elif kind_of_tile == "lcd" : filename = floor.LIT_CLUE_DIAGONAL
         elif kind_of_tile == "lcu" : filename = floor.LIT_CLUE_UP
         elif kind_of_tile == "lcr" : filename = floor.LIT_CLUE_RIGHT
-        elif kind_of_tile == "lsc" : filename = floor.LIT_SPIDER_CLUE
+        elif kind_of_tile == "lcs" : filename = floor.LIT_SPIDER_CLUE
         elif kind_of_tile == "dcr" : filename = floor.HIDDEN_CLUE_RIGHT
         elif kind_of_tile == "dcs" : filename = floor.HIDDEN_CLUE_SPIDER
         elif kind_of_tile == "dcu" : filename = floor.HIDDEN_CLUE_UP
