@@ -22,8 +22,29 @@ class Tile:
         elif kind_of_tile == "l" : filename = floor.LIGHT_TILE_EMPTY
         elif kind_of_tile == "kd" : filename = floor.KNIGHT_DARK_BACKGROUND
         elif kind_of_tile == "kl" : filename = floor.KNIGHT_LIGHT_BACKGROUND
+        elif kind_of_tile == "w" : filename = floor.DARK_PURPLE
+        elif kind_of_tile == "lcg" : filename = floor.LIT_CLOSED_GATE
+        elif kind_of_tile == "bl" : filename = floor.BROKEN_LAMP
+        elif kind_of_tile == "lss" : filename = floor.LIT_SKELETON_SKULL
+        elif kind_of_tile == "lsr" : filename = floor.LIT_SKELETON_RIBS
+        elif kind_of_tile == "lsa" : filename = floor.LIT_SKELETON_ARMS
+        elif kind_of_tile == "lre" : filename = floor.LIT_RANGED_ENEMY
+        elif kind_of_tile == "dre" : filename = floor.DARK_RANGED_ENEMY
+        elif kind_of_tile == "drea" : filename = floor.DARK_RANGED_ENEMY_ANGRY
+        elif kind_of_tile == "lb" : filename = floor.LIT_BOOKSHELF
+        elif kind_of_tile == "lj" : filename = floor.LIT_JOURNAL
+        elif kind_of_tile == "lpp" : filename = floor.LIT_PRESSURE_PLATE
+        elif kind_of_tile == "lcd" : filename = floor.LIT_CLUE_DIAGONAL
+        elif kind_of_tile == "lcu" : filename = floor.LIT_CLUE_UP
+        elif kind_of_tile == "lcr" : filename = floor.LIT_CLUE_RIGHT
+        elif kind_of_tile == "lsc" : filename = floor.LIT_SPIDER_CLUE
+        elif kind_of_tile == "hcr" : filename = floor.HIDDEN_CLUE_RIGHT
+        elif kind_of_tile == "hcs" : filename = floor.HIDDEN_CLUE_SPIDER
+        elif kind_of_tile == "hb" : filename = floor.HIDDEN_BOOKSHELF
+        elif kind_of_tile == "hpp" : filename = floor.HIDDEN_PRESSUREPLATE
         elif kind_of_tile == "ht" : filename = floor.HIDDEN_TORCH
         elif kind_of_tile == "hs" : filename = floor.HIDDEN_SPIDER
+        elif kind_of_tile == "hcg" : filename = floor.HIDDEN_CLOSED_GATE
         elif kind_of_tile == 'ls' : filename = floor.LIT_SPIDER
         elif kind_of_tile == "hcu" : filename = floor.HIDDEN_CLUE_UP
         elif kind_of_tile == "hcd" : filename = floor.HIDDEN_CLUE_DIAGONAL
