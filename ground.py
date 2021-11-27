@@ -46,7 +46,7 @@ LIT_SKELETON_ARMS = "ArmBones.png"
 
 # Ranged Enemy ["lre, dre, drea"]
 
-LIT_RANGED_ENEMY = "DarkShadow.png"
+LIT_RANGED_ENEMY = "LightShadow.png"
 
 DARK_RANGED_ENEMY = "DarkShadow.png"
 
