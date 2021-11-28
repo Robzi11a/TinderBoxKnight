@@ -13,8 +13,9 @@ from tiles import TILES_VERTICAL, TILES_HORIZONTAL, TILESIZE
 from knight import Knight
 from bigtorch import BigTorch
 from utils import WHITE
+from rangedenemy import Ranged_enemy
 
-TITLE = "Tinder Box Knight"
+TITLE = "Tinder Box Knightf"
 
 # Main game object
 class Tinder_Box_Knight:
@@ -99,6 +100,61 @@ class Tinder_Box_Knight:
                         BigTorch().play_lightcutscene()
                     # missing: all tiles change into visible
 
+    def attack(self, level_array):
+        if self.level_array[1][0] == 'lk':
+            self.level_array[1][0] == 'pk'
+            self.level_array[1][1] == 'p'
+            self.level_array[1][2] == 'psa'
+            self.level_array[1][3] == 'psr'
+            self.level_array[1][4] == 'pss'
+            self.level_array[1][5] == 'p'
+            self.level_array[1][6] == 'pre'
+            reset_knight_poison(self, kp_y, kp_x)
+        if self.level_array[1][1] == 'lk':
+            self.level_array[1][0] == 'p'
+            self.level_array[1][1] == 'pk'
+            self.level_array[1][2] == 'psa'
+            self.level_array[1][3] == 'psr'
+            self.level_array[1][4] == 'pss'
+            self.level_array[1][5] == 'p'
+            self.level_array[1][6] == 'pre'
+            reset_knight_poison(self, kp_y, kp_x)
+        if self.level_array[1][2] == 'lk':
+            self.level_array[1][0] == 'p'
+            self.level_array[1][1] == 'p'
+            self.level_array[1][2] == 'pk'
+            self.level_array[1][3] == 'psr'
+            self.level_array[1][4] == 'pss'
+            self.level_array[1][5] == 'p'
+            self.level_array[1][6] == 'pre'
+            reset_knight_poison(self, kp_y, kp_x)
+        if self.level_array[1][3] == 'lk':
+            self.level_array[1][0] == 'p'
+            self.level_array[1][1] == 'p'
+            self.level_array[1][2] == 'psa'
+            self.level_array[1][3] == 'pk'
+            self.level_array[1][4] == 'pss'
+            self.level_array[1][5] == 'p'
+            self.level_array[1][6] == 'pre'
+            reset_knight_poison(self, kp_y, kp_x)
+        if self.level_array[1][4] == 'lk':
+            self.level_array[1][0] == 'p'
+            self.level_array[1][1] == 'pk'
+            self.level_array[1][2] == 'psa'
+            self.level_array[1][3] == 'psr'
+            self.level_array[1][4] == 'pk'
+            self.level_array[1][5] == 'p'
+            self.level_array[1][6] == 'pre'
+            reset_knight_poison(self, kp_y, kp_x)
+        if self.level_array[1][5] == 'lk':
+            self.level_array[1][0] == 'p'
+            self.level_array[1][1] == 'pk'
+            self.level_array[1][2] == 'psa'
+            self.level_array[1][3] == 'psr'
+            self.level_array[1][4] == 'pss'
+            self.level_array[1][5] == 'pk'
+            self.level_array[1][6] == 'pre'
+            reset_knight_poison(self, kp_y, kp_xf)
 
     def update(self):
         pass

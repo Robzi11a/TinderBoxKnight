@@ -54,6 +54,20 @@ DARK_RANGED_ENEMY = "DarkShadow.png"
 
 DARK_RANGED_ENEMY_ANGRY = "DarkShadowAngry.png"
 
+# Poison tiles 
+
+POISON_TILE_EMPTY = "PoisonTile.png"
+
+POISON_KNIGHT_BACKGROUND = "Poison_Knight_Background.png"
+
+POISON_SHADOW = "Poison_Shadow.png"
+
+POISON_SKELETON_SKULL = "PoisonSkullBones.png"
+
+POISON_SKELETON_RIBS = "PoisonRibBones.png"
+
+POISON_SKELETON_ARMS = "PoisonArmBones.png"
+
 # Lit Bookshelf ["lb"]
 
 LIT_BOOKSHELF = "LitBookshelf.png"
@@ -129,7 +143,8 @@ SCAN_BUTTON = "ScanButton.png"
 QUIT_CONTROL = "QuitButton.png"
 
 CONTROLS = "Controls.png"
-# Lit monster tiles = ["ls"]
+
+# Lit spider monster tiles = ["ls"]
 
 LIT_SPIDER = "LitSpider.png"
 
