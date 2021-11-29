@@ -103,6 +103,9 @@ class Tinder_Box_Knight:
                     self.level_array[kp_y][kp_x] = 'kl'
                     self.knight.next_tile = 'l'
                     self.is_lit = True
+                    if self.check_for_attack():
+                        self.draw()
+                        self.reset_knight(kp_y, kp_x, "Beware the eyes...")
 
 
                 # press SPACE to interactive with torch
