@@ -29,8 +29,10 @@ class Tile:
         #Wall and gate tiles
         elif kind_of_tile == "vw" : filename = floor.WALL
         elif kind_of_tile == "hw" : filename = floor.HIDDEN_WALL
-        elif kind_of_tile == "vcg" : filename = floor.LIT_CLOSED_GATE
+        elif kind_of_tile == "vcg" : filename = floor.LIT_CLOSED_GATE 
         elif kind_of_tile == "hcg" : filename = floor.HIDDEN_CLOSED_GATE
+        elif kind_of_tile == "log" : filename = floor.LIT_OPENED_GATE
+        elif kind_of_tile == "dog" : filename = floor.HIDDEN_OPENED_GATE
 
         #Environmental tiles
         elif kind_of_tile == "lss" : filename = floor.LIT_SKELETON_SKULL
@@ -58,7 +60,7 @@ class Tile:
         elif kind_of_tile == 'hs' : filename = floor.HIDDEN_SPIDER
 
         #Pressure plate tiles
-        elif kind_of_tile == "lpp" : filename = floor.LIT_PRESSURE_PLATE
+        elif kind_of_tile == "lpp" : filename = floor.LIT_PRESSURE_PLATE 
         elif kind_of_tile == "dpp" : filename = floor.HIDDEN_PRESSUREPLATE
 
         #Clue tiles
