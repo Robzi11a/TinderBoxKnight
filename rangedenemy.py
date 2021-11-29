@@ -23,6 +23,7 @@ class Ranged_Enemy:
             level_array[1][5] = 'p'
             level_array[1][6] = 'pre'
             
+            
 
         if level_array[1][1] == 'kl':
             print("1")
@@ -43,7 +44,6 @@ class Ranged_Enemy:
             level_array[1][4] = 'pss'
             level_array[1][5] = 'p'
             level_array[1][6] = 'pre'
-            print(level_array)
             
         
         if level_array[1][3] == 'kl':
@@ -70,7 +70,7 @@ class Ranged_Enemy:
         
         if level_array[1][5] == 'kl':
             level_array[1][0] = 'p'
-            level_array[1][1] = 'pk'
+            level_array[1][1] = 'p'
             level_array[1][2] = 'psa'
             level_array[1][3] = 'psr'
             level_array[1][4] = 'pss'

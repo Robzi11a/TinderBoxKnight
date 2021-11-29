@@ -84,6 +84,7 @@ class Tinder_Box_Knight:
                     safe_move = self.knight.move_down(self.level_array)
                     if self.check_for_attack():
                         self.draw()
+                        self.reset_knight(kp_y, kp_x, "Beware the eyes...")
                     if not safe_move:
                         kp_y, kp_x = self.knight.return_position()
                         self.reset_knight(kp_y, kp_x, "You hit a spider!")
