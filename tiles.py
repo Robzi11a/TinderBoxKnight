@@ -4,7 +4,7 @@ import os
  
 TILES_HORIZONTAL = 7
 TILES_VERTICAL = 10
-TILESIZE = 100
+TILESIZE = 50
 WINDOW_WIDTH = TILESIZE * TILES_HORIZONTAL
 WINDOW_HEIGHT = TILESIZE * TILES_VERTICAL
 
@@ -39,14 +39,14 @@ class Tile:
         elif kind_of_tile == "vb" : filename = floor.LIT_BOOKSHELF
         elif kind_of_tile == "hb" : filename = floor.HIDDEN_BOOKSHELF
         elif kind_of_tile == "lj" : filename = floor.LIT_JOURNAL
-        elif kind_of_tile == "bl" : filename = floor.BROKEN_LAMP
+        elif kind_of_tile == "lb" : filename = floor.BROKEN_LAMP
 
         #Poison tiles
         elif kind_of_tile == "pss" : filename = floor.POISON_SKELETON_SKULL
         elif kind_of_tile == "psr" : filename = floor.POISON_SKELETON_RIBS
         elif kind_of_tile == "psa" : filename = floor.POISON_SKELETON_ARMS
         elif kind_of_tile == "p" : filename = floor.POISON_TILE_EMPTY
-        elif kind_of_tile == "kp" : filename = floor.POISON_KNIGHT_BACKGROUND
+        elif kind_of_tile == "pk" : filename = floor.POISON_KNIGHT_BACKGROUND
         elif kind_of_tile == "pre" : filename = floor.POISON_SHADOW
 
         

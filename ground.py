@@ -58,9 +58,9 @@ DARK_RANGED_ENEMY_ANGRY = "DarkShadowAngry.png"
 
 POISON_TILE_EMPTY = "PoisonTile.png"
 
-POISON_KNIGHT_BACKGROUND = "Poison_Knight_Background.png"
+POISON_KNIGHT_BACKGROUND = "PoisonKnightBackground.png"
 
-POISON_SHADOW = "Poison_Shadow.png"
+POISON_SHADOW = "PoisonShadow.png"
 
 POISON_SKELETON_SKULL = "PoisonSkullBones.png"
 

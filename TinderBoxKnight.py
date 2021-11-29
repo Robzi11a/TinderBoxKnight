@@ -13,7 +13,7 @@ from tiles import TILES_VERTICAL, TILES_HORIZONTAL, TILESIZE
 from knight import Knight
 from bigtorch import BigTorch
 from utils import WHITE
-from rangedenemy import Ranged_enemy
+from rangedenemy import Ranged_Enemy
 
 TITLE = "Tinder Box Knightf"
 
@@ -33,6 +33,8 @@ class Tinder_Box_Knight:
         self.scanned_tiles = []
         self.is_lit = False
         self.lit_tiles = []
+        self.Ranged_Enemy = Ranged_Enemy(0, 0)
+        self.ranged_enemies = []
         
 
     # Read user input
@@ -49,31 +51,43 @@ class Tinder_Box_Knight:
                 # Move right
                 if event.key == pygame.K_RIGHT: 
                     safe_move = self.knight.move_right(self.level_array)
+                    if self.check_for_attack():
+                        self.draw()
                     if not safe_move:
                         kp_y, kp_x = self.knight.return_position()
-                        self.reset_knight(kp_y, kp_x)                            
+                        self.reset_knight(kp_y, kp_x, "You hit a spider!")     
+                    self.check_for_attack()                       
 
                 # Move left 
                 if event.key == pygame.K_LEFT:
                     safe_move = self.knight.move_left(self.level_array)
+                    if self.check_for_attack():
+                        self.draw()
                     if not safe_move:
                         kp_y, kp_x = self.knight.return_position()
-                        self.reset_knight(kp_y, kp_x)                  
+                        self.reset_knight(kp_y, kp_x, "You hit a spider!")           
+                    self.check_for_attack()
 
                 # Move up 
                 if event.key == pygame.K_UP:
                     safe_move = self.knight.move_up(self.level_array)
-                    if not safe_move:
-                        kp_y, kp_x = self.knight.return_position()
-                        self.reset_knight(kp_y, kp_x)
+                    kp_y, kp_x = self.knight.return_position()
+                    if self.check_for_attack():
+                        self.draw()
+                        self.reset_knight(kp_y, kp_x, "Beware the eyes...")
+                    if not safe_move:                     
+                        self.reset_knight(kp_y, kp_x, "You hit a spider!")
+                    
                 
                 # Move down 
                 if event.key == pygame.K_DOWN:
                     safe_move = self.knight.move_down(self.level_array)
+                    if self.check_for_attack():
+                        self.draw()
                     if not safe_move:
                         kp_y, kp_x = self.knight.return_position()
-                        self.reset_knight(kp_y, kp_x)
-                
+                        self.reset_knight(kp_y, kp_x, "You hit a spider!")
+                                    
                 # Scan
                 if event.key == pygame.K_s:
                     self.scanner = Scanner(self.level_array, self.original_array, self.scanned_tiles, self.knight.return_position())
@@ -100,69 +114,19 @@ class Tinder_Box_Knight:
                         BigTorch().play_lightcutscene()
                     # missing: all tiles change into visible
 
-    def attack(self, level_array):
-        if self.level_array[1][0] == 'lk':
-            self.level_array[1][0] == 'pk'
-            self.level_array[1][1] == 'p'
-            self.level_array[1][2] == 'psa'
-            self.level_array[1][3] == 'psr'
-            self.level_array[1][4] == 'pss'
-            self.level_array[1][5] == 'p'
-            self.level_array[1][6] == 'pre'
-            reset_knight_poison(self, kp_y, kp_x)
-        if self.level_array[1][1] == 'lk':
-            self.level_array[1][0] == 'p'
-            self.level_array[1][1] == 'pk'
-            self.level_array[1][2] == 'psa'
-            self.level_array[1][3] == 'psr'
-            self.level_array[1][4] == 'pss'
-            self.level_array[1][5] == 'p'
-            self.level_array[1][6] == 'pre'
-            reset_knight_poison(self, kp_y, kp_x)
-        if self.level_array[1][2] == 'lk':
-            self.level_array[1][0] == 'p'
-            self.level_array[1][1] == 'p'
-            self.level_array[1][2] == 'pk'
-            self.level_array[1][3] == 'psr'
-            self.level_array[1][4] == 'pss'
-            self.level_array[1][5] == 'p'
-            self.level_array[1][6] == 'pre'
-            reset_knight_poison(self, kp_y, kp_x)
-        if self.level_array[1][3] == 'lk':
-            self.level_array[1][0] == 'p'
-            self.level_array[1][1] == 'p'
-            self.level_array[1][2] == 'psa'
-            self.level_array[1][3] == 'pk'
-            self.level_array[1][4] == 'pss'
-            self.level_array[1][5] == 'p'
-            self.level_array[1][6] == 'pre'
-            reset_knight_poison(self, kp_y, kp_x)
-        if self.level_array[1][4] == 'lk':
-            self.level_array[1][0] == 'p'
-            self.level_array[1][1] == 'pk'
-            self.level_array[1][2] == 'psa'
-            self.level_array[1][3] == 'psr'
-            self.level_array[1][4] == 'pk'
-            self.level_array[1][5] == 'p'
-            self.level_array[1][6] == 'pre'
-            reset_knight_poison(self, kp_y, kp_x)
-        if self.level_array[1][5] == 'lk':
-            self.level_array[1][0] == 'p'
-            self.level_array[1][1] == 'pk'
-            self.level_array[1][2] == 'psa'
-            self.level_array[1][3] == 'psr'
-            self.level_array[1][4] == 'pss'
-            self.level_array[1][5] == 'pk'
-            self.level_array[1][6] == 'pre'
-            reset_knight_poison(self, kp_y, kp_xf)
+    def check_for_attack(self):
+        for i in range(6):
+            if self.level_array[1][i] == "kl":
+                self.Ranged_Enemy.ranged_attack(self.level_array, self.knight)
+                return True
 
     def update(self):
         pass
 
 # Move knight back to starting square when they hit a spider 
-    def reset_knight(self, kp_y, kp_x):
+    def reset_knight(self, kp_y, kp_x, message):
         font = pygame.font.SysFont("arial", 16)
-        caption = font.render("You hit a spider!", True, WHITE)
+        caption = font.render(message, True, WHITE)
         '''self.screen.fill((0,0,0))'''
         '''self.screen.blit(caption,[self.wINDOW_WIDTH/2,self.wINDOW_HEIGHT/2])'''
         self.caption_rect = pygame.Rect((kp_x + 6) * TILESIZE, kp_y * TILESIZE, TILESIZE, TILESIZE)
@@ -170,6 +134,7 @@ class Tinder_Box_Knight:
         pygame.display.flip()
         pygame.time.wait(1000)
         self.knight.reset_knight_position(self.level_array)
+
 
     # Read in level is its own function so that we can call it to read in different levels.
     def read_in_level(self, level_number):
@@ -180,7 +145,15 @@ class Tinder_Box_Knight:
             self.level_array = [x for x in self.level_array if x != []]
             self.original_array = copy.deepcopy(self.level_array)
         self.knight = Knight(9, 0)
+        self.create_monster_objects()
 
+    # Create array of monster objects
+    def create_monster_objects(self):
+        self.ranged_enemies.clear()
+        for y in range(TILES_VERTICAL):
+            for x in range(TILES_HORIZONTAL):
+                if self.level_array[y][x] == "hre":
+                    self.ranged_enemies.append(Ranged_Enemy(y, x))
 
 
 # Draw new assets to screen
