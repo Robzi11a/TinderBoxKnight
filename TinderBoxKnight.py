@@ -14,6 +14,7 @@ from knight import Knight
 from bigtorch import BigTorch
 from utils import WHITE
 from rangedenemy import Ranged_Enemy
+from pressureplate import PresurePlate
 
 TITLE = "Tinder Box Knightf"
 
@@ -56,7 +57,7 @@ class Tinder_Box_Knight:
                     if not safe_move:
                         kp_y, kp_x = self.knight.return_position()
                         self.reset_knight(kp_y, kp_x, "You hit a spider!")     
-                    self.check_for_attack()                       
+                    self.check_for_attack()
 
                 # Move left 
                 if event.key == pygame.K_LEFT:
@@ -84,7 +85,6 @@ class Tinder_Box_Knight:
                     safe_move = self.knight.move_down(self.level_array)
                     if self.check_for_attack():
                         self.draw()
-                        self.reset_knight(kp_y, kp_x, "Beware the eyes...")
                     if not safe_move:
                         kp_y, kp_x = self.knight.return_position()
                         self.reset_knight(kp_y, kp_x, "You hit a spider!")
@@ -94,7 +94,7 @@ class Tinder_Box_Knight:
                     self.scanner = Scanner(self.level_array, self.original_array, self.scanned_tiles, self.knight.return_position())
                     self.is_scanned = True
                 
-                # Light
+                # Light and Open Gate 
                 if event.key == pygame.K_f:
                     kp_y, kp_x = self.knight.return_position() 
                     self.light = Light(self.level_array, self.original_array, self.lit_tiles, self.knight.return_position())
@@ -103,10 +103,9 @@ class Tinder_Box_Knight:
                     self.level_array[kp_y][kp_x] = 'kl'
                     self.knight.next_tile = 'l'
                     self.is_lit = True
-                    if self.check_for_attack():
-                        self.draw()
-                        self.reset_knight(kp_y, kp_x, "Beware the eyes...")
-
+                    # open gate(steping on the pressure plate)
+                    PresurePlate(self.knight.return_position(),self.level_array,self.surface)
+                
 
                 # press SPACE to interactive with torch
                 if event.key == pygame.K_SPACE:
@@ -118,13 +117,14 @@ class Tinder_Box_Knight:
                         BigTorch().play_lightcutscene()
                     # missing: all tiles change into visible
 
+
     def check_for_attack(self):
         for i in range(6):
             if self.level_array[1][i] == "kl":
                 self.Ranged_Enemy.ranged_attack(self.level_array, self.knight)
                 return True
 
-    def update(self):
+    def update(self): 
         pass
 
 # Move knight back to starting square when they hit a spider 
@@ -150,6 +150,8 @@ class Tinder_Box_Knight:
             self.original_array = copy.deepcopy(self.level_array)
         self.knight = Knight(9, 0)
         self.create_monster_objects()
+        #find and save positions for gates and pressure plates
+        PresurePlate(self.knight.return_position(),self.level_array,self.surface)
 
     # Create array of monster objects
     def create_monster_objects(self):

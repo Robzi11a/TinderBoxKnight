@@ -38,12 +38,16 @@ class Light:
                             self.previous_tile = self.original_array[xIndex][yIndex].replace('d', 'l', 1)
                         else:
                             self.previous_tile = 'l'
+                        # an if method to fix a bug about gate
+                        if self.previous_tile=="vcg":
+                            self.previous_tile="log"
                         print('ppp', self.previous_tile)
                         self.tiles[xIndex][yIndex] = 'kl'
                         continue
                     if self.tiles[xIndex][yIndex].startswith('h'):
                         print(xIndex, yIndex, 2)
                         self.tiles[xIndex][yIndex] = self.tiles[xIndex][yIndex].replace('h', 'v', 1)
+                        print(self.tiles[xIndex][yIndex])
                     elif self.tiles[xIndex][yIndex].startswith('d'):
                         print(xIndex, yIndex, 3)
                         self.tiles[xIndex][yIndex] = self.tiles[xIndex][yIndex].replace('d', 'l', 1)

@@ -7,6 +7,7 @@ KIND_OF_TILES += ["MovementLeft", "MatchButton", "ScanButton"]
 KIND_OF_TILES += ["QuitButton", "Controls"]
 KIND_OF_TILES += ["QuitButton"]
 KIND_OF_TILES += ["LitSpider"]
+KIND_OF_TILES += ["LightClosedGate", "LightPressurePlate"]
 
 DARK_PURPLE = (3.5, 3.9, 7.8)
 
@@ -33,6 +34,9 @@ KNIGHT_LIGHT_BACKGROUND = "KnightLightBackground.png"
 # Lit Closed Gate ["lcg"]
 
 LIT_CLOSED_GATE = "LightClosedGate.png"
+
+# Lit Opened Gate ["log"]
+LIT_OPENED_GATE = "LightTile.png" 
 
 # Broken Lamp ["bl"]
 
@@ -90,7 +94,7 @@ LIT_CLUE_RIGHT = "ClueRight.png"
 
 LIT_SPIDER_CLUE = "SpiderClue.png"
 
-# Hidden object dark tiles = ["ht, hs, hcu, hcd, hcr, hcs, hb, hpp"]
+# Hidden object dark tiles = ["ht, hs, hcu, hcd, hcr, hcs, hb, dpp,dog,hcg"]
 
 HIDDEN_TORCH = "DarkTile.png"
 
@@ -109,6 +113,8 @@ HIDDEN_BOOKSHELF = "DarkTile.png"
 HIDDEN_PRESSUREPLATE = "DarkTile.png"
 
 HIDDEN_CLOSED_GATE = "DarkTile.png"
+
+HIDDEN_OPENED_GATE = "DarkTile.png"
 
 HIDDEN_WALL = "DarkTile.png"
 
@@ -147,6 +153,5 @@ CONTROLS = "Controls.png"
 # Lit spider monster tiles = ["ls"]
 
 LIT_SPIDER = "LitSpider.png"
-
 
 
