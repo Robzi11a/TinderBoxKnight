@@ -13,7 +13,7 @@ class Ranged_Enemy:
     
     def ranged_attack(self, level_array, knight):
         
-        if level_array[1][0] == 'kl':
+        if level_array[1][0] == 'kl' and (level_array[1][6] == 'hre' or 'pre'):
             print("0")
             level_array[1][0] = 'pk'
             level_array[1][1] = 'p'
@@ -21,11 +21,9 @@ class Ranged_Enemy:
             level_array[1][3] = 'psr'
             level_array[1][4] = 'pss'
             level_array[1][5] = 'p'
-            level_array[1][6] = 'pre'
-            
-            
+            level_array[1][6] = 'pre'   
 
-        if level_array[1][1] == 'kl':
+        if level_array[1][1] == 'kl' and (level_array[1][6] == 'hre' or 'pre'):
             print("1")
             level_array[1][0] = 'p'
             level_array[1][1] = 'pk'
@@ -35,7 +33,7 @@ class Ranged_Enemy:
             level_array[1][5] = 'p'
             level_array[1][6] = 'pre'
             
-        if level_array[1][2] == 'kl':
+        if level_array[1][2] == 'kl' and (level_array[1][6] == 'hre' or 'pre'):
             print("2")
             level_array[1][0] = 'p'
             level_array[1][1] = 'p'
@@ -44,9 +42,8 @@ class Ranged_Enemy:
             level_array[1][4] = 'pss'
             level_array[1][5] = 'p'
             level_array[1][6] = 'pre'
-            
         
-        if level_array[1][3] == 'kl':
+        if level_array[1][3] == 'kl' and (level_array[1][6] == 'hre' or 'pre'):
             print("3")
             level_array[1][0] = 'p'
             level_array[1][1] = 'p'
@@ -54,10 +51,9 @@ class Ranged_Enemy:
             level_array[1][3] = 'pk'
             level_array[1][4] = 'pss'
             level_array[1][5] = 'p'
-            level_array[1][6] = 'pre'
-            
+            level_array[1][6] = 'pre'  
         
-        if level_array[1][4] == 'kl':
+        if level_array[1][4] == 'kl' and (level_array[1][6] == 'hre' or 'pre'):
             print("4")
             level_array[1][0] = 'p'
             level_array[1][1] = 'pk'
@@ -66,9 +62,8 @@ class Ranged_Enemy:
             level_array[1][4] = 'pk'
             level_array[1][5] = 'p'
             level_array[1][6] = 'pre'
-            
         
-        if level_array[1][5] == 'kl':
+        if level_array[1][5] == 'kl' and (level_array[1][6] == 'hre' or 'pre'):
             level_array[1][0] = 'p'
             level_array[1][1] = 'p'
             level_array[1][2] = 'psa'
