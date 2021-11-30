@@ -74,7 +74,7 @@ class Tile:
         #Torch tiles     
         elif kind_of_tile == "ht" : filename = floor.HIDDEN_TORCH
         elif kind_of_tile == "vut" : filename = floor.VISIBLE_UNLIT_TORCH
-        elif kind_of_tile == "vlt" : filename = floor.VISIBLE_LIT_TORCH   
+        elif kind_of_tile == "vt" : filename = floor.VISIBLE_LIT_TORCH   
         
         # Info tiles
         elif kind_of_tile == "sk" : filename = floor.SCAN_KNIGHT
