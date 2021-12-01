@@ -1,3 +1,5 @@
+import pygame
+
 KIND_OF_TILES = ["DarkTile", "LightTile", "KnightDarkBackground"]
 KIND_OF_TILES += ["KnightLightBackground", "HiddenTorch", "HiddenSpider"]
 KIND_OF_TILES += ["HiddenClueUp", "HiddenClueDiagonal", "VisibleUnlitTorch"]
@@ -36,7 +38,7 @@ KNIGHT_LIGHT_BACKGROUND = "KnightLightBackground.png"
 LIT_CLOSED_GATE = "LightClosedGate.png"
 
 # Lit Opened Gate ["log"]
-LIT_OPENED_GATE = "LightTile.png" 
+LIT_OPENED_GATE = "LightTile.png"
 
 # Broken Lamp ["bl"]
 
@@ -154,4 +156,18 @@ CONTROLS = "Controls.png"
 
 LIT_SPIDER = "LitSpider.png"
 
+# Game states
+MAIN_MENU = 1
+
+LEVEL = 2
+
+END_SCREEN = 3
+
+QUIT = 4
+
+screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+WINDOW_WIDTH = screen.get_rect().width
+WINDOW_HEIGHT = screen.get_rect().height
+# WINDOW_WIDTH = 700
+# WINDOW_HEIGHT = 600
 
