@@ -36,6 +36,8 @@ class Light:
                             self.previous_tile = self.original_array[xIndex][yIndex].replace('h', 'v', 1)
                         elif self.original_array[xIndex][yIndex].startswith('d'):
                             self.previous_tile = self.original_array[xIndex][yIndex].replace('d', 'l', 1)
+                        elif self.original_array[xIndex][yIndex].startswith('p'):
+                            self.previous_tile = self.original_array[xIndex][yIndex].replace('p', 'l', 1) 
                         else:
                             self.previous_tile = 'l'
                         # an if method to fix a bug about gate
@@ -51,6 +53,9 @@ class Light:
                     elif self.tiles[xIndex][yIndex].startswith('d'):
                         print(xIndex, yIndex, 3)
                         self.tiles[xIndex][yIndex] = self.tiles[xIndex][yIndex].replace('d', 'l', 1)
+                    elif self.tiles[xIndex][yIndex].startswith('p'):
+                        print(xIndex, yIndex, 3)
+                        self.tiles[xIndex][yIndex] = self.tiles[xIndex][yIndex].replace('p', 'l', 1)
                     # elif self.tiles[xIndex][yIndex] == 'vs':
                     #     self.knight.update_position(9, 0)
                     #     self.level_array[kp_y][kp_x], self.level_array[9][0] = self.level_array[9][0], self.level_array[kp_y][kp_x]

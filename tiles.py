@@ -25,6 +25,7 @@ class Tile:
         #Knight tiles
         elif kind_of_tile == "kd" : filename = floor.KNIGHT_DARK_BACKGROUND
         elif kind_of_tile == "kl" : filename = floor.KNIGHT_LIGHT_BACKGROUND
+        elif kind_of_tile == "lk" : filename = floor.KNIGHT_LIGHT_BACKGROUND
 
         #Wall and gate tiles
         elif kind_of_tile == "vw" : filename = floor.WALL
@@ -53,6 +54,7 @@ class Tile:
 
         
         #Monster tiles
+        elif kind_of_tile == "lre" : filename = floor.LIT_RANGED_ENEMY
         elif kind_of_tile == "vre" : filename = floor.LIT_RANGED_ENEMY
         elif kind_of_tile == "hre" : filename = floor.DARK_RANGED_ENEMY
         elif kind_of_tile == "hrea" : filename = floor.DARK_RANGED_ENEMY_ANGRY
@@ -76,7 +78,7 @@ class Tile:
         #Torch tiles     
         elif kind_of_tile == "ht" : filename = floor.HIDDEN_TORCH
         elif kind_of_tile == "vut" : filename = floor.VISIBLE_UNLIT_TORCH
-        elif kind_of_tile == "vlt" : filename = floor.VISIBLE_LIT_TORCH   
+        elif kind_of_tile == "vt" : filename = floor.VISIBLE_LIT_TORCH   
         
         # Info tiles
         elif kind_of_tile == "sk" : filename = floor.SCAN_KNIGHT

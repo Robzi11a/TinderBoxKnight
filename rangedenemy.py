@@ -64,6 +64,7 @@ class Ranged_Enemy:
             level_array[1][6] = 'pre'
         
         if level_array[1][5] == 'kl' and (level_array[1][6] == 'hre' or 'pre'):
+            print("5")
             level_array[1][0] = 'p'
             level_array[1][1] = 'p'
             level_array[1][2] = 'psa'
@@ -71,6 +72,13 @@ class Ranged_Enemy:
             level_array[1][4] = 'pss'
             level_array[1][5] = 'pk'
             level_array[1][6] = 'pre'
-            
 
-
+        if level_array[1][6] == 'lre':
+            print("5")
+            level_array[1][0] = 'l'
+            level_array[1][1] = 'l'
+            level_array[1][2] = 'lsa'
+            level_array[1][3] = 'lsr'
+            level_array[1][4] = 'lss'
+            level_array[1][5] = 'l'
+            level_array[1][6] = 'l'
