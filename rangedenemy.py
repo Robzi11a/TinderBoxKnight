@@ -12,7 +12,7 @@ class Ranged_Enemy:
         self.column = column
     
     def ranged_attack(self, level_array, knight):
-        
+
         if level_array[3][4] == 'kl' and (level_array[3][10] == 'hre' or 'pre'):
             print("0")
             level_array[3][4] = 'pk'
