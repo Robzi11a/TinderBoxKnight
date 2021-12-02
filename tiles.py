@@ -4,7 +4,7 @@ import os
  
 TILES_HORIZONTAL = 7
 TILES_VERTICAL = 10
-TILESIZE = 50
+TILESIZE = TILES_HORIZONTAL * TILES_VERTICAL
 WINDOW_WIDTH = TILESIZE * TILES_HORIZONTAL
 WINDOW_HEIGHT = TILESIZE * TILES_VERTICAL
 
@@ -14,7 +14,7 @@ class Tile:
     def __init__(self, id, x, y, kind_of_tile):
         filename = ""
         self.id = id
-        self.x = int(x + 6)
+        self.x = int(x + 10)
         self.y = int(y)
         self.kind_of_tile = kind_of_tile
         # ----
