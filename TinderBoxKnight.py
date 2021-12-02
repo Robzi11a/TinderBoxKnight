@@ -148,7 +148,7 @@ class Tinder_Box_Knight:
             self.level_array = list(csv_reader)
             self.level_array = [x for x in self.level_array if x != []]
             self.original_array = copy.deepcopy(self.level_array)
-        self.knight = Knight(9, 0)
+        self.knight = Knight(11, 4)
         self.create_monster_objects()
         #find and save positions for gates and pressure plates
         PresurePlate(self.knight.return_position(),self.level_array,self.surface)
