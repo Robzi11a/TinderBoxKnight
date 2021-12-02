@@ -30,6 +30,7 @@ class Level(State):
         self.reset = False
         self.message = ''
         self.next = floor.LEVEL
+        self.scan_label = {}
 
         self.read_in_level(0)
 
@@ -40,6 +41,10 @@ class Level(State):
 
         if key == pygame.K_q:
             self.keep_looping = False
+            self.next = floor.MAIN_MENU
+
+        if key == pygame.K_RIGHT or key == pygame.K_LEFT or key == pygame.K_UP or key == pygame.K_DOWN:
+            self.scan_label = {}
 
         # Move right
         if key == pygame.K_RIGHT:
@@ -149,14 +154,18 @@ class Level(State):
                     self.ranged_enemies.append(Ranged_Enemy(y, x))
 
     # Draw new assets to screen
-    def draw(self, surface):
+    def draw(self, surface, time_tick):
         surface.fill(self.BG_COLOR)
         self.tiles = Tiles(surface, self.level_array)
         self.tiles.draw(surface)
         # if self.is_lit:
         #     self.light.draw(self.surface)
         if self.is_scanned:
-            self.scanner.draw(surface)
+            self.scan_label = self.scanner.draw(surface)
+            self.scan_label['timestamp'] = time_tick
+            print(time_tick)
+        if self.scan_label and time_tick - self.scan_label['timestamp'] < 3000:
+            surface.blit(self.scan_label['text'], self.scan_label['rect'])
         if self.reset:
             font = pygame.font.SysFont("arial", 16)
             caption = font.render(self.message, True, WHITE)
@@ -173,8 +182,9 @@ class Level(State):
 
     def startup(self, game_info):
         self.read_in_level(0)
+        self.scanned_tiles = []
 
-    def update(self, surface, key):
+    def update(self, surface, key, time_tick):
         if not self.reset:
             self.keydown_events(key)
-        self.draw(surface)
+        self.draw(surface, time_tick)

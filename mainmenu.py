@@ -128,6 +128,6 @@ class Menu(State):
     def startup(self, game_info):
         pass
 
-    def update(self, surface, keys):
+    def update(self, surface, keys, time_tick):
         self.update_cursor(keys)
         self.draw(surface)

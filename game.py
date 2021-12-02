@@ -19,7 +19,7 @@ class State:
         return self.knight_info
 
     @abstractmethod
-    def update(self, surface, keys):
+    def update(self, surface, keys, time_tick):
         pass
 
 
@@ -32,6 +32,7 @@ class Game:
         self.state_dict = {}
         self.state_name = None
         self.state = None
+        self.time_tick = 0.0
 
     def setup_states(self, state_dict, start_state):
         self.state_dict = state_dict
@@ -41,7 +42,7 @@ class Game:
     def update(self):
         if not self.state.keep_looping:
             self.next_state()
-        self.state.update(self.screen, self.key)
+        self.state.update(self.screen, self.key, self.time_tick)
         self.key = ''
 
     def next_state(self):
@@ -57,6 +58,7 @@ class Game:
     def run(self):
         while self.keep_looping:
             self.clock.tick(30)
+            self.time_tick = pygame.time.get_ticks()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.keep_looping = False
