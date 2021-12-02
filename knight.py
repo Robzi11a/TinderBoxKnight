@@ -152,13 +152,13 @@ class Knight:
         return False
 
     def reset_knight_position(self, level_array):
-        if level_array[9][0] == "l":
-            level_array[9][0] = "kl"
+        if level_array[11][4] == "l":
+            level_array[11][4] = "kl"
         else: 
-            level_array[9][0] = "kd"
+            level_array[11][4] = "kd"
         if level_array[self.row][self.column] == "kd":
             level_array[self.row][self.column] = "d"
         else: 
             level_array[self.row][self.column] = "l"
-        self.row, self.column = 9, 0
-        self.reset_tile_memory(level_array[9][0])
+        self.row, self.column = 11, 4
+        self.reset_tile_memory(level_array[11][4])
