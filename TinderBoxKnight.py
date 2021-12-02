@@ -120,7 +120,7 @@ class Tinder_Box_Knight:
 
     def check_for_attack(self):
         for i in range(6):
-            if self.level_array[1][i] == "kl":
+            if self.level_array[3][i] == "kl":
                 self.Ranged_Enemy.ranged_attack(self.level_array, self.knight)
                 return True
 
