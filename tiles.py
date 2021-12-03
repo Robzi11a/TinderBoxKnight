@@ -39,6 +39,8 @@ class Tile:
         elif kind_of_tile == "lss" : filename = floor.LIT_SKELETON_SKULL
         elif kind_of_tile == "lsr" : filename = floor.LIT_SKELETON_RIBS
         elif kind_of_tile == "lsa" : filename = floor.LIT_SKELETON_ARMS
+        elif kind_of_tile == "lwsr" : filename = floor.LIT_WEB_SKELETON_RIBS
+        elif kind_of_tile == "lwsa" : filename = floor.LIT_WEB_SKELETON_ARMS
         elif kind_of_tile == "vb" : filename = floor.LIT_BOOKSHELF
         elif kind_of_tile == "hb" : filename = floor.HIDDEN_BOOKSHELF
         elif kind_of_tile == "lj" : filename = floor.LIT_JOURNAL
@@ -70,10 +72,15 @@ class Tile:
         elif kind_of_tile == "lcu" : filename = floor.LIT_CLUE_UP
         elif kind_of_tile == "lcr" : filename = floor.LIT_CLUE_RIGHT
         elif kind_of_tile == "lcs" : filename = floor.LIT_SPIDER_CLUE
+        elif kind_of_tile == "lrrc" : filename = floor.LIT_RIGHT_ROOM_CLUE
+        elif kind_of_tile == "llrc" : filename = floor.LIT_LEFT_ROOM_CLUE
+        elif kind_of_tile == "dcd" : filename = floor.LIT_MATCH_CLUE
         elif kind_of_tile == "dcr" : filename = floor.HIDDEN_CLUE_RIGHT
         elif kind_of_tile == "dcs" : filename = floor.HIDDEN_CLUE_SPIDER
         elif kind_of_tile == "dcu" : filename = floor.HIDDEN_CLUE_UP
         elif kind_of_tile == "dcd" : filename = floor.HIDDEN_CLUE_DIAGONAL
+        elif kind_of_tile == "drrc" : filename = floor.HIDDEN_RIGHT_ROOM_CLUE
+        elif kind_of_tile == "dlrc" : filename = floor.HIDDEN_LEFT_ROOM_CLUE
 
         #Torch tiles     
         elif kind_of_tile == "ht" : filename = floor.HIDDEN_TORCH

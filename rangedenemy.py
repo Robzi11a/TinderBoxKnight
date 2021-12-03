@@ -37,7 +37,7 @@ class Ranged_Enemy:
             print("2")
             level_array[3][4] = 'p'
             level_array[3][5] = 'p'
-            level_array[3][6] = 'pk'
+            level_array[3][6] = 'psa'
             level_array[3][7] = 'psr'
             level_array[3][8] = 'pss'
             level_array[3][9] = 'p'

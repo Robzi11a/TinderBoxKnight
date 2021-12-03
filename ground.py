@@ -52,6 +52,10 @@ LIT_SKELETON_RIBS = "RibBones.png"
 
 LIT_SKELETON_ARMS = "ArmBones.png"
 
+LIT_WEB_SKELETON_RIBS = "VisibleWebRibBones.png"
+
+LIT_WEB_SKELETON_ARMS = "VisibleWebArmBones.png"
+
 # Ranged Enemy ["lre, dre, drea"]
 
 LIT_RANGED_ENEMY = "LightShadow.png"
@@ -96,6 +100,12 @@ LIT_CLUE_RIGHT = "ClueRight.png"
 
 LIT_SPIDER_CLUE = "SpiderClue.png"
 
+LIT_RIGHT_ROOM_CLUE = "VisibleRightRoomClue.png"
+
+LIT_LEFT_ROOM_CLUE = "VisibleLeftRoomClue.png"
+
+LIT_MATCH_CLUE = "SpiderClue.png"
+
 # Hidden object dark tiles = ["ht, hs, hcu, hcd, hcr, hcs, hb, dpp,dog,hcg"]
 
 HIDDEN_TORCH = "DarkTile.png"
@@ -119,6 +129,10 @@ HIDDEN_CLOSED_GATE = "DarkTile.png"
 HIDDEN_OPENED_GATE = "DarkTile.png"
 
 HIDDEN_WALL = "DarkTile.png"
+
+HIDDEN_RIGHT_ROOM_CLUE = "DarkTile.png"
+
+HIDDEN_LEFT_ROOM_CLUE = "DarkTile.png"
 
 # Torch tiles in the light = ["vut, vlt"]
 
