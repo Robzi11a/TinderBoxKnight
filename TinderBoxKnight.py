@@ -15,6 +15,7 @@ from bigtorch import BigTorch
 from utils import WHITE
 from rangedenemy import Ranged_Enemy
 from pressureplate import PresurePlate
+from spider import Spider
 
 TITLE = "Tinder Box Knightf"
 
@@ -52,20 +53,22 @@ class Tinder_Box_Knight:
                 # Move right
                 if event.key == pygame.K_RIGHT: 
                     safe_move = self.knight.move_right(self.level_array)
+                    kp_y, kp_x = self.knight.return_position()
                     if self.check_for_attack():
                         self.draw()
+                        self.reset_knight(kp_y, kp_x, "Beware the eyes...")
                     if not safe_move:
-                        kp_y, kp_x = self.knight.return_position()
                         self.reset_knight(kp_y, kp_x, "You hit a spider!")     
                     self.check_for_attack()
 
                 # Move left 
                 if event.key == pygame.K_LEFT:
                     safe_move = self.knight.move_left(self.level_array)
+                    kp_y, kp_x = self.knight.return_position()
                     if self.check_for_attack():
                         self.draw()
+                        self.reset_knight(kp_y, kp_x, "Beware the eyes...")
                     if not safe_move:
-                        kp_y, kp_x = self.knight.return_position()
                         self.reset_knight(kp_y, kp_x, "You hit a spider!")           
                     self.check_for_attack()
 
@@ -83,10 +86,11 @@ class Tinder_Box_Knight:
                 # Move down 
                 if event.key == pygame.K_DOWN:
                     safe_move = self.knight.move_down(self.level_array)
+                    kp_y, kp_x = self.knight.return_position()
                     if self.check_for_attack():
                         self.draw()
+                        self.reset_knight(kp_y, kp_x, "Beware the eyes...")
                     if not safe_move:
-                        kp_y, kp_x = self.knight.return_position()
                         self.reset_knight(kp_y, kp_x, "You hit a spider!")
                                     
                 # Scan
@@ -98,13 +102,21 @@ class Tinder_Box_Knight:
                 if event.key == pygame.K_f:
                     kp_y, kp_x = self.knight.return_position() 
                     self.light = Light(self.level_array, self.original_array, self.lit_tiles, self.knight.return_position())
-                    self.knight.previous_tile = self.light.previous_tile
-                    print('previous tile: ', self.light.previous_tile)
-                    self.level_array[kp_y][kp_x] = 'kl'
-                    self.knight.next_tile = 'l'
-                    self.is_lit = True
-                    # open gate(steping on the pressure plate)
-                    PresurePlate(self.knight.return_position(),self.level_array,self.surface)
+                    
+                    #Check to see if the player lit up a spider
+                    found_spider, y, x = self.spider.check_for_lit_spider(kp_y, kp_x)
+                    if found_spider:
+                        self.draw()
+                        self.spider.reset_spider()
+                        self.reset_knight(kp_y, kp_x, "You lit up a spider!")
+                    else:
+                        self.knight.previous_tile = self.light.previous_tile
+                        print('previous tile: ', self.light.previous_tile)
+                        self.level_array[kp_y][kp_x] = 'kl'
+                        self.knight.next_tile = 'l'
+                        self.is_lit = True
+                        # open gate(steping on the pressure plate)
+                        PresurePlate(self.knight.return_position(),self.level_array,self.surface)
                 
 
                 # press SPACE to interactive with torch
@@ -131,9 +143,7 @@ class Tinder_Box_Knight:
     def reset_knight(self, kp_y, kp_x, message):
         font = pygame.font.SysFont("arial", 16)
         caption = font.render(message, True, WHITE)
-        '''self.screen.fill((0,0,0))'''
-        '''self.screen.blit(caption,[self.wINDOW_WIDTH/2,self.wINDOW_HEIGHT/2])'''
-        self.caption_rect = pygame.Rect((kp_x + 6) * TILESIZE, kp_y * TILESIZE, TILESIZE, TILESIZE)
+        self.caption_rect = pygame.Rect((kp_x+6) * TILESIZE, kp_y * TILESIZE, TILESIZE, TILESIZE)
         self.screen.blit(caption, self.caption_rect)
         pygame.display.flip()
         pygame.time.wait(1000)
@@ -149,6 +159,7 @@ class Tinder_Box_Knight:
             self.level_array = [x for x in self.level_array if x != []]
             self.original_array = copy.deepcopy(self.level_array)
         self.knight = Knight(11, 4)
+        self.spider = Spider(self.level_array)
         self.create_monster_objects()
         #find and save positions for gates and pressure plates
         PresurePlate(self.knight.return_position(),self.level_array,self.surface)
