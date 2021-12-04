@@ -1,4 +1,5 @@
 import pygame
+import copy
 
 from tiles import Tile, Tiles
 from tiles import TILES_VERTICAL, TILES_HORIZONTAL, TILESIZE
@@ -7,12 +8,80 @@ from bigtorch import BigTorch
 
 
 class Ranged_Enemy:
-    def __init__(self, row, column):
+    def __init__(self, row, column, level_array):
         self.row = row
         self.column = column
+        self.level_array = level_array
+        self.original_array = level_array
     
-    def ranged_attack(self, level_array, knight):
+    def ranged_attack(self, knight, level):
+        wall = False
+        kp_y, kp_x = knight.return_position()
+        self.original_array = copy.deepcopy(level)
+        
+        # If enemy is on same row as player
+        if kp_y == self.row:
+            
+            # Check if there is a wall in the way
+            if kp_x > self.column:
+                for i in range(self.column, kp_x):
+                    if 'w' in level[self.row][i]:
+                        wall = True
+            if kp_x < self.column:
+                for i in range (kp_x, self.column):
+                    if 'w' in level[self.row][i]:
+                        wall = True
+            
+            
+            if not wall and level[kp_y][kp_x] == 'kl':
+                level[self.row][self.column] = 'vre'
+                if kp_x > self.column:
+                    for i in range (self.column, kp_x):
+                        level[self.row][i] = level[self.row][i].replace('l', 'p')
+                        level[self.row][i] = level[self.row][i].replace('d', 'p')
+                    return True, self.original_array 
+                    
+                if kp_x < self.column:      
+                    for i in range (kp_x, self.column):
+                        level[self.row][i] = level[self.row][i].replace('l', 'p')
+                        level[self.row][i] = level[self.row][i].replace('d', 'p')
+                    return True, self.original_array 
+                  
+        #if enemy is on same column as player
+        elif kp_x == self.column:
+            # Check if there is a wall in the way
+            if kp_y > self.row:
+                for i in range(self.row, kp_y):
+                    if 'w' in self.level_array[i][self.column]:
+                        wall = True
+                        print(wall, i)
+            elif kp_y < self.row:
+                for i in range (kp_y, self.row):
+                    if 'w' in self.level_array[i][self.column]:
+                        wall = True
+            
+            if not wall and self.level_array[kp_y][kp_x] == 'kl':
+                level[self.row][self.column] = 'vre'
+                print("values are:", kp_x, self.column)
 
+                if kp_y > self.row:
+                    print("greater")
+                    for i in range (self.row, kp_y):
+                        level[i][self.column] = level[i][self.column].replace('l', 'p')
+                        level[i][self.column] = level[i][self.column].replace('d', 'p')
+                        level[i][self.column] = level[i][self.column].replace('l', 'p')
+                        level[i][self.column] = level[i][self.column].replace('d', 'p')
+
+                    return True, self.original_array 
+                    
+                if kp_y < self.row:      
+                    for i in range (kp_y, self.row):
+                        level[i][self.column] = level[i][self.column].replace('l', 'p')
+                        level[i][self.column] = level[i][self.column].replace('d', 'p')
+                    return True, self.original_array 
+
+        return False, self.level_array
+        """
         if level_array[3][4] == 'kl' and (level_array[3][10] == 'hre' or 'pre'):
             print("0")
             level_array[3][4] = 'pk'
@@ -82,3 +151,4 @@ class Ranged_Enemy:
             level_array[3][8] = 'lss'
             level_array[3][9] = 'l'
             level_array[3][10] = 'l'
+            """

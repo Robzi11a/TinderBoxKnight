@@ -51,7 +51,7 @@ class Tile:
         elif kind_of_tile == "psr" : filename = floor.POISON_SKELETON_RIBS
         elif kind_of_tile == "psa" : filename = floor.POISON_SKELETON_ARMS
         elif kind_of_tile == "p" : filename = floor.POISON_TILE_EMPTY
-        elif kind_of_tile == "pk" : filename = floor.POISON_KNIGHT_BACKGROUND
+        elif kind_of_tile == "kp" : filename = floor.POISON_KNIGHT_BACKGROUND
         elif kind_of_tile == "pre" : filename = floor.POISON_SHADOW
 
         
