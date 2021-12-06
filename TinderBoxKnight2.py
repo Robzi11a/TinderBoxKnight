@@ -5,6 +5,8 @@ import ground as floor
 import os
 import csv
 import time
+import tkinter
+import tkinter.messagebox
 
 from tiles import Tile, Tiles
 from scan import Scanner
@@ -183,15 +185,18 @@ class Tinder_Box_Knight:
             x=len(self.level_array[y-1]) #get the row number of lives in tiles,true x location for lives tile is x-1
             w=self.screen.get_rect().width
             h=self.screen.get_rect().height
+            root=tkinter.Tk()   #makesure only one accurate pop-up
+            root.withdraw()     #makesure only one accurate pop-up
             if(self.level_array[y-1][x-1]=="ml3"):
                 self.level_array[y-1][x-1] = self.level_array[y-1][x-1].replace("ml3","ml2",1)            #change lives tiles(3lives->2 lives)
             elif(self.level_array[y-1][x-1]=="ml2"):
                 self.level_array[y-1][x-1] = self.level_array[y-1][x-1].replace("ml2","ml1",1)            #change lives tiles(2lives->1 lives)
             elif(self.level_array[y-1][x-1]=="ml1"):
                 self.level_array[y-1][x-1] = self.level_array[y-1][x-1].replace("ml1","ml3",1)            #change lives tiles(1lives->3 lives)
-                self.display_text( kp_y, kp_x,"You have no lives!",60,(255,0,0),w/3,h/3)            #display message1
-                self.display_text( kp_y, kp_x,"Retry a new level!",60,(255,0,0),w/3,h/3+100)        #display message2
-                pygame.time.wait(2000)
+                tkinter.messagebox.showinfo("Tips","You have no lives! Plese retry a new level!")       #display a pop-up(option1)
+                #self.display_text( kp_y, kp_x,"You have no lives!",60,(255,0,0),w/3,h/3)            #display message1(option2)
+                #self.display_text( kp_y, kp_x,"Retry a new level!",60,(255,0,0),w/3,h/3+100)        #display message2(option2)
+                #pygame.time.wait(2000)
                 self.flag_restart=1  # a flag to trigger the restart function in "update"
 
     # a function to display a text in middle of screen
