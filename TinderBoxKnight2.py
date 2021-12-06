@@ -37,6 +37,8 @@ class Tinder_Box_Knight:
         self.lit_tiles = []
         self.ranged_enemies = []
         self.level_number = 0
+        self.flag_restart =0;#flag_restart: a flag to trigger the restart function("read_in_level") to reset level 
+                             #flag_restart=1 => start trigger; flag_restart=0 => no trigger
         
 
     # Read user input
@@ -58,11 +60,12 @@ class Tinder_Box_Knight:
                     if attacked:
                         self.draw()
                         self.reset_knight(kp_y, kp_x, "Beware the eyes...", level)
+                        self.lives_change(kp_y, kp_x)       #change the number of lives 
                     if not safe_move:
                         self.reset_knight(kp_y, kp_x, "You hit a spider!")
                         self.draw()
                         self.level_array[kp_y][kp_x+1] = 'hs'          #HIDING A SPIDER
-                        
+                        self.lives_change(kp_y, kp_x)       #change the number of lives 
                         
                     self.check_for_attack()
 
@@ -74,10 +77,12 @@ class Tinder_Box_Knight:
                     if attacked:
                         self.draw()
                         self.reset_knight(kp_y, kp_x, "Beware the eyes...", level)
+                        self.lives_change(kp_y, kp_x)       #change the number of lives 
                     if not safe_move:
                         self.reset_knight(kp_y, kp_x, "You hit a spider!")
                         self.draw()
                         self.level_array[kp_y][kp_x-1] = 'hs'           #HIDING A SPIDER
+                        self.lives_change(kp_y, kp_x)       #change the number of lives 
                     self.check_for_attack()
 
                 # Move up 
@@ -88,10 +93,12 @@ class Tinder_Box_Knight:
                     if attacked:
                         self.draw()
                         self.reset_knight(kp_y, kp_x, "Beware the eyes...", level)
-                    if not safe_move:                     
+                        self.lives_change(kp_y, kp_x)       #change the number of lives 
+                    if not safe_move: 
                         self.reset_knight(kp_y, kp_x, "You hit a spider!")
                         self.draw()
                         self.level_array[kp_y-1][kp_x] = 'hs'               #HIDING A SPIDER
+                        self.lives_change(kp_y, kp_x)       #change the number of lives 
                     
                 
                 # Move down 
@@ -102,17 +109,19 @@ class Tinder_Box_Knight:
                     if attacked:
                         self.draw()
                         self.reset_knight(kp_y, kp_x, "Beware the eyes...", level)
+                        self.lives_change(kp_y, kp_x)       #change the number of lives 
                     if not safe_move:
                         self.reset_knight(kp_y, kp_x, "You hit a spider!")
                         self.draw()
                         self.level_array[kp_y+1][kp_x] = 'hs'               #HIDING A SPIDER
+                        self.lives_change(kp_y, kp_x)       #change the number of lives 
                                     
                 # Scan
                 if event.key == pygame.K_s:
                     self.scanner = Scanner(self.level_array, self.original_array, self.scanned_tiles, self.knight.return_position())
                     self.is_scanned = True
                 
-                # Light and Open Gate 
+                # Light 
                 if event.key == pygame.K_f:
                     kp_y, kp_x = self.knight.return_position() 
                     self.light = Light(self.level_array, self.original_array, self.lit_tiles, self.knight.return_position())
@@ -124,21 +133,27 @@ class Tinder_Box_Knight:
                         self.draw()
                         self.spider.reset_spider()
                         self.reset_knight(kp_y, kp_x, "You lit up a spider!")
+                        self.lives_change(kp_y, kp_x)       #change the number of lives 
+
                     
                     elif attacked:
                         self.draw()
                         self.reset_knight(kp_y, kp_x, "Beware the eyes...", level)
+                        self.lives_change(kp_y, kp_x)       #change the number of lives 
+
                     else:
                         self.knight.previous_tile = self.light.previous_tile
                         print('previous tile: ', self.light.previous_tile)
                         self.level_array[kp_y][kp_x] = 'kl'
                         self.knight.next_tile = 'l'
                         self.is_lit = True
-                        # open gate(steping on the pressure plate)
-                        PresurePlate(self.knight.return_position(),self.level_array,self.surface)
                 
+                # Open gate 
+                if event.key == pygame.K_o:
+                      # open gate(steping on the pressure plate)
+                      PresurePlate(self.knight.return_position(),self.level_array,self.surface)
 
-                # press SPACE to interactive with torch
+                # press SPACE to interactive with torch(NOT USED)
                 if event.key == pygame.K_SPACE:
                     kp_y, kp_x = self.knight.return_position()  # kp_y is knight's row, kp_y is knight's column
                     xlocation_torch,ylocation_torch,sate_torch = BigTorch().is_torch_lit(self.level_array) # check and retrun the state of troch, also retrun torch's row and column
@@ -160,8 +175,41 @@ class Tinder_Box_Knight:
                 return True, level
         return False, 0
 
+     # a function to change the number of lives
+     # plyaer have 3 lives at first, meet a monster -> reduce a lives 
+     # when plyer don't have enought lives, this level will be restart.
+    def lives_change(self,kp_y,kp_x):
+            y=len(self.level_array)      #get the column number of lives in tiles,true y location for lives tile is y-1
+            x=len(self.level_array[y-1]) #get the row number of lives in tiles,true x location for lives tile is x-1
+            w=self.screen.get_rect().width
+            h=self.screen.get_rect().height
+            if(self.level_array[y-1][x-1]=="ml3"):
+                self.level_array[y-1][x-1] = self.level_array[y-1][x-1].replace("ml3","ml2",1)            #change lives tiles(3lives->2 lives)
+            elif(self.level_array[y-1][x-1]=="ml2"):
+                self.level_array[y-1][x-1] = self.level_array[y-1][x-1].replace("ml2","ml1",1)            #change lives tiles(2lives->1 lives)
+            elif(self.level_array[y-1][x-1]=="ml1"):
+                self.level_array[y-1][x-1] = self.level_array[y-1][x-1].replace("ml1","ml3",1)            #change lives tiles(1lives->3 lives)
+                self.display_text( kp_y, kp_x,"You have no lives!",60,(255,0,0),w/3,h/3)            #display message1
+                self.display_text( kp_y, kp_x,"Retry a new level!",60,(255,0,0),w/3,h/3+100)        #display message2
+                pygame.time.wait(2000)
+                self.flag_restart=1  # a flag to trigger the restart function in "update"
+
+    # a function to display a text in middle of screen
+    def display_text(self, kp_y, kp_x,message,font_size,font_color,w,h):
+        font = pygame.font.SysFont("arial",font_size)
+        caption = font.render(message, True, (font_color))
+        self.screen.blit(caption, (w,h))
+        pygame.display.flip()
+
+
+
     def update(self): 
-        pass
+        #flag_restart: a flag to trigger the restart function("read_in_level") to reset level 
+        #flag_restart=1 => start trigger; flag_restart=0 => no trigger
+        if(self.flag_restart==1):
+            self.flag_restart=0
+            self.read_in_level(self.level_number)
+            
 
 # Move knight back to starting square when they hit a spider 
     def reset_knight(self, kp_y, kp_x, message, level = None):

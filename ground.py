@@ -10,6 +10,7 @@ KIND_OF_TILES += ["QuitButton", "Controls"]
 KIND_OF_TILES += ["QuitButton"]
 KIND_OF_TILES += ["LitSpider"]
 KIND_OF_TILES += ["LightClosedGate", "LightPressurePlate"]
+KIND_OF_TILES += ["Lives1", "Lives2","Lives3"]
 
 DARK_PURPLE = (3.5, 3.9, 7.8)
 
@@ -169,6 +170,12 @@ CONTROLS = "Controls.png"
 # Lit spider monster tiles = ["ls"]
 
 LIT_SPIDER = "LitSpider.png"
+
+
+#Lives number showed =["ml1,ml2,ml3"]
+LIVES_1 = "Lives1.png"
+LIVES_2 = "Lives2.png"
+LIVES_3 = "Lives3.png"
 
 # Game states
 MAIN_MENU = 1

@@ -10,7 +10,7 @@ pressureplate
 
 Function: A module to open the gates when players steps on the pressure plate tile. 
 
-Current button design: Using keyborad 'f' to interactive with the pressure plate tile when player stand at the pressure plate tile.    
+Current button design: Using keyborad 'o' to interactive with the pressure plate tile when player stand at the pressure plate tile.    
 
 Tips: Can add more than 1 gate in a level.
       But the number of gate tiles must equal the number of the pressure plate tiles

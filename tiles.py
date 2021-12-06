@@ -98,6 +98,9 @@ class Tile:
         elif kind_of_tile == "sb" : filename = floor.SCAN_BUTTON
         elif kind_of_tile == "qc" : filename = floor.QUIT_CONTROL 
         elif kind_of_tile == "c" : filename = floor.CONTROLS
+        elif kind_of_tile == "ml1" : filename = floor.LIVES_1
+        elif kind_of_tile == "ml2" : filename = floor.LIVES_2
+        elif kind_of_tile == "ml3" : filename = floor.LIVES_3
         else: raise ValueError("Error, unkown tile: ", kind_of_tile)
         # ---------------------
         self.rect = pygame.Rect(self.x * TILESIZE, self.y * TILESIZE, TILESIZE, TILESIZE)
