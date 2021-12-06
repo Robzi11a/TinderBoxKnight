@@ -93,5 +93,6 @@ class BigTorch:
                 cap.release()
                 cv2.destroyAllWindows()
             else: print("light_torch video meets error! ")
+                
 
         
