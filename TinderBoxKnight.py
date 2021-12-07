@@ -148,11 +148,18 @@ class Tinder_Box_Knight:
                 # press SPACE to interactive with torch
                 if event.key == pygame.K_SPACE:
                     kp_y, kp_x = self.knight.return_position()  # kp_y is knight's row, kp_y is knight's column
-                    xlocation_torch,ylocation_torch,sate_torch = BigTorch().is_torch_lit(self.level_array) # check and retrun the state of troch, also retrun torch's row and column
-                    flag_isnearby=BigTorch().is_near_torch(xlocation_torch,ylocation_torch,kp_x, kp_y) #check eligibility to interact with the torch
-                    flag_finaltorch=BigTorch().change_torch_state (sate_torch,xlocation_torch,ylocation_torch,self.level_array,flag_isnearby) #change torch's pictures
-                    if (flag_finaltorch==True): # if lit torch, play a related cutscene
-                        BigTorch().play_lightcutscene()
+                    state_torch = self.big_torch.is_torch_lit(self.level_array) # check and retrun the state of troch, also retrun torch's row and column
+                    
+                    flag_isnearby = self.big_torch.is_near_torch(self.level_array, kp_x, kp_y) #check eligibility to interact with the torch
+                    
+                    print(flag_isnearby)
+                    flag_finaltorch = self.big_torch.change_torch_state () #change torch's pictures
+                    self.draw()
+                    pygame.time.wait(1000)
+                    
+                    if (flag_finaltorch): # if lit torch, play a related cutscene
+                        self.big_torch.play_lightcutscene()
+
                     # missing: all tiles change into visible
 
                 if event.key == pygame.K_r:
@@ -255,6 +262,7 @@ class Tinder_Box_Knight:
                 if element == 'ml3':
                     self.lives_tile = (row_num, col_num)
         self.spider = Spider(self.level_array)
+        self.big_torch = BigTorch(self.level_array)
         self.create_monster_objects()
         #find and save positions for gates and pressure plates
         PressurePlate(self.knight.return_position(),self.level_array,self.surface)
