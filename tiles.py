@@ -11,7 +11,7 @@ TILES_VERTICAL = 15
 
 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
-TILESIZE = screen.get_height()/13
+TILESIZE = screen.get_height()/14
 
 WINDOW_WIDTH = TILESIZE * TILES_HORIZONTAL
 
