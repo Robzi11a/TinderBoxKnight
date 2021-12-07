@@ -9,7 +9,9 @@ TILES_HORIZONTAL = 15
 
 TILES_VERTICAL = 15
 
-TILESIZE = 50
+screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+
+TILESIZE = screen.get_height()/20
 
 WINDOW_WIDTH = TILESIZE * TILES_HORIZONTAL
 
@@ -26,7 +28,7 @@ class Tile:
         filename = ""
         self.id = id
 
-        self.x = int(x + 10)
+        self.x = int(x + screen.get_height()/100)
 
         self.y = int(y)
 
