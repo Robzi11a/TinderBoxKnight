@@ -186,6 +186,12 @@ class Tile:
 
         elif kind_of_tile == "c" : filename = floor.CONTROLS
 
+        elif kind_of_tile == "ml1" : filename = floor.LIVES_1
+
+        elif kind_of_tile == "ml2" : filename = floor.LIVES_2
+
+        elif kind_of_tile == "ml3" : filename = floor.LIVES_3
+
         else: raise ValueError("Error, unkown tile: ", kind_of_tile)
 
         # ---------------------
