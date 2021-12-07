@@ -95,4 +95,8 @@ class BigTorch:
             else: print("light_torch video meets error! ")
                 
 
+#    def next_level(self):
+#        if self.torch_state == ;lit torch'
+#                import lvl2
+#           else: return False
         
