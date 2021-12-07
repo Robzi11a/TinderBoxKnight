@@ -6,6 +6,8 @@ import ground as floor
 import os
 import csv
 import time
+import tkinter
+import tkinter.messagebox
 
 from tiles import Tile, Tiles
 from scan import Scanner
@@ -39,7 +41,8 @@ class Tinder_Box_Knight:
         self.lit_tiles = []
         self.ranged_enemies = []
         self.level_number= 0
-        self.flag_restart = 0
+        self.flag_restart =0;#flag_restart: a flag to trigger the restart function("read_in_level") to reset level 
+                             #flag_restart=1 => start trigger; flag_restart=0 => no trigger
         
 
     # Read user input
@@ -135,10 +138,12 @@ class Tinder_Box_Knight:
                         self.level_array[kp_y][kp_x] = 'kl'
                         self.knight.next_tile = 'l'
                         self.is_lit = True
-                        # open gate(steping on the pressure plate)
-                        
+
+                # Open gate 
                 if event.key == pygame.K_o:
-                    PressurePlate(self.knight.return_position(), self.level_array, self.surface)
+                      # open gate(steping on the pressure plate)
+                      PresurePlate(self.knight.return_position(),self.level_array,self.surface)
+                
 
                 # press SPACE to interactive with torch
                 if event.key == pygame.K_SPACE:
@@ -161,6 +166,30 @@ class Tinder_Box_Knight:
                 print("attacked")
                 return True, level
         return False, 0
+
+     # a function to change the number of lives
+     # plyaer have 3 lives at first, meet a monster -> reduce a lives 
+     # when plyer don't have enought lives, this level will be restart.
+    def lives_change(self,kp_y,kp_x):
+            y=len(self.level_array)      #get the column number of lives in tiles,true y location for lives tile is y-1
+            x=len(self.level_array[y-1]) #get the row number of lives in tiles,true x location for lives tile is x-1
+            w=self.screen.get_rect().width
+            h=self.screen.get_rect().height
+            root=tkinter.Tk()   #makesure only one accurate pop-up
+            root.withdraw()     #makesure only one accurate pop-up
+            if(self.level_array[y-1][x-1]=="ml3"):
+                self.level_array[y-1][x-1] = self.level_array[y-1][x-1].replace("ml3","ml2",1)            #change lives tiles(3lives->2 lives)
+            elif(self.level_array[y-1][x-1]=="ml2"):
+                self.level_array[y-1][x-1] = self.level_array[y-1][x-1].replace("ml2","ml1",1)            #change lives tiles(2lives->1 lives)
+            elif(self.level_array[y-1][x-1]=="ml1"):
+                self.level_array[y-1][x-1] = self.level_array[y-1][x-1].replace("ml1","ml3",1)            #change lives tiles(1lives->3 lives)
+                T=tkinter.messagebox.askokcancel("Tips","You have no lives! Do you want to retry a new level?")       #display a pop-up(option1)
+                if(T):
+                    self.flag_restart=1  # a flag to trigger the restart function in "update" (choose yes option)
+                else:                    
+                    self.flag_restart=1  ##!!!! if player choose no , it should return start or finish menu. delete this row code (else:) and write your connect code for menu 
+
+
 
     def update(self): 
         if(self.flag_restart==1):

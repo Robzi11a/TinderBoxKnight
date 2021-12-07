@@ -13,5 +13,3 @@ vw;vw;vw;vw;vw;kd;d;d;d;d;vw;vw;vw;vw;vw
 vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw
 vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw
 vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw
-
-vw;vw;vw;vw;mu;mr;md;ml;sb;mb;ml3

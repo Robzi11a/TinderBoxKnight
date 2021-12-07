@@ -11,7 +11,7 @@ TILES_VERTICAL = 15
 
 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
-TILESIZE = screen.get_height()/14
+TILESIZE = screen.get_height()/13
 
 WINDOW_WIDTH = TILESIZE * TILES_HORIZONTAL
 
@@ -28,7 +28,7 @@ class Tile:
         filename = ""
         self.id = id
 
-        self.x = int(x + screen.get_width()/375)
+        self.x = int(x + screen.get_width()/400)
 
         self.y = int(y + screen.get_width()/4000 - screen.get_width()/1000)
 
@@ -189,7 +189,6 @@ class Tile:
         elif kind_of_tile == "ml1" : filename = floor.LIVES_1
 
         elif kind_of_tile == "ml2" : filename = floor.LIVES_2
-        
         elif kind_of_tile == "ml3" : filename = floor.LIVES_3
 
         else: raise ValueError("Error, unkown tile: ", kind_of_tile)
