@@ -58,9 +58,6 @@ class Tinder_Box_Knight:
                         self.reset_knight(kp_y, kp_x, "Beware the eyes...")
                     if not safe_move:
                         self.reset_knight(kp_y, kp_x, "You hit a spider!") 
-                        #NEW FOR MAKING VISIBLE SPIDER TILE HIDDEN AFTER HITTING SPIDER
-                        self.draw()
-                        
                         self.level_array[kp_y][kp_x+1] = 'hs'    
                         
                     self.check_for_attack()
@@ -73,10 +70,7 @@ class Tinder_Box_Knight:
                         self.draw()
                         self.reset_knight(kp_y, kp_x, "Beware the eyes...")
                     if not safe_move:
-                        self.reset_knight(kp_y, kp_x, "You hit a spider!") 
-                        #NEW FOR MAKING VISIBLE SPIDER TILE HIDDEN AFTER HITTING SPIDER
-                        self.draw()
-                        
+                        self.reset_knight(kp_y, kp_x, "You hit a spider!")                      
                         self.level_array[kp_y][kp_x-1] = 'hs'        
                     self.check_for_attack()
 
@@ -88,10 +82,7 @@ class Tinder_Box_Knight:
                         self.draw()
                         self.reset_knight(kp_y, kp_x, "Beware the eyes...")
                     if not safe_move:                     
-                        self.reset_knight(kp_y, kp_x, "You hit a spider!")
-                        #NEW FOR MAKING VISIBLE SPIDER TILE HIDDEN AFTER HITTING SPIDER
-                        self.draw()
-                       
+                        self.reset_knight(kp_y, kp_x, "You hit a spider!")                     
                         self.level_array[kp_y-1][kp_x] = 'hs'  
                 
                 # Move down 
@@ -103,10 +94,6 @@ class Tinder_Box_Knight:
                         self.reset_knight(kp_y, kp_x, "Beware the eyes...")
                     if not safe_move:
                         self.reset_knight(kp_y, kp_x, "You hit a spider!")
-                        #NEW
-                        #NEW FOR MAKING VISIBLE SPIDER TILE HIDDEN AFTER HITTING SPIDER
-                        self.draw()
-                        
                         self.level_array[kp_y+1][kp_x] = 'hs'           
                 # Scan
                 if event.key == pygame.K_s:
@@ -117,13 +104,12 @@ class Tinder_Box_Knight:
                 if event.key == pygame.K_f:
                     kp_y, kp_x = self.knight.return_position() 
                     self.light = Light(self.level_array, self.original_array, self.lit_tiles, self.knight.return_position())
-                    
-                    #Check to see if the player lit up a spider
-                    found_spider, y, x = self.spider.check_for_lit_spider(kp_y, kp_x)
-                    if found_spider:
-                        self.draw()
-                        self.spider.reset_spider()
+                 
+                    #Check to see if the player lit up a spider               
+                    if self.spider.check_for_lit_spider(kp_y, kp_x):
                         self.reset_knight(kp_y, kp_x, "You lit up a spider!")
+                        self.spider.reset_spider(kp_y, kp_x)
+                        
                     else:
                         self.knight.previous_tile = self.light.previous_tile
                         print('previous tile: ', self.light.previous_tile)
@@ -156,6 +142,7 @@ class Tinder_Box_Knight:
 
 # Move knight back to starting square when they hit a spider 
     def reset_knight(self, kp_y, kp_x, message):
+        self.draw() # to show whatever the player walked in to
         font = pygame.font.SysFont("arial", 16)
         caption = font.render(message, True, WHITE)
         self.caption_rect = pygame.Rect((kp_x+6) * TILESIZE, kp_y * TILESIZE, TILESIZE, TILESIZE)

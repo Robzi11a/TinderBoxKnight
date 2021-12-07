@@ -11,11 +11,14 @@ class Spider:
             for xIndex in range(kp_x - 1, kp_x + 2):
                 if -1 < yIndex < TILES_VERTICAL and -1 < xIndex < TILES_HORIZONTAL:
                     if self.level_array[yIndex][xIndex] == 'vs':
-                        self.spider_row = yIndex
-                        self.spider_column = xIndex
-                        return True, yIndex, xIndex
-        return False, 0, 0
+                        return True
+        return False
 
-    def reset_spider(self):
-        self.level_array[self.spider_row][self.spider_column] = 'hs'
+    def reset_spider(self, kp_y, kp_x):
+        for yIndex in range(kp_y - 1, kp_y + 2):
+            for xIndex in range(kp_x - 1, kp_x + 2):
+                if -1 < yIndex < TILES_VERTICAL and -1 < xIndex < TILES_HORIZONTAL:
+                    if self.level_array[yIndex][xIndex] == 'vs':
+                        self.level_array[yIndex][xIndex] = 'hs'
+        return
 
