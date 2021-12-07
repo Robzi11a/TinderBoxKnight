@@ -94,9 +94,9 @@ class BigTorch:
                 cv2.destroyAllWindows()
             else: print("light_torch video meets error! ")
                 
-
+# import level 2 when lit the torch
 #    def next_level(self):
-#        if self.torch_state == ;lit torch'
+#        if self.torch_state == 'lit torch'
 #                import lvl2
 #           else: return False
         
