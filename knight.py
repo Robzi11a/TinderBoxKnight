@@ -10,6 +10,7 @@ class Knight:
         self.column = column
         self.previous_tile = "d"
         self.next_tile = ""
+        self.start_position = (row, column)
 
     # Updates the row and column stored for the knight. Called whenever the knight moves to new position.
     def update_position(self, row, column):
@@ -152,13 +153,14 @@ class Knight:
         return False
 
     def reset_knight_position(self, level_array):
-        if level_array[11][4] == "l":
-            level_array[11][4] = "kl"
+        if level_array[self.start_position[0]][self.start_position[1]] == "l":
+            level_array[self.start_position[0]][self.start_position[1]] = "kl"
         else: 
-            level_array[11][4] = "kd"
+            level_array[self.start_position[0]][self.start_position[1]] = "kd"
+        
         if level_array[self.row][self.column] == "kd":
             level_array[self.row][self.column] = "d"
         else: 
             level_array[self.row][self.column] = "l"
-        self.row, self.column = 11, 4
-        self.reset_tile_memory(level_array[11][4])
+        self.row, self.column = self.start_position[0], self.start_position[1]
+        self.reset_tile_memory(level_array[self.start_position[0]][self.start_position[1]])

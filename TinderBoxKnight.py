@@ -174,27 +174,6 @@ class Tinder_Box_Knight:
                 return True, level
         return False, 0
 
-     # a function to change the number of lives
-     # plyaer have 3 lives at first, meet a monster -> reduce a lives 
-     # when plyer don't have enought lives, this level will be restart.
-    def lives_change(self,kp_y,kp_x):
-            y=len(self.level_array)      #get the column number of lives in tiles,true y location for lives tile is y-1
-            x=len(self.level_array[y-1]) #get the row number of lives in tiles,true x location for lives tile is x-1
-            w=self.screen.get_rect().width
-            h=self.screen.get_rect().height
-            root=tkinter.Tk()   #makesure only one accurate pop-up
-            root.withdraw()     #makesure only one accurate pop-up
-            if(self.level_array[y-1][x-1]=="ml3"):
-                self.level_array[y-1][x-1] = self.level_array[y-1][x-1].replace("ml3","ml2",1)            #change lives tiles(3lives->2 lives)
-            elif(self.level_array[y-1][x-1]=="ml2"):
-                self.level_array[y-1][x-1] = self.level_array[y-1][x-1].replace("ml2","ml1",1)            #change lives tiles(2lives->1 lives)
-            elif(self.level_array[y-1][x-1]=="ml1"):
-                self.level_array[y-1][x-1] = self.level_array[y-1][x-1].replace("ml1","ml3",1)            #change lives tiles(1lives->3 lives)
-                T=tkinter.messagebox.askokcancel("Tips","You have no lives! Do you want to retry a new level?")       #display a pop-up(option1)
-                if(T):
-                    self.flag_restart=1  # a flag to trigger the restart function in "update" (choose yes option)
-                else:                    
-                    self.flag_restart=1  ##!!!! if player choose no , it should return start or finish menu. delete this row code (else:) and write your connect code for menu 
 
 
 
