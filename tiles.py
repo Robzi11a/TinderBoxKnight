@@ -96,7 +96,7 @@ class Tile:
 
         elif kind_of_tile == "p" : filename = floor.POISON_TILE_EMPTY
         
-        elif jls_extract_var == "pk" : filename = floor.POISON_KNIGHT_BACKGROUND
+        elif jls_extract_var == "kp" : filename = floor.POISON_KNIGHT_BACKGROUND
 
         elif kind_of_tile == "pre" : filename = floor.POISON_SHADOW
 
