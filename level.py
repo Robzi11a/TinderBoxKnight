@@ -24,7 +24,6 @@ class Level(State):
         self.scanned_tiles = []
         self.is_lit = False
         self.lit_tiles = []
-        self.Ranged_Enemy = Ranged_Enemy(0, 0)
         self.ranged_enemies = []
         self.levels = ['demolvl.txt']
         self.reset = False
@@ -142,7 +141,10 @@ class Level(State):
             self.level_array = list(csv_reader)
             self.level_array = [x for x in self.level_array if x != []]
             self.original_array = copy.deepcopy(self.level_array)
-        self.knight = Knight(9, 0)
+        for row_num, row in enumerate(self.level_array):
+            for col_num, element in enumerate(row):
+                if element == 'kd':
+                    self.knight = Knight(row_num, col_num)
         self.create_monster_objects()
 
     # Create array of monster objects
@@ -151,7 +153,7 @@ class Level(State):
         for y in range(TILES_VERTICAL):
             for x in range(TILES_HORIZONTAL):
                 if self.level_array[y][x] == "hre":
-                    self.ranged_enemies.append(Ranged_Enemy(y, x))
+                    self.ranged_enemies.append(Ranged_Enemy(y, x, self.level_array))
 
     # Draw new assets to screen
     def draw(self, surface, time_tick):
