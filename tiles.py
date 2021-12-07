@@ -28,7 +28,7 @@ class Tile:
         filename = ""
         self.id = id
 
-        self.x = int(x + screen.get_width()/400)
+        self.x = int(x + screen.get_width()/375)
 
         self.y = int(y + screen.get_width()/4000 - screen.get_width()/1000)
 
