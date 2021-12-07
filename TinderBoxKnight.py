@@ -36,6 +36,7 @@ class Tinder_Box_Knight:
         self.is_lit = False
         self.lit_tiles = []
         self.ranged_enemies = []
+        self.level_number= 0
         
 
     # Read user input
@@ -53,34 +54,36 @@ class Tinder_Box_Knight:
                 if event.key == pygame.K_RIGHT: 
                     safe_move = self.knight.move_right(self.level_array)
                     kp_y, kp_x = self.knight.return_position()
-                    if self.check_for_attack():
+                    attacked, level = self.check_for_attack()
+                    if attacked:
                         self.draw()
-                        self.reset_knight(kp_y, kp_x, "Beware the eyes...")
+                        self.reset_knight(kp_y, kp_x, "Beware the eyes...", level)
                     if not safe_move:
                         self.reset_knight(kp_y, kp_x, "You hit a spider!") 
                         self.level_array[kp_y][kp_x+1] = 'hs'    
                         
-                    self.check_for_attack()
 
                 # Move left 
                 if event.key == pygame.K_LEFT:
                     safe_move = self.knight.move_left(self.level_array)
                     kp_y, kp_x = self.knight.return_position()
-                    if self.check_for_attack():
+                    attacked, level = self.check_for_attack()
+                    if attacked:
                         self.draw()
-                        self.reset_knight(kp_y, kp_x, "Beware the eyes...")
+                        self.reset_knight(kp_y, kp_x, "Beware the eyes...", level)
                     if not safe_move:
                         self.reset_knight(kp_y, kp_x, "You hit a spider!")                      
                         self.level_array[kp_y][kp_x-1] = 'hs'        
-                    self.check_for_attack()
+                    
 
                 # Move up 
                 if event.key == pygame.K_UP:
                     safe_move = self.knight.move_up(self.level_array)
                     kp_y, kp_x = self.knight.return_position()
-                    if self.check_for_attack():
+                    attacked, level = self.check_for_attack()
+                    if attacked:
                         self.draw()
-                        self.reset_knight(kp_y, kp_x, "Beware the eyes...")
+                        self.reset_knight(kp_y, kp_x, "Beware the eyes...", level)
                     if not safe_move:                     
                         self.reset_knight(kp_y, kp_x, "You hit a spider!")                     
                         self.level_array[kp_y-1][kp_x] = 'hs'  
@@ -89,9 +92,10 @@ class Tinder_Box_Knight:
                 if event.key == pygame.K_DOWN:
                     safe_move = self.knight.move_down(self.level_array)
                     kp_y, kp_x = self.knight.return_position()
-                    if self.check_for_attack():
+                    attacked, level = self.check_for_attack()
+                    if attacked:
                         self.draw()
-                        self.reset_knight(kp_y, kp_x, "Beware the eyes...")
+                        self.reset_knight(kp_y, kp_x, "Beware the eyes...", level)
                     if not safe_move:
                         self.reset_knight(kp_y, kp_x, "You hit a spider!")
                         self.level_array[kp_y+1][kp_x] = 'hs'           
@@ -130,18 +134,23 @@ class Tinder_Box_Knight:
                         BigTorch().play_lightcutscene()
                     # missing: all tiles change into visible
 
+                if event.key == pygame.K_r:
+                    self.read_in_level(self.level_number)
+
 
     def check_for_attack(self):
-        for i in range(6):
-            if self.level_array[3][i] == "kl" and self.level_array[3][10] != "vre":
-                self.Ranged_Enemy.ranged_attack(self.level_array, self.knight)
-                return True
+        for enemy in self.ranged_enemies: 
+            attacked, level = enemy.ranged_attack(self.knight, self.level_array)
+            if attacked:
+                print("attacked")
+                return True, level
+        return False, 0
 
     def update(self): 
         pass
 
 # Move knight back to starting square when they hit a spider 
-    def reset_knight(self, kp_y, kp_x, message):
+    def reset_knight(self, kp_y, kp_x, message, level=None):
         self.draw() # to show whatever the player walked in to
         font = pygame.font.SysFont("arial", 16)
         caption = font.render(message, True, WHITE)
@@ -149,6 +158,8 @@ class Tinder_Box_Knight:
         self.screen.blit(caption, self.caption_rect)
         pygame.display.flip()
         pygame.time.wait(1000)
+        if level != None:
+            self.level_array = level
         self.knight.reset_knight_position(self.level_array)
 
 
@@ -194,7 +205,7 @@ class Tinder_Box_Knight:
         #Level names are stored in a list
         self.levels = ['demolvl.txt']     
         #Call read_in_level with the index of the level that should be loaded.
-        self.read_in_level(0)
+        self.read_in_level(self.level_number)
         while self.keep_looping:
             self.clock.tick(30)
             self.keydown_events()
