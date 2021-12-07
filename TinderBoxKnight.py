@@ -35,7 +35,6 @@ class Tinder_Box_Knight:
         self.scanned_tiles = []
         self.is_lit = False
         self.lit_tiles = []
-        self.Ranged_Enemy = Ranged_Enemy(0, 0)
         self.ranged_enemies = []
         
 
@@ -186,7 +185,7 @@ class Tinder_Box_Knight:
         for y in range(TILES_VERTICAL):
             for x in range(TILES_HORIZONTAL):
                 if self.level_array[y][x] == "hre":
-                    self.ranged_enemies.append(Ranged_Enemy(y, x))
+                    self.ranged_enemies.append(Ranged_Enemy(y, x, self.level_array))
 
 
 # Draw new assets to screen
