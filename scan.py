@@ -19,8 +19,8 @@ class Scanner:
     def scan(self):
         kp_x, kp_y = self.position
         print("now position:", kp_y, kp_x, TILESIZE)
-        self.tip = pygame.Rect((kp_y + 10.4) * TILESIZE, (kp_x + 0.4) * TILESIZE, TILESIZE, TILESIZE)
-        self.rect = pygame.Rect((kp_y + 10.4) * TILESIZE, kp_x * TILESIZE, TILESIZE, TILESIZE)
+        self.tip = pygame.Rect((kp_y+3.2) * TILESIZE, (kp_x-0.6) * TILESIZE, TILESIZE, TILESIZE)
+        self.rect = pygame.Rect((kp_y+3.2) * TILESIZE, kp_x-0.6 * TILESIZE, TILESIZE, TILESIZE)
         for xIndex in range(kp_x - 2, kp_x + 3):
             for yIndex in range(kp_y - 2, kp_y + 3):
                 if -1 < xIndex < TILES_VERTICAL and -1 < yIndex < TILES_HORIZONTAL:

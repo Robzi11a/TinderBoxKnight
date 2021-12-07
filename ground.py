@@ -172,7 +172,7 @@ CONTROLS = "Controls.png"
 LIT_SPIDER = "LitSpider.png"
 
 
-#Lives number showed =["ml1,ml2,ml3"]
+#Lives number showed =["ml1, ml2, ml3"]
 LIVES_1 = "Lives1.png"
 LIVES_2 = "Lives2.png"
 LIVES_3 = "Lives3.png"

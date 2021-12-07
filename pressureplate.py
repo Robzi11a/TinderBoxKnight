@@ -30,7 +30,7 @@ MAX_GATENUMBER=1
 COUNT_GATENUMBER=0 
 
 
-class PresurePlate:
+class PressurePlate:
     """
     Provides a interaction for pressure plate tiles to open gates.
     def __init__(self, position,level_array,surface): stores transferd data and performs the "find_position()" and the "check_pressure()". no return.
@@ -106,7 +106,7 @@ class PresurePlate:
         font = pygame.font.SysFont('arial', 16)
         label = "The gate is opened!"
         text = font.render(label, True, WHITE)
-        self.rect = pygame.Rect((self.px + 6) * TILESIZE, self.py * TILESIZE, TILESIZE, TILESIZE)
+        self.rect = pygame.Rect((self.px + 3) * TILESIZE, (self.py-1) * TILESIZE, TILESIZE, TILESIZE)
         self.surface.blit(text, self.rect)
         pygame.display.flip()
-        pygame.time.wait(400)
+        pygame.time.wait(1000)
