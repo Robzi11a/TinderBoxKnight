@@ -30,7 +30,7 @@ class Tinder_Box_Knight:
     
     def __init__(self):
         pygame.init() 
-        mixer.music.load('backgroundtwo.mp3')                               #loading backgroundmusic
+        mixer.music.load('sound/backgroundtwo.mp3')                               #loading backgroundmusic
         pygame.mixer.music.play(-1)                                         #loading for indefinite time
         self.clock = pygame.time.Clock()
         pygame.display.set_caption("Tinder Box Knight")
@@ -52,8 +52,8 @@ class Tinder_Box_Knight:
 
     # Read user input
     def keydown_events(self):
-        spider_sound = pygame.mixer.Sound("spider.mp3")   #loading spider sound
-        door_sound = pygame.mixer.Sound("dooropen.wav")         # loading door open sound
+        spider_sound = pygame.mixer.Sound("sound/spider.mp3")   #loading spider sound
+        door_sound = pygame.mixer.Sound("sound/dooropen.wav")         # loading door open sound
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.keep_looping = False
@@ -201,8 +201,8 @@ class Tinder_Box_Knight:
             y, x = self.lives_tile
             w=self.screen.get_rect().width
             h=self.screen.get_rect().height
-            twolives_sound = pygame.mixer.Sound("twolives.mp3")                                     #loading two life left sound
-            onelife_sound = pygame.mixer.Sound("onelife.mp3")                                     #loading one life left sound
+            twolives_sound = pygame.mixer.Sound("sound/twolives.mp3")                                     #loading two life left sound
+            onelife_sound = pygame.mixer.Sound("sound/onelife.mp3")                                     #loading one life left sound
            
             if(self.level_array[y][x]=="ml3"):
                 self.level_array[y][x] = self.level_array[y][x].replace("ml3","ml2",1)            #change lives tiles(3lives->2 lives)
