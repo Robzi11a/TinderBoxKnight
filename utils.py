@@ -1,3 +1,8 @@
+WHITE = (255, 255, 255)
+
+"""
+Legacy code
+"""
 # Player Movement
 
 #def is_even(myint):

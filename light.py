@@ -22,37 +22,71 @@ class Light:
         self.lit_tiles = lit_tiles
         self.original_array = original_array
         self.count = 0
+        self.previous_tile = 'd'
         self.light()
 
     def light(self):
         kp_x, kp_y = self.position
-        print("now position:", self.position)
-        self.tip = pygame.Rect((kp_y + 6.4) * TILESIZE, (kp_x + 0.4) * TILESIZE, TILESIZE, TILESIZE)
-        self.rect = pygame.Rect((kp_y + 6) * TILESIZE, kp_x * TILESIZE, TILESIZE, TILESIZE)
-        
-        for xIndex in range(kp_x-1 , kp_x +2):
-            for yIndex in range(kp_y -1, kp_y+2):
-                if kp_x == xIndex and kp_y == yIndex:
-                    continue
 
-                #elif self.original_array[xIndex][yIndex] == 'kd':
-                #    self.tiles[xIndex][yIndex] = 'kd'
-                    #if xIndex == kp_x or yIndex == kp_y:
-                    #    return 0 
-                        
-                elif self.original_array[xIndex][yIndex] == 'd':
-                    self.tiles[xIndex][yIndex] = 'l'
-                elif self.original_array[xIndex][yIndex] == 'hs':
-                    self.tiles[xIndex][yIndex] = 'ls'
-                    #elif self.original_array[xIndex][yIndex] == 'kd':
-                    #    self.tiles[xIndex][yIndex] = 'kd'
-                elif self.tiles[xIndex][yIndex] == 'ht':
-                        self.tiles[xIndex][yIndex] = 'vlt'
-                        
+        for xIndex in range(kp_x - 1, kp_x + 2):
+            for yIndex in range(kp_y - 1, kp_y + 2):
+                if -1 < xIndex < TILES_VERTICAL and -1 < yIndex < TILES_HORIZONTAL:
+                    if kp_x == xIndex and kp_y == yIndex:
+                        if self.original_array[xIndex][yIndex].startswith('h'):
+                            self.previous_tile = self.original_array[xIndex][yIndex].replace('h', 'v', 1)
+                        elif self.original_array[xIndex][yIndex].startswith('d'):
+                            self.previous_tile = self.original_array[xIndex][yIndex].replace('d', 'l', 1)
+                        elif self.original_array[xIndex][yIndex].startswith('p'):
+                            self.previous_tile = self.original_array[xIndex][yIndex].replace('p', 'l', 1) 
+                        else:
+                            self.previous_tile = 'l'
+                        # an if method to fix a bug about gate
+                        if self.previous_tile=="vcg":
+                            self.previous_tile="log"
+                        print('ppp', self.previous_tile)
+                        self.tiles[xIndex][yIndex] = 'kl'
                         continue
-                     #self.tiles[xIndex][yIndex] = 'st'
-     
-        self.lit_tiles.append([self.tip, self.count])
+                    if self.tiles[xIndex][yIndex].startswith('h'):
+                        print(xIndex, yIndex, 2)
+                        self.tiles[xIndex][yIndex] = self.tiles[xIndex][yIndex].replace('h', 'v', 1)
+                        print(self.tiles[xIndex][yIndex])
+                    elif self.tiles[xIndex][yIndex].startswith('d'):
+                        print(xIndex, yIndex, 3)
+                        self.tiles[xIndex][yIndex] = self.tiles[xIndex][yIndex].replace('d', 'l', 1)
+                    elif self.tiles[xIndex][yIndex].startswith('p'):
+                        print(xIndex, yIndex, 3)
+                        self.tiles[xIndex][yIndex] = self.tiles[xIndex][yIndex].replace('p', 'l', 1)
+                    # elif self.tiles[xIndex][yIndex] == 'vs':
+                    #     self.knight.update_position(9, 0)
+                    #     self.level_array[kp_y][kp_x], self.level_array[9][0] = self.level_array[9][0], self.level_array[kp_y][kp_x]
+
+    #def reset_knight(self, kp_y, kp_x):
+     #   font = pygame.font.SysFont("arial", 20)
+      #  caption = font.render("You lit a spider!", True , WHITE)
+       # '''self.screen.fill((0,0,0))'''
+        #'''self.screen.blit(caption,[self.wINDOW_WIDTH/2,self.wINDOW_HEIGHT/2])'''
+        #self.screen.blit(caption,[100,100])
+        #pygame.display.flip()
+        #pygame.time.wait(1000)
+        #self.knight.update_position(9, 0)
+        #self.level_array[kp_y][kp_x], self.level_array[9][0] = self.level_array[9][0], self.level_array[kp_y][kp_x]    
+
+    #def reset_knight_position(self):
+     #    if self.original_array[xIndex][yIndex] == 'ls': 
+      #      return True
+
+    #def check_for_enemy(self, square):
+     #   if square == 'hs':
+      #      return True
+       # return False
+         
+    #def return_position(self):
+     #   return self.row, self.column
+
+#    def check_for_spider(self, square):
+ #       if square == 'ls':
+  #          return True
+   #     return False    
 
     def update(self):
         pass
