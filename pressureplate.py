@@ -55,7 +55,7 @@ class PressurePlate:
         self.check_pressure()
 
     #check whether satify the conditions to open gate.
-    #2condiitons: 1.plyaer's x,ylocation = presuureplate's x,yloacation
+    #2condiitons: 1.plyaer's x,ylocation = pressureplate's x,yloacation
     #             2.this pressure plate should be visible
     def check_pressure(self):
         global PP_LOCATION,G_LOCATION

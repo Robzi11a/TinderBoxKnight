@@ -62,7 +62,7 @@ class Level(State):
             kp_y, kp_x = self.knight.return_position()
             attacked, level = self.check_for_attack()
             if attacked:
-                #self.draw()
+                self.draw(self.surface, self.time_tick)
                 self.reset_knight(kp_y, kp_x, "Beware the eyes...", level)
                 self.lives_change(kp_y, kp_x)
             if not safe_move:
@@ -78,7 +78,7 @@ class Level(State):
             kp_y, kp_x = self.knight.return_position()
             attacked, level = self.check_for_attack()
             if attacked:
-               # self.draw()
+                self.draw(self.surface, self.time_tick)
                 self.reset_knight(kp_y, kp_x, "Beware the eyes...", level)
                 self.lives_change(kp_y, kp_x)
             if not safe_move:
@@ -110,7 +110,7 @@ class Level(State):
             kp_y, kp_x = self.knight.return_position()
             attacked, level = self.check_for_attack()
             if attacked:
-                self.draw(self.surface, self, time_tick)
+                self.draw(self.surface, self.time_tick)
                 self.reset_knight(kp_y, kp_x, "Beware the eyes...", level)
                 self.lives_change(kp_y, kp_x)
             if not safe_move:
@@ -148,7 +148,7 @@ class Level(State):
         # Open gate 
         if key == pygame.K_o:
                 # open gate(steping on the pressure plate)
-                PresurePlate(self.knight.return_position(),self.level_array,self.surface)
+                PressurePlate(self.knight.return_position(),self.level_array,self.surface)
         
 
         # press SPACE to interactive with torch
