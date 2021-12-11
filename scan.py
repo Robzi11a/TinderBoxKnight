@@ -17,18 +17,20 @@ class Scanner:
         self.scan()
 
     def scan(self):
-        kp_x, kp_y = self.position
+        kp_y, kp_x = self.position
         print("now position:", kp_y, kp_x, TILESIZE)
-        self.tip = pygame.Rect((kp_y+4.4) * TILESIZE, (kp_x-1.6) * TILESIZE, TILESIZE, TILESIZE)
-        self.rect = pygame.Rect((kp_y+4.4) * TILESIZE, kp_x-1.6 * TILESIZE, TILESIZE, TILESIZE)
-        for xIndex in range(kp_x - 2, kp_x + 3):
-            for yIndex in range(kp_y - 2, kp_y + 3):
-                if -1 < xIndex < TILES_VERTICAL and -1 < yIndex < TILES_HORIZONTAL:
+        horizontal = (kp_x * TILESIZE) + (TILESIZE * 3.2)
+        vertical = ((kp_y * TILESIZE) - (TILESIZE * 0.6))
+        self.tip = pygame.Rect(horizontal, vertical, TILESIZE, TILESIZE)
+        self.rect = pygame.Rect(horizontal, vertical, TILESIZE, TILESIZE)
+        for yIndex in range(kp_y - 2, kp_y + 3):
+            for xIndex in range(kp_x - 2, kp_x + 3):
+                if -1 < yIndex < TILES_VERTICAL and -1 < xIndex < TILES_HORIZONTAL:
                     if kp_x == xIndex and kp_y == yIndex:
                         continue
-                    if self.original_array[xIndex][yIndex] == 'hs':
+                    if self.original_array[yIndex][xIndex] == 'hs':
                         self.count += 1
-                    if self.tiles[xIndex][yIndex] == 'vs':
+                    if self.tiles[yIndex][xIndex] == 'vs':
                         continue
                     # self.tiles[xIndex][yIndex] = 'st'
         self.scanned_tiles.append([self.tip, self.count])

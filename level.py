@@ -35,6 +35,7 @@ class Level(State):
         self.levels = ['demolvl.txt']
         self.reset = False
         self.display_text = False
+        self.end_game = False
         self.message = ''
         self.level_number= 0
         self.flag_restart =0;#flag_restart: a flag to trigger the restart function("read_in_level") to reset level 
@@ -62,12 +63,10 @@ class Level(State):
             kp_y, kp_x = self.knight.return_position()
             attacked, level = self.check_for_attack()
             if attacked:
-                self.draw(self.surface, self.time_tick)
                 self.reset_knight(kp_y, kp_x, "Beware the eyes...", level)
                 self.lives_change(kp_y, kp_x)
             if not safe_move:
-                self.reset_knight(kp_y, kp_x, "You hit a spider!") 
-                self.draw(self.surface, self.time_tick)        
+                self.reset_knight(kp_y, kp_x, "You hit a spider!")         
                 self.level_array[kp_y][kp_x+1] = 'hs'    
                 self.lives_change(kp_y, kp_x)
                 
@@ -78,12 +77,10 @@ class Level(State):
             kp_y, kp_x = self.knight.return_position()
             attacked, level = self.check_for_attack()
             if attacked:
-                self.draw(self.surface, self.time_tick)
                 self.reset_knight(kp_y, kp_x, "Beware the eyes...", level)
                 self.lives_change(kp_y, kp_x)
             if not safe_move:
-                self.reset_knight(kp_y, kp_x, "You hit a spider!") 
-                self.draw(self.surface, self.time_tick)                             
+                self.reset_knight(kp_y, kp_x, "You hit a spider!")                         
                 self.level_array[kp_y][kp_x-1] = 'hs'        
                 self.lives_change(kp_y, kp_x)
             
@@ -94,14 +91,11 @@ class Level(State):
             kp_y, kp_x = self.knight.return_position()
             attacked, level = self.check_for_attack()
             if attacked:
-                self.draw(self.surface, self.time_tick)
                 self.reset_knight(kp_y, kp_x, "Beware the eyes...", level)
                 self.lives_change(kp_y, kp_x)
             if not safe_move:        
-                self.reset_knight(kp_y, kp_x, "You hit a spider!")    
-                self.draw(self.surface, self.time_tick)                 
-                self.level_array[kp_y-1][kp_x] = 'hs'
-                   
+                self.reset_knight(kp_y, kp_x, "You hit a spider!")                          
+                self.level_array[kp_y-1][kp_x] = 'hs'   
                 self.lives_change(kp_y, kp_x)
         
         # Move down 
@@ -110,12 +104,10 @@ class Level(State):
             kp_y, kp_x = self.knight.return_position()
             attacked, level = self.check_for_attack()
             if attacked:
-                self.draw(self.surface, self.time_tick)
                 self.reset_knight(kp_y, kp_x, "Beware the eyes...", level)
                 self.lives_change(kp_y, kp_x)
             if not safe_move:
-                self.reset_knight(kp_y, kp_x, "You hit a spider!")
-                self.draw(self.surface, self.time_tick)        
+                self.reset_knight(kp_y, kp_x, "You hit a spider!")        
                 self.level_array[kp_y+1][kp_x] = 'hs'  
                 self.lives_change(kp_y, kp_x)         
         # Scan
@@ -131,11 +123,9 @@ class Level(State):
             #Check to see if the player lit up a spider               
             if self.spider.check_for_lit_spider(kp_y, kp_x):
                 self.reset_knight(kp_y, kp_x, "You lit up a spider!")
-                self.draw(self.surface, self.time_tick)
                 self.spider.reset_spider(kp_y, kp_x)
                 self.lives_change(kp_y, kp_x)
             elif attacked:
-                #self.draw()
                 self.reset_knight(kp_y, kp_x, 'Beware the eyes...', level)
                 self.lives_change(kp_y, kp_x)    
             else:
@@ -148,8 +138,13 @@ class Level(State):
         # Open gate 
         if key == pygame.K_o:
                 # open gate(steping on the pressure plate)
-                PressurePlate(self.knight.return_position(),self.level_array,self.surface)
-        
+                kp_y, kp_x = self.knight.return_position() 
+                self.pressure_plate.check_pressure(kp_y, kp_x)
+                if self.pressure_plate.is_gate_open:
+                    self.caption_rect = pygame.Rect((kp_x+3) * TILESIZE, (kp_y-1.5) * TILESIZE, TILESIZE, TILESIZE)
+                    self.message = "The gate is open!"
+                    self.display_text = True
+                    
 
         # press SPACE to interactive with torch
         if key == pygame.K_SPACE:
@@ -160,7 +155,7 @@ class Level(State):
             
             flag_finaltorch = self.big_torch.change_torch_state () #change torch's pictures
             self.end_message = 'You lit the torch!'
-            self.display_text = True
+            self.end_game = True
             self.end_caption_rect = pygame.Rect(self.surface.get_height(), self.surface.get_width(), 100, 100)
             self.draw(self.surface, self.time_tick)
             pygame.time.wait(1000)
@@ -203,8 +198,8 @@ class Level(State):
                 self.level_array[y][x] = self.level_array[y][x].replace("ml2","ml1",1)            #change lives tiles(2lives->1 lives)
             elif(self.level_array[y][x]=="ml1"):
                 self.level_array[y][x] = self.level_array[y][x].replace("ml1","ml3",1)            #change lives tiles(1lives->3 lives)
-                self.display_text = True
-                self.end_caption_rect = pygame.Rect(self.surface.get_height()/2, self.surface.get_width()/2, 50, 50)
+                self.end_game = True
+                self.end_caption_rect = pygame.Rect(self.surface.get_width()/3, self.surface.get_height()/2, 50, 50)
                 self.draw(self.surface, self.time_tick)                            #display message1
                 pygame.time.wait(1000)
                 self.keep_looping = False
@@ -215,12 +210,14 @@ class Level(State):
 
 # Move knight back to starting square when they hit a spider 
     def reset_knight(self, kp_y, kp_x, message, level=None):
-        
-        self.caption_rect = pygame.Rect((kp_x+3) * TILESIZE, (kp_y-1) * TILESIZE, TILESIZE, TILESIZE)
+        self.caption_rect = pygame.Rect((kp_x+3) * TILESIZE, (kp_y-1.5) * TILESIZE, TILESIZE, TILESIZE)
         self.reset = True
+        self.display_text = True
         self.message = message
+        self.draw(self.surface, self.time_tick)
         if level != None:
             self.level_array = level
+        self.knight.reset_knight_position(self.level_array)
 
 
     # Read in level is its own function so that we can call it to read in different levels.
@@ -242,8 +239,9 @@ class Level(State):
         self.spider = Spider(self.level_array)
         self.big_torch = BigTorch(self.level_array)
         self.create_monster_objects()
+        self.end_game = False
         #find and save positions for gates and pressure plates
-        #self.pressure_plate = PressurePlate(self.knight.return_position(),self.level_array,self.surface)
+        self.pressure_plate = PressurePlate(self.knight.return_position(), self.level_array)
 
     # Create array of monster objects
     def create_monster_objects(self):
@@ -261,27 +259,30 @@ class Level(State):
         self.tiles.draw(surface)
         # if self.is_lit:
         #     self.light.draw(self.surface)
-        if self.is_scanned:
-            self.scan_label = self.scanner.draw(surface)
-            self.scan_label['timestamp'] = time_tick
-        if self.scan_label and time_tick - self.scan_label['timestamp'] < 3000:
-            surface.blit(self.scan_label['text'], self.scan_label['rect'])
-        if self.reset:
+        #if self.is_scanned:
+        #    self.scanner.draw(surface)
+           # self.scan_label['timestamp'] = time_tick
+       # if self.scan_label and time_tick - self.scan_label['timestamp'] < 3000:
+       #     surface.blit(self.scan_label['text'], self.scan_label['rect'])
+        if self.display_text:
             font = pygame.font.SysFont("arial", 16)
             caption = font.render(self.message, True, WHITE)
             surface.blit(caption, self.caption_rect)
             pygame.display.flip()
             pygame.time.wait(1000)
-            self.knight.reset_knight_position(self.level_array)
+            self.display_text = False
+        if self.reset:
+
             self.reset = False
-        if self.display_text:
+        if self.end_game:
             font = pygame.font.SysFont("arial", 20)
             caption = font.render(self.end_message, True, WHITE)
             surface.blit(caption, self.end_caption_rect)
             pygame.display.flip()
+            self.end_game = False
         font = pygame.font.SysFont('arial', 20)
         for scanned in self.scanned_tiles:
-            text = font.render(str(scanned[1]), True, (255, 255, 255))
+            text = font.render(str(scanned[1]), True, (WHITE))
             self.surface.blit(text, scanned[0])
         pygame.display.update()
       

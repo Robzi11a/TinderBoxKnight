@@ -40,27 +40,28 @@ class PressurePlate:
     def draw(self): add text when open the gate, no return.
     """
 
-    def __init__(self, position,level_array,surface):
+    def __init__(self, position, level_array):
         global MAX_GATENUMBER,COUNT_GATENUMBER,PP_LOCATION,G_LOCATION
         # a current x,y location data for player (knight)
-        self.py,self.px= position
+        self.py, self.px= position
         # a list to store the data for a level
         self.level_array=level_array
+        self.is_gate_open = False
         # a return param from initialized display interface
-        self.surface=surface
+       # self.surface=surface
         # only when dealed number for gates < max mumber for gates, finding position for the pressure plates and gates
         if (COUNT_GATENUMBER<MAX_GATENUMBER):
             self.find_position()
             COUNT_GATENUMBER+=1
-        self.check_pressure()
+        #self.check_pressure(kp_y, kp_x)
 
     #check whether satify the conditions to open gate.
     #2condiitons: 1.plyaer's x,ylocation = pressureplate's x,yloacation
     #             2.this pressure plate should be visible
-    def check_pressure(self):
+    def check_pressure(self, kp_y, kp_x):
         global PP_LOCATION,G_LOCATION
         for i in range(len(G_LOCATION)):
-            if (self.px==PP_LOCATION[i][1]) and (self.py==PP_LOCATION[i][0]):
+            if (kp_x==PP_LOCATION[i][1]) and (kp_y==PP_LOCATION[i][0]):
                 print("start open gate!")
                 self.open_gate(i)
 
@@ -70,10 +71,12 @@ class PressurePlate:
     def open_gate(self,i):
         if self.level_array[G_LOCATION[i][0]][G_LOCATION[i][1]]=="vcg":
             self.level_array[G_LOCATION[i][0]][G_LOCATION[i][1]] = self.level_array[G_LOCATION[i][0]][G_LOCATION[i][1]].replace("vcg","log",1)
+            self.is_gate_open = True
         elif self.level_array[G_LOCATION[i][0]][G_LOCATION[i][1]]=="hcg":
             self.level_array[G_LOCATION[i][0]][G_LOCATION[i][1]] = self.level_array[G_LOCATION[i][0]][G_LOCATION[i][1]].replace("hcg","dog",1)
+            self.is_gate_open = True
         else: pass
-        self.draw()
+        #self.draw()
     
     #find and store the x,y position for gates and pressure plates
     def find_position(self):
@@ -101,6 +104,7 @@ class PressurePlate:
                     G_LOCATION.append([gy,gx])
 
     # add text when the player steps the pressure plate to open the gate
+    """
     def draw(self):
         pygame.font.init()
         font = pygame.font.SysFont('arial', 16)
@@ -110,3 +114,4 @@ class PressurePlate:
         self.surface.blit(text, self.rect)
         pygame.display.flip()
         pygame.time.wait(1000)
+        """
