@@ -1,0 +1,15 @@
+vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw
+vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw
+vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw
+vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw
+vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw
+vw;d;d;d;d;d;d;d;d;d;d;d;d;hb;vw
+vw;d;hb;hb;hb;d;d;d;d;d;d;d;d;hb;vw
+vw;d;lcm;lb;lcm;hb;hb;hb;hb;vw;vw;hb;d;hb;vw
+vw;d;lcm;lft;lcm;vw;vw;vw;vw;vw;vw;hb;d;hb;vw
+vw;d;d;d;d;vw;vw;vw;vw;vw;vw;hb;d;hb;vw
+vw;hb;hb;hb;d;vw;vw;vw;vw;vw;vw;d;d;d;vw
+vw;vw;vw;vw;d;vw;vw;vw;vw;vw;vw;d;d;d;vw
+vw;vw;vw;vw;d;vw;vw;vw;vw;vw;vw;d;ht;d;vw
+vw;vw;vw;vw;kd;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw
+vw;vw;vw;vw;mu;mr;md;ml;sb;mb;c;ml3;vw;vw;vw

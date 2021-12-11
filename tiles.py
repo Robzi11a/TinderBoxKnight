@@ -79,6 +79,10 @@ class Tile:
 
         elif kind_of_tile == "lwsa" : filename = floor.LIT_WEB_SKELETON_ARMS
 
+        elif kind_of_tile == "lft" : filename = floor.LIT_F_TILE
+
+        elif kind_of_tile == "lst" : filename = floor.LIT_S_TILE
+
         elif kind_of_tile == "vb" : filename = floor.LIT_BOOKSHELF
 
         elif kind_of_tile == "hb" : filename = floor.HIDDEN_BOOKSHELF

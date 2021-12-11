@@ -57,6 +57,10 @@ LIT_WEB_SKELETON_RIBS = "VisibleWebRibBones.png"
 
 LIT_WEB_SKELETON_ARMS = "VisibleWebArmBones.png"
 
+LIT_S_TILE = "STILE.png"
+
+LIR_F_TILE = "FTILE.png"
+
 # Ranged Enemy ["lre, dre, drea"]
 
 LIT_RANGED_ENEMY = "LightShadow.png"
