@@ -31,7 +31,7 @@ class Level(State):
         self.lit_tiles = []
         self.ranged_enemies = []
 
-        
+
         self.level_number = level_number
         self.levels = ['demolvl.txt', 'lvl3.txt', 'lvl1.txt']
         self.number_of_levels = 3
@@ -164,12 +164,11 @@ class Level(State):
             kp_y, kp_x = self.knight.return_position()  # kp_y is knight's row, kp_y is knight's column
             state_torch = self.big_torch.is_torch_lit(self.level_array)  # check and retrun the state of troch, also retrun torch's row and column
 
-            flag_isnearby = self.big_torch.is_near_torch(self.level_array, kp_x, kp_y)  # check eligibility to interact with the torch
-
-            if (self.big_torch.change_torch_state()):  # change torch's pictures
+            if(self.big_torch.is_near_torch(self.level_array, kp_x, kp_y)):  # check eligibility to interact with the torch
+                self.big_torch.change_torch_state()  # change torch's pictures
                 self.end_message = "You lit the torch!"
                 self.end_level = True
-                self.end_caption_rect = self.end_caption_rect = pygame.Rect(floor.WINDOW_WIDTH/2.5, floor.WINDOW_HEIGHT/2, 50, 50)
+                self.end_caption_rect = pygame.Rect(floor.WINDOW_WIDTH/2.5, floor.WINDOW_HEIGHT/2, 50, 50)
                 self.draw(self.surface, self.time_tick)
                 pygame.time.wait(1000)
                 self.level_number += 1
