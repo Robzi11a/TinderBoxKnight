@@ -75,8 +75,16 @@ class Menu(State):
         start_image = pygame.transform.scale(start_image, (c.WINDOW_WIDTH * 1 / 5, c.WINDOW_WIDTH * 1 / 5 / 9))
         start_rect = start_image.get_rect()
         start_rect.x, start_rect.y = (
-        (c.WINDOW_WIDTH - start_image.get_width()) / 2, title_image.get_height() + c.WINDOW_HEIGHT * 3 / 8)
+        (c.WINDOW_WIDTH - start_image.get_width()) / 2, title_image.get_height() + c.WINDOW_HEIGHT * 1 / 3)
         self.menu.append((start_image, start_rect, c.LEVEL))
+
+        random_challenge = "randomchallenge.png"
+        random_image = pygame.image.load(os.path.join(image_path, random_challenge)).convert_alpha()
+        random_image = pygame.transform.scale(random_image, (c.WINDOW_WIDTH * 1 / 5/ 0.68, c.WINDOW_WIDTH * 1 / 5 / 0.68/ 13.14))
+        random_rect = random_image.get_rect()
+        random_rect.x, random_rect.y = (
+        (c.WINDOW_WIDTH - start_image.get_width()) / 2, start_rect.y + start_image.get_height() * 2)
+        self.menu.append((random_image, random_rect, c.RANDOM_LEVEL))
 
         exit = "exit.png"
         exit_image = pygame.image.load(os.path.join(image_path, exit)).convert_alpha()
@@ -85,7 +93,7 @@ class Menu(State):
         exit_rect = exit_image.get_rect()
         exit_rect.x, exit_rect.y = (
             (c.WINDOW_WIDTH - start_image.get_width()) / 2,
-            title_image.get_height() + start_image.get_height() * 2 + c.WINDOW_HEIGHT * 3 / 8)
+            start_rect.y + start_image.get_height() * 4)
         self.menu.append((exit_image, exit_rect, c.QUIT))
 
     def setup_cursor(self):
@@ -126,7 +134,10 @@ class Menu(State):
         surface.blit(self.cursor.image, self.cursor.rect)
 
     def startup(self, game_info):
-        pass
+        print("set index 0")
+        self.index = 0
+        self.cursor.rect.y = self.menu[self.index][1].y
+        self.cursor.state = self.menu[self.index][2]
 
     def update(self, surface, keys, time_tick):
         self.update_cursor(keys)

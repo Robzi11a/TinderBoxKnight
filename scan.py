@@ -2,6 +2,7 @@ import pygame.font
 
 from tiles import TILES_VERTICAL, TILES_HORIZONTAL, TILESIZE
 from utils import WHITE
+import ground as c
 
 pygame.font.init()
 
@@ -19,10 +20,10 @@ class Scanner:
     def scan(self):
         kp_y, kp_x = self.position
         print("now position:", kp_y, kp_x, TILESIZE)
-        horizontal = (kp_x * TILESIZE) + (TILESIZE * 3.2)
-        vertical = ((kp_y * TILESIZE) - (TILESIZE * 0.6))
+        horizontal = (c.WINDOW_WIDTH - TILES_HORIZONTAL * TILESIZE) / 2 + (kp_x + 0.2) * TILESIZE
+        vertical = (kp_y + 0.6) * TILESIZE
         self.tip = pygame.Rect(horizontal, vertical, TILESIZE, TILESIZE)
-        self.rect = pygame.Rect(horizontal, vertical, TILESIZE, TILESIZE)
+        self.rect = pygame.Rect(horizontal, vertical - TILESIZE * 0.8, TILESIZE, TILESIZE)
         for yIndex in range(kp_y - 2, kp_y + 3):
             for xIndex in range(kp_x - 2, kp_x + 3):
                 if -1 < yIndex < TILES_VERTICAL and -1 < xIndex < TILES_HORIZONTAL:

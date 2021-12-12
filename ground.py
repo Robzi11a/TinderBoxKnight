@@ -186,13 +186,16 @@ MAIN_MENU = 1
 
 LEVEL = 2
 
-END_SCREEN = 3
+RANDOM_LEVEL = 3
 
-QUIT = 4
+END_SCREEN = 4
+
+QUIT = 5
 
 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+pygame.display.toggle_fullscreen()
 WINDOW_WIDTH = screen.get_rect().width
 WINDOW_HEIGHT = screen.get_rect().height
-# WINDOW_WIDTH = 700
+# WINDOW_WIDTH = 1000
 # WINDOW_HEIGHT = 600
 

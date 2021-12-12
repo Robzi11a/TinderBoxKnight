@@ -11,11 +11,11 @@ TILES_VERTICAL = 15
 
 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
-TILESIZE = screen.get_height()/14
+TILESIZE = floor.WINDOW_HEIGHT/15
 
-WINDOW_WIDTH = TILESIZE * TILES_HORIZONTAL
+# WINDOW_WIDTH = TILESIZE * TILES_HORIZONTAL
 
-WINDOW_HEIGHT = TILESIZE * TILES_VERTICAL
+# WINDOW_HEIGHT = TILESIZE * TILES_VERTICAL
 
 
 # Class for each individual tile
@@ -28,9 +28,7 @@ class Tile:
         filename = ""
         self.id = id
 
-        self.x = int(x + screen.get_width()/400)
 
-        self.y = int(y + screen.get_width()/4000 - screen.get_width()/1000)
 
         self.kind_of_tile = kind_of_tile
 
@@ -199,7 +197,14 @@ class Tile:
 
         # ---------------------
 
-        self.rect = pygame.Rect(self.x * TILESIZE, self.y * TILESIZE, TILESIZE, TILESIZE)
+        self.x = (floor.WINDOW_WIDTH - TILES_HORIZONTAL * TILESIZE) / 2 + x * TILESIZE
+        self.y = y * TILESIZE
+        self.rect = pygame.Rect(self.x, self.y, TILESIZE, TILESIZE)
+        # self.x = int(x + screen.get_width() / 400)
+        #
+        # self.y = int(y + screen.get_width() / 4000 - screen.get_width() / 1000)
+
+        # self.rect = pygame.Rect(self.x * TILESIZE, self.y * TILESIZE, TILESIZE, TILESIZE)
 
         image_path = os.path.join("levels", "images")
 

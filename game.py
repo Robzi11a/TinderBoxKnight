@@ -25,7 +25,8 @@ class State:
 
 class Game:
     def __init__(self):
-        self.screen = pygame.display.get_surface()
+        self.surface = pygame.display.set_mode((c.WINDOW_WIDTH, c.WINDOW_HEIGHT))
+        print("current windows size: ", c.WINDOW_WIDTH, "*", c.WINDOW_HEIGHT)
         self.keep_looping = True
         self.clock = pygame.time.Clock()
         self.key = pygame.key.get_pressed()
@@ -42,7 +43,7 @@ class Game:
     def update(self):
         if not self.state.keep_looping:
             self.next_state()
-        self.state.update(self.screen, self.key, self.time_tick)
+        self.state.update(self.surface, self.key, self.time_tick)
         self.key = ''
 
     def next_state(self):
