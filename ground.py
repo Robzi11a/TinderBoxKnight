@@ -59,7 +59,7 @@ LIT_WEB_SKELETON_ARMS = "VisibleWebArmBones.png"
 
 LIT_S_TILE = "STILE.png"
 
-LIR_F_TILE = "FTILE.png"
+LIT_F_TILE = "FTILE.png"
 
 # Ranged Enemy ["lre, dre, drea"]
 
