@@ -30,11 +30,16 @@ class Level(State):
         self.is_lit = False
         self.lit_tiles = []
         self.ranged_enemies = []
+
+        
         self.level_number = level_number
-        self.levels = ['lvl3.txt', 'lvl1.txt']
+        self.levels = ['demolvl.txt', 'lvl3.txt', 'lvl1.txt']
+        self.number_of_levels = 3
+
+
         self.reset = False
         self.display_text = False
-        self.end_game = False
+        self.end_level = False
         self.message = ''
         self.flag_restart = 0 #flag_restart: a flag to trigger the restart function("read_in_level") to reset level
                              #flag_restart=1 => start trigger; flag_restart=0 => no trigger
@@ -161,16 +166,21 @@ class Level(State):
 
             flag_isnearby = self.big_torch.is_near_torch(self.level_array, kp_x, kp_y)  # check eligibility to interact with the torch
 
-            flag_finaltorch = self.big_torch.change_torch_state()  # change torch's pictures
-            self.end_message = 'You lit the torch!'
-            self.end_game = True
-            self.end_caption_rect = pygame.Rect(self.surface.get_height(), self.surface.get_width(), 100, 100)
-            self.draw(self.surface, self.time_tick)
-            pygame.time.wait(1000)
+            if (self.big_torch.change_torch_state()):  # change torch's pictures
+                self.end_message = "You lit the torch!"
+                self.end_level = True
+                self.end_caption_rect = self.end_caption_rect = pygame.Rect(floor.WINDOW_WIDTH/2.5, floor.WINDOW_HEIGHT/2, 50, 50)
+                self.draw(self.surface, self.time_tick)
+                pygame.time.wait(1000)
+                self.level_number += 1
 
-            if (flag_finaltorch):  # if lit torch, play a related cutscene
-                # self.big_torch.play_lightcutscene()
-                self.read_in_level(self.level_number)
+                if self.level_number < self.number_of_levels:
+                    self.read_in_level(self.level_number)
+                else:
+                    self.keep_looping = False
+                    self.next = MAIN_MENU
+                    self.big_torch.play_lightcutscene()
+                
 
 
 
@@ -201,7 +211,7 @@ class Level(State):
                 self.level_array[y][x] = self.level_array[y][x].replace("ml2","ml1",1)            #change lives tiles(2lives->1 lives)
             elif(self.level_array[y][x]=="ml1"):
                 self.level_array[y][x] = self.level_array[y][x].replace("ml1","ml3",1)            #change lives tiles(1lives->3 lives)
-                self.end_game = True
+                self.end_level = True
                 self.end_caption_rect = pygame.Rect(w/2.5, h/2, 50, 50)
                 self.draw(self.surface, self.time_tick)                            #display message1
                 pygame.time.wait(1000)
@@ -243,7 +253,7 @@ class Level(State):
             self.spider = Spider(self.level_array)
             self.big_torch = BigTorch(self.level_array)
             self.create_monster_objects()
-            self.end_game = False
+            self.end_level = False
             # find and save positions for gates and pressure plates
             self.pressure_plate = PressurePlate(self.knight.return_position(), self.level_array)
 
@@ -280,12 +290,12 @@ class Level(State):
         if self.reset:
 
             self.reset = False
-        if self.end_game:
+        if self.end_level:
             font = pygame.font.SysFont("arial", 20)
             caption = font.render(self.end_message, True, WHITE)
             surface.blit(caption, self.end_caption_rect)
             pygame.display.flip()
-            self.end_game = False
+            self.end_level = False
         font = pygame.font.SysFont('arial', 20)
         for scanned in self.scanned_tiles:
             text = font.render(str(scanned[1]), True, (WHITE))
