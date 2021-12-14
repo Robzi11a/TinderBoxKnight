@@ -129,7 +129,7 @@ class Menu(State):
             self.keep_looping = False
             pygame.mixer.music.pause()
             pygame.mixer.music.unload()
-            
+
 
 
 
@@ -141,7 +141,6 @@ class Menu(State):
         surface.blit(self.cursor.image, self.cursor.rect)
 
     def startup(self, game_info):
-        print("set index 0")
         self.index = 0
         self.cursor.rect.y = self.menu[self.index][1].y
         self.cursor.state = self.menu[self.index][2]

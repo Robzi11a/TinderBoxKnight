@@ -5,6 +5,8 @@ import os
 import csv
 
 from pygame import mixer
+
+from randomlevel import RandomLevel
 from tiles import Tile, Tiles
 from scan import Scanner
 from light import Light
@@ -19,7 +21,7 @@ from game import State
 
 
 class Level(State):
-    def __init__(self, level_number=0):
+    def __init__(self, level_number=1):
         super().__init__()
         #mixer.music.load('sound/TinderBoxKnightTheme.mp3')  # loading backgroundmusic     
         self.BG_COLOR = floor.DARK_PURPLE
@@ -32,8 +34,9 @@ class Level(State):
 
 
         self.level_number = level_number
-        self.levels = ['lvl5.txt', 'lvl1.txt', 'lvl2.txt', 'lvl3.txt', 'lv4.txt', 'lvl5.txt',]
+        self.levels = ['lvl1.txt', 'lvl2.txt', 'lvl3.txt', 'lvl4.txt', 'lvl5.txt',]
         self.number_of_levels = len(self.levels)
+        self.level_array = []
 
 
         self.reset = False
@@ -43,7 +46,6 @@ class Level(State):
         self.flag_restart = 0 #flag_restart: a flag to trigger the restart function("read_in_level") to reset level
                              #flag_restart=1 => start trigger; flag_restart=0 => no trigger
         self.scan_label = {}
-        self.read_in_level(self.level_number)
         self.end_message = 'You have no lives left!'
 
 
@@ -169,13 +171,17 @@ class Level(State):
                 self.end_caption_rect = pygame.Rect(floor.WINDOW_WIDTH/2.5, floor.WINDOW_HEIGHT/2, 50, 50)
                 self.draw(self.surface, self.time_tick)
                 pygame.time.wait(1000)
-                self.level_number += 1
+                if self.level_number >= 0:
+                    self.level_number += 1
+                else:
+                    self.keep_looping = False
+                    self.next = floor.MAIN_MENU
 
                 if self.level_number < self.number_of_levels:
                     self.read_in_level(self.level_number)
                 else:
                     self.keep_looping = False
-                    self.next = MAIN_MENU
+                    self.next = floor.MAIN_MENU
                     self.big_torch.play_lightcutscene()
                 
 
@@ -231,31 +237,32 @@ class Level(State):
     # Read in level is its own function so that we can call it to read in different levels.
     def read_in_level(self, level_number):
         self.scanned_tiles.clear()
-        if level_number == -1:
+        if level_number < 0:
             print("random level")
-
+            random_level = RandomLevel(self.level_number, self.levels)
+            self.level_array = random_level.level_array
         else:
             filepath = os.path.join("levels", self.levels[level_number])
             with open(filepath, "r") as f:
                 csv_reader = csv.reader(f, delimiter=';')
                 self.level_array = list(csv_reader)
                 self.level_array = [x for x in self.level_array if x != []]
-                self.original_array = copy.deepcopy(self.level_array)
-            for row_num, row in enumerate(self.level_array):
-                for col_num, element in enumerate(row):
-                    if element == 'kd':
-                        self.knight = Knight(row_num, col_num)
-            for row_num, row in enumerate(self.level_array):
-                for col_num, element in enumerate(row):
-                    if element == 'ml3':
-                        self.lives_tile = (row_num, col_num)
-            self.spider = Spider(self.level_array)
-            self.big_torch = BigTorch(self.level_array)
-            self.create_monster_objects()
-            self.end_level = False
+        self.original_array = copy.deepcopy(self.level_array)
+        for row_num, row in enumerate(self.level_array):
+            for col_num, element in enumerate(row):
+                if element == 'kd':
+                    self.knight = Knight(row_num, col_num)
+        for row_num, row in enumerate(self.level_array):
+            for col_num, element in enumerate(row):
+                if element == 'ml3':
+                    self.lives_tile = (row_num, col_num)
+        self.spider = Spider(self.level_array)
+        self.big_torch = BigTorch(self.level_array)
+        self.create_monster_objects()
+        self.end_level = False
 
-            # find and save positions for gates and pressure plates
-            self.pressure_plate = PressurePlate(self.knight.return_position(), self.level_array)
+        # find and save positions for gates and pressure plates
+        self.pressure_plate = PressurePlate(self.knight.return_position(), self.level_array)
 
     # Create array of monster objects
     def create_monster_objects(self):

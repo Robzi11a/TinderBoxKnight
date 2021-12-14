@@ -39,6 +39,8 @@ class Game:
         self.state_dict = state_dict
         self.state_name = start_state
         self.state = self.state_dict[self.state_name]
+        game_info = self.state.cleanup()
+        self.state.startup(game_info)
 
     def update(self):
         if not self.state.keep_looping:

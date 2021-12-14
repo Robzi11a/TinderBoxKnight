@@ -3,6 +3,7 @@ import ground as floor
 from game import Game
 from mainmenu import Menu
 from level import Level
+from randomdifficulty import RandomDifficulty
 
 
 def main():
@@ -12,7 +13,10 @@ def main():
 
     state_dict = {floor.MAIN_MENU: Menu(),
                   floor.LEVEL: Level(),
-                  floor.RANDOM_LEVEL: Level(-1)
+                  floor.RANDOM_LEVEL: RandomDifficulty(),
+                  floor.EASY_LEVEL: Level(-1),
+                  floor.MEDIUM_LEVEL: Level(-2),
+                  floor.HARD_LEVEL: Level(-3)
                   }
 
     game.setup_states(state_dict, floor.MAIN_MENU)
