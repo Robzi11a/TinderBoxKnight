@@ -25,15 +25,16 @@ class Ranged_Enemy:
         
         # If enemy is on same row as player
         if kp_y == self.row:
-            
+            print('same row')
+            print(level[kp_y][kp_x])
             # Check if there is a wall in the way
             if kp_x > self.column:
                 for i in range(self.column, kp_x):
-                    if 'w' in level[self.row][i]:
+                    if 'hw' in level[self.row][i] or 'vw' in level[self.row][i]:
                         wall = True
             if kp_x < self.column:
                 for i in range (kp_x, self.column):
-                    if 'w' in level[self.row][i]:
+                    if 'hw' in level[self.row][i] or 'vw' in level[self.row][i]:
                         wall = True
             
             
@@ -58,3 +59,5 @@ class Ranged_Enemy:
                 level[self.row][self.column] = 'pre'
                 level[kp_y][kp_x] = 'kp'
                 return True, self.original_array
+        
+        return False, 0

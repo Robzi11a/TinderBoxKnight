@@ -32,8 +32,8 @@ class Level(State):
 
 
         self.level_number = level_number
-        self.levels = ['lvl1.txt', 'lvl2.txt', 'lvl3.txt', 'lv4.txt', 'lvl5.txt',]
-        self.number_of_levels = 5
+        self.levels = ['lvl5.txt', 'lvl1.txt', 'lvl2.txt', 'lvl3.txt', 'lv4.txt', 'lvl5.txt',]
+        self.number_of_levels = len(self.levels)
 
 
         self.reset = False
@@ -51,10 +51,6 @@ class Level(State):
     def keydown_events(self, key):
         self.is_scanned = False
         self.is_lit = False
-        spider_sound = pygame.mixer.Sound("sound/spider.mp3")  # loading spider sound
-        door_sound = pygame.mixer.Sound("sound/dooropen.wav")  # loading door open sound
-        match_sound = pygame.mixer.Sound("sound/LightingMatch.mp3")  # loading spider sound
-        shadow_sound = pygame.mixer.Sound("sound/GhostSound.mp3")
 
         if key == pygame.K_q:
             self.keep_looping = False
@@ -72,7 +68,7 @@ class Level(State):
                 self.reset_knight(kp_y, kp_x, "Beware the eyes...", level)
                 self.lives_change(kp_y, kp_x)
             if not safe_move:
-                spider_sound.play()  # playing spider sound
+                self.spider_sound.play()  # playing spider sound
                 self.reset_knight(kp_y, kp_x, "You hit a spider!")
                 self.level_array[kp_y][kp_x + 1] = 'hs'
                 self.lives_change(kp_y, kp_x)
@@ -87,7 +83,7 @@ class Level(State):
                 self.reset_knight(kp_y, kp_x, "Beware the eyes...", level)
                 self.lives_change(kp_y, kp_x)
             if not safe_move:
-                spider_sound.play()  # playing spider sound
+                self.spider_sound.play()  # playing spider sound
                 self.reset_knight(kp_y, kp_x, "You hit a spider!")
                 self.level_array[kp_y][kp_x - 1] = 'hs'
                 self.lives_change(kp_y, kp_x)
@@ -102,7 +98,7 @@ class Level(State):
                 self.reset_knight(kp_y, kp_x, "Beware the eyes...", level)
                 self.lives_change(kp_y, kp_x)
             if not safe_move:
-                spider_sound.play()  # playing spider sound
+                self.spider_sound.play()  # playing spider sound
                 self.reset_knight(kp_y, kp_x, "You hit a spider!")
                 self.level_array[kp_y - 1][kp_x] = 'hs'
                 self.lives_change(kp_y, kp_x)
@@ -116,7 +112,7 @@ class Level(State):
                 self.reset_knight(kp_y, kp_x, "Beware the eyes...", level)
                 self.lives_change(kp_y, kp_x)
             if not safe_move:
-                spider_sound.play()  # playing spider sound
+                self.spider_sound.play()  # playing spider sound
                 self.reset_knight(kp_y, kp_x, "You hit a spider!")
                 self.level_array[kp_y + 1][kp_x] = 'hs'
                 self.lives_change(kp_y, kp_x)
@@ -128,13 +124,13 @@ class Level(State):
 
         # Light and Open Gate 
         if key == pygame.K_f:
-            match_sound.play()
+            self.match_sound.play()
             kp_y, kp_x = self.knight.return_position()
             self.light = Light(self.level_array, self.original_array, self.lit_tiles, self.knight.return_position())
             attacked, level = self.check_for_attack()
             # Check to see if the player lit up a spider
             if self.spider.check_for_lit_spider(kp_y, kp_x):
-                spider_sound.play()
+                self.spider_sound.play()
                 self.reset_knight(kp_y, kp_x, "You lit up a spider!")
                 self.spider.reset_spider(kp_y, kp_x)
                 self.lives_change(kp_y, kp_x)
@@ -153,7 +149,7 @@ class Level(State):
                 kp_y, kp_x = self.knight.return_position()
                 self.pressure_plate.check_pressure(kp_y, kp_x)
                 if self.pressure_plate.is_gate_open:
-                    door_sound.play()
+                    self.door_sound.play()
                     x, y = self.get_display_position(kp_x, kp_y, 1, 0)
                     self.caption_rect = pygame.Rect((x, y, TILESIZE, TILESIZE))
                     self.message = "The gate is open!"
@@ -162,7 +158,7 @@ class Level(State):
 
         # press SPACE to interactive with torch
         if key == pygame.K_SPACE:
-            match_sound.play()
+            self.match_sound.play()
             kp_y, kp_x = self.knight.return_position()  # kp_y is knight's row, kp_y is knight's column
             state_torch = self.big_torch.is_torch_lit(self.level_array)  # check and retrun the state of troch, also retrun torch's row and column
 
@@ -194,7 +190,7 @@ class Level(State):
         for enemy in self.ranged_enemies:
             attacked, level = enemy.ranged_attack(self.knight, self.level_array)
             if attacked:
-                shadow_sound.play()
+                self.shadow_sound.play()
                 return True, level
         return False, 0
 
@@ -312,6 +308,10 @@ class Level(State):
         mixer.music.load('sound/backgroundtwo.mp3')  # loading backgroundmusic
         pygame.mixer.music.set_volume(0.6)
         pygame.mixer.music.play(-1)  # loading for indefinite time
+        self.spider_sound = pygame.mixer.Sound("sound/spider.mp3")  # loading spider sound
+        self.door_sound = pygame.mixer.Sound("sound/dooropen.wav")  # loading door open sound
+        self.match_sound = pygame.mixer.Sound("sound/LightingMatch.mp3")  # loading spider sound
+        self.shadow_sound = pygame.mixer.Sound("sound/GhostSound.mp3")
 
     def update(self, surface, key, time_tick):
         if (self.flag_restart == 1):
