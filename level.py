@@ -33,8 +33,8 @@ class Level(State):
 
 
         self.level_number = level_number
-        self.levels = ['demolvl.txt', 'lvl3.txt', 'lvl1.txt']
-        self.number_of_levels = 3
+        self.levels = ['lvl1.txt', 'lvl2.txt', 'lvl3.txt', 'lv4.txt', 'lvl5.txt',]
+        self.number_of_levels = 5
 
 
         self.reset = False
@@ -54,6 +54,8 @@ class Level(State):
         self.is_lit = False
         spider_sound = pygame.mixer.Sound("sound/spider.mp3")  # loading spider sound
         door_sound = pygame.mixer.Sound("sound/dooropen.wav")  # loading door open sound
+        match_sound = pygame.mixer.Sound("sound/LightingMatch.mp3")  # loading spider sound
+        shadow_sound = pygame.mixer.Sound("sound/GhostSound.mp3")
 
         if key == pygame.K_q:
             self.keep_looping = False
@@ -127,6 +129,7 @@ class Level(State):
 
         # Light and Open Gate 
         if key == pygame.K_f:
+            match_sound.play()
             kp_y, kp_x = self.knight.return_position()
             self.light = Light(self.level_array, self.original_array, self.lit_tiles, self.knight.return_position())
             attacked, level = self.check_for_attack()
@@ -161,6 +164,7 @@ class Level(State):
 
         # press SPACE to interactive with torch
         if key == pygame.K_SPACE:
+            match_sound.play()
             kp_y, kp_x = self.knight.return_position()  # kp_y is knight's row, kp_y is knight's column
             state_torch = self.big_torch.is_torch_lit(self.level_array)  # check and retrun the state of troch, also retrun torch's row and column
 
@@ -192,6 +196,7 @@ class Level(State):
         for enemy in self.ranged_enemies:
             attacked, level = enemy.ranged_attack(self.knight, self.level_array)
             if attacked:
+                shadow_sound.play()
                 return True, level
         return False, 0
 

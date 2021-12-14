@@ -142,6 +142,8 @@ class Tile:
 
         elif kind_of_tile == "llrc" : filename = floor.LIT_LEFT_ROOM_CLUE
 
+        elif kind_of_tile == "lmc" : filename = floor.LIT_MATCH_CLUE
+
         elif kind_of_tile == "lcm" : filename = floor.LIT_MATCH_CLUE
 
         elif kind_of_tile == "dcr" : filename = floor.HIDDEN_CLUE_RIGHT

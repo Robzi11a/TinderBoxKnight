@@ -1,16 +1,20 @@
-import os
-
+import copy
 import pygame
+import ground as floor
+import os
+import csv
 
 import ground as c
 from game import State
 from utils import WHITE
-
+from pygame import mixer
 
 class Menu(State):
 
     def __init__(self):
         super().__init__()
+        mixer.music.load('sound/TinderBoxKnightTheme.mp3')  # loading backgroundmusic
+        pygame.mixer.music.play(-1)
         self.BG_COLOR = c.DARK_PURPLE
         self.stickers = []
         self.menu = []

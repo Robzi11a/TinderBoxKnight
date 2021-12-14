@@ -5,8 +5,8 @@ vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw
 vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw;vw
 vw;d;d;d;d;d;d;d;d;d;hb;vw;vw;vw;vw
 vw;d;hb;hb;hb;d;d;d;d;d;hb;vw;vw;vw;vw
-vw;d;lcm;lb;lcm;hb;hb;hb;hb;d;hb;vw;vw;vw;vw
-vw;d;lcm;lft;lcm;vw;vw;vw;hb;d;hb;vw;vw;vw;vw
+vw;d;lmc;lb;lmc;hb;hb;hb;hb;d;hb;vw;vw;vw;vw
+vw;d;lmc;lft;lmc;vw;vw;vw;hb;d;hb;vw;vw;vw;vw
 vw;d;d;d;d;vw;vw;vw;hb;d;hb;vw;vw;vw;vw
 vw;hb;hb;hb;d;vw;vw;vw;d;d;d;vw;vw;vw;vw
 vw;vw;vw;vw;d;vw;vw;vw;d;d;d;vw;vw;vw;vw

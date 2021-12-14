@@ -59,7 +59,7 @@ LIT_WEB_SKELETON_ARMS = "VisibleWebArmBones.png"
 
 LIT_S_TILE = "STILE.png"
 
-LIR_F_TILE = "FTILE.png"
+LIT_F_TILE = "FTILE.png"
 
 # Ranged Enemy ["lre, dre, drea"]
 
@@ -109,7 +109,7 @@ LIT_RIGHT_ROOM_CLUE = "VisibleRightRoomClue.png"
 
 LIT_LEFT_ROOM_CLUE = "VisibleLeftRoomClue.png"
 
-LIT_MATCH_CLUE = "SpiderClue.png"
+LIT_MATCH_CLUE = "VisibleMatchClue.png"
 
 # Hidden object dark tiles = ["ht, hs, hcu, hcd, hcr, hcs, hb, dpp,dog,hcg"]
 
