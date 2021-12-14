@@ -21,9 +21,7 @@ from game import State
 class Level(State):
     def __init__(self, level_number=0):
         super().__init__()
-        mixer.music.load('sound/TinderBoxKnightTheme.mp3')  # loading backgroundmusic
-        pygame.mixer.music.play(1)  # loading for indefinite time
-        mixer.music.queue('sound/backgroundtwo.mp3')  # loading backgroundmusic
+        #mixer.music.load('sound/TinderBoxKnightTheme.mp3')  # loading backgroundmusic     
         self.BG_COLOR = floor.DARK_PURPLE
         self.keep_looping = True
         self.is_scanned = False
@@ -237,6 +235,7 @@ class Level(State):
 
     # Read in level is its own function so that we can call it to read in different levels.
     def read_in_level(self, level_number):
+        self.scanned_tiles.clear()
         if level_number == -1:
             print("random level")
 
@@ -310,6 +309,9 @@ class Level(State):
     def startup(self, game_info):
         self.read_in_level(self.level_number)
         self.scanned_tiles = []
+        mixer.music.load('sound/backgroundtwo.mp3')  # loading backgroundmusic
+        pygame.mixer.music.set_volume(0.6)
+        pygame.mixer.music.play(-1)  # loading for indefinite time
 
     def update(self, surface, key, time_tick):
         if (self.flag_restart == 1):
