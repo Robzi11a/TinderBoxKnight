@@ -312,6 +312,8 @@ class Level(State):
     def startup(self, game_info):
         self.read_in_level(self.level_number)
         self.scanned_tiles = []
+        mixer.music.pause()
+        mixer.music.unload()
         mixer.music.load('sound/backgroundtwo.mp3')  # loading backgroundmusic
         pygame.mixer.music.set_volume(0.6)
         pygame.mixer.music.play(-1)  # loading for indefinite time

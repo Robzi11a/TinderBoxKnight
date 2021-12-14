@@ -13,8 +13,6 @@ class Menu(State):
 
     def __init__(self):
         super().__init__()
-        mixer.music.load('sound/TinderBoxKnightTheme.mp3')  # loading backgroundmusic
-        mixer.music.play(-1)
         self.BG_COLOR = c.DARK_PURPLE
         self.stickers = []
         self.menu = []
@@ -127,11 +125,6 @@ class Menu(State):
         elif key == pygame.K_RETURN:
             self.next = self.cursor.state
             self.keep_looping = False
-            pygame.mixer.music.pause()
-            pygame.mixer.music.unload()
-
-
-
 
     def draw(self, surface):
         surface.fill(self.BG_COLOR)
@@ -144,6 +137,8 @@ class Menu(State):
         self.index = 0
         self.cursor.rect.y = self.menu[self.index][1].y
         self.cursor.state = self.menu[self.index][2]
+        mixer.music.load('sound/TinderBoxKnightTheme.mp3')  # loading backgroundmusic
+        mixer.music.play(-1)
 
     def update(self, surface, keys, time_tick):
         self.update_cursor(keys)

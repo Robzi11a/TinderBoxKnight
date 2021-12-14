@@ -21,8 +21,8 @@ class RandomLevel:
         self.set_enemy()
 
     def read_random_level(self):
-        # level_number = random.randint(0, len(self.levels) - 1)
-        level_number = 1
+        level_number = random.randint(0, len(self.levels) - 1)
+        # level_number = 1
         filepath = os.path.join("levels", self.levels[level_number])
         spider_and_clue = ["lss", "lsr", "lsa", "lwsr", "lwsa", "hs"]
         ranged_and_clue = ["lwsa", "hre"]
@@ -69,7 +69,6 @@ class RandomLevel:
                     i = i - 1
                     spider_clue = ["lss", "lsr", "lsa", "lwsr", "lwsa"]
                     if self.spider_clue > 0:
-                        print("clue left to put: ", self.spider_clue)
                         if x - 1 > 0 and self.empty_tile.count([x - 1, y]) > 0:
                             self.level_array[x - 1][y] = random.choice(spider_clue)
                             self.empty_tile.remove([x - 1, y])
