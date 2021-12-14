@@ -30,11 +30,11 @@ class Ranged_Enemy:
             # Check if there is a wall in the way
             if kp_x > self.column:
                 for i in range(self.column, kp_x):
-                    if 'hw' in level[self.row][i] or 'vw' in level[self.row][i]:
+                    if level[self.row][i] == 'hw' or level[self.row][i] =='vw':
                         wall = True
             if kp_x < self.column:
                 for i in range (kp_x, self.column):
-                    if 'hw' in level[self.row][i] or 'vw' in level[self.row][i]:
+                    if level[self.row][i] == 'hw' or level[self.row][i] == 'vw':
                         wall = True
             
             
@@ -48,11 +48,11 @@ class Ranged_Enemy:
             # Check if there is a wall in the way
             if kp_y > self.row:
                 for i in range(self.row, kp_y):
-                    if 'w' in self.level_array[i][self.column]:
+                    if level[i][self.column] == 'hw' or level[i][self.column] == 'vw':
                         wall = True
             elif kp_y < self.row:
                 for i in range (kp_y, self.row):
-                    if 'w' in self.level_array[i][self.column]:
+                    if level[i][self.column] == 'hw' or level[i][self.column] == 'vw':
                         wall = True
             
             if not wall and self.level_array[kp_y][kp_x] == 'kl':
