@@ -21,8 +21,9 @@ from game import State
 class Level(State):
     def __init__(self, level_number=0):
         super().__init__()
-        mixer.music.load('sound/backgroundtwo.mp3')  # loading backgroundmusic
-        pygame.mixer.music.play(-1)  # loading for indefinite time
+        mixer.music.load('sound/TinderBoxKnightTheme.mp3')  # loading backgroundmusic
+        pygame.mixer.music.play(1)  # loading for indefinite time
+        mixer.music.queue('sound/backgroundtwo.mp3')  # loading backgroundmusic
         self.BG_COLOR = floor.DARK_PURPLE
         self.keep_looping = True
         self.is_scanned = False
