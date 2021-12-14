@@ -41,7 +41,18 @@ class PressurePlate:
     """
 
     def __init__(self, position, level_array):
-        global MAX_GATENUMBER,COUNT_GATENUMBER,PP_LOCATION,G_LOCATION
+        # a list to store the location data (y,x) for pressure plates
+        self.PP_LOCATION=[]
+        
+        # a list to store the location data (y,x) for gates
+        self.G_LOCATION=[]
+        
+        # max number of gates in one level
+        self.MAX_GATENUMBER=1 
+        
+        # a flag to count dealed number for gates: start from 0 and less than MAX_GATENUMBER
+        self.COUNT_GATENUMBER=0 
+        
         # a current x,y location data for player (knight)
         self.py, self.px= position
         # a list to store the data for a level
@@ -50,30 +61,28 @@ class PressurePlate:
         # a return param from initialized display interface
        # self.surface=surface
         # only when dealed number for gates < max mumber for gates, finding position for the pressure plates and gates
-        if (COUNT_GATENUMBER<MAX_GATENUMBER):
+        if (self.COUNT_GATENUMBER<self.MAX_GATENUMBER):
             self.find_position()
-            COUNT_GATENUMBER+=1
+            self.COUNT_GATENUMBER+=1
         #self.check_pressure(kp_y, kp_x)
 
     #check whether satify the conditions to open gate.
     #2condiitons: 1.plyaer's x,ylocation = pressureplate's x,yloacation
     #             2.this pressure plate should be visible
     def check_pressure(self, kp_y, kp_x):
-        global PP_LOCATION,G_LOCATION
-        for i in range(len(G_LOCATION)):
-            if (kp_x==PP_LOCATION[i][1]) and (kp_y==PP_LOCATION[i][0]):
-                print("start open gate!")
+        for i in range(len(self.G_LOCATION)):
+            if (kp_x==self.PP_LOCATION[i][1]) and (kp_y==self.PP_LOCATION[i][0]):
                 self.open_gate(i)
 
     # change data for gate tiles. 
     # 2 options: 1.when the current gate tile is "vcg"=>changes into "log"
     #            2.when the current gate tile is "hcg"=>changes into "hog"
     def open_gate(self,i):
-        if self.level_array[G_LOCATION[i][0]][G_LOCATION[i][1]]=="vcg":
-            self.level_array[G_LOCATION[i][0]][G_LOCATION[i][1]] = self.level_array[G_LOCATION[i][0]][G_LOCATION[i][1]].replace("vcg","log",1)
+        if self.level_array[self.G_LOCATION[i][0]][self.G_LOCATION[i][1]]=="vcg":
+            self.level_array[self.G_LOCATION[i][0]][self.G_LOCATION[i][1]] = self.level_array[self.G_LOCATION[i][0]][self.G_LOCATION[i][1]].replace("vcg","log",1)
             self.is_gate_open = True
-        elif self.level_array[G_LOCATION[i][0]][G_LOCATION[i][1]]=="hcg":
-            self.level_array[G_LOCATION[i][0]][G_LOCATION[i][1]] = self.level_array[G_LOCATION[i][0]][G_LOCATION[i][1]].replace("hcg","dog",1)
+        elif self.level_array[self.G_LOCATION[i][0]][self.G_LOCATION[i][1]]=="hcg":
+            self.level_array[self.G_LOCATION[i][0]][self.G_LOCATION[i][1]] = self.level_array[self.G_LOCATION[i][0]][self.G_LOCATION[i][1]].replace("hcg","dog",1)
             self.is_gate_open = True
         else: pass
         #self.draw()
@@ -94,14 +103,12 @@ class PressurePlate:
                 if (j=="dpp") or (j=="lpp"):
                     ppx = countx
                     ppy = county
-                    global  PP_LOCATION
-                    PP_LOCATION.append([ppy,ppx])
+                    self.PP_LOCATION.append([ppy,ppx])
                     #print("ppx is",self.ppx,"ppy is",self.ppy)
                 if (j=="hcg") or (j=="vcg"):
                     gx = countx
                     gy = county
-                    global G_LOCATION
-                    G_LOCATION.append([gy,gx])
+                    self.G_LOCATION.append([gy,gx])
 
     # add text when the player steps the pressure plate to open the gate
     """

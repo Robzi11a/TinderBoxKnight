@@ -42,21 +42,6 @@ class Ranged_Enemy:
                 level[kp_y][kp_x] = 'kp'
                 return True, self.original_array
                 
-                #Not all tiles have poison variant
-                """
-                if kp_x > self.column:
-                    for i in range (self.column, kp_x):
-                        level[self.row][i] = level[self.row][i].replace('l', 'p')
-                        level[self.row][i] = level[self.row][i].replace('d', 'p')
-                    return True, self.original_array 
-                    
-                if kp_x < self.column:      
-                    for i in range (kp_x, self.column):
-                        level[self.row][i] = level[self.row][i].replace('l', 'p')
-                        level[self.row][i] = level[self.row][i].replace('d', 'p')
-                    return True, self.original_array 
-                """
-
         #if enemy is on same column as player
         elif kp_x == self.column:
             # Check if there is a wall in the way
@@ -64,7 +49,6 @@ class Ranged_Enemy:
                 for i in range(self.row, kp_y):
                     if 'w' in self.level_array[i][self.column]:
                         wall = True
-                        print(wall, i)
             elif kp_y < self.row:
                 for i in range (kp_y, self.row):
                     if 'w' in self.level_array[i][self.column]:
@@ -74,96 +58,3 @@ class Ranged_Enemy:
                 level[self.row][self.column] = 'pre'
                 level[kp_y][kp_x] = 'kp'
                 return True, self.original_array
-                
-
-                """
-                if kp_y > self.row:
-                    print("greater")
-                    for i in range (self.row, kp_y):
-                        level[i][self.column] = level[i][self.column].replace('l', 'p')
-                        level[i][self.column] = level[i][self.column].replace('d', 'p')
-                        level[i][self.column] = level[i][self.column].replace('l', 'p')
-                        level[i][self.column] = level[i][self.column].replace('d', 'p')
-
-                    return True, self.original_array 
-                    
-                if kp_y < self.row:      
-                    for i in range (kp_y, self.row):
-                        level[i][self.column] = level[i][self.column].replace('l', 'p')
-                        level[i][self.column] = level[i][self.column].replace('d', 'p')
-                    return True, self.original_array 
-                """
-        return False, self.level_array
-       
-       
-        """
-        if level_array[3][4] == 'kl' and (level_array[3][10] == 'hre' or 'pre'):
-            print("0")
-            level_array[3][4] = 'pk'
-            level_array[3][5] = 'p'
-            level_array[3][6] = 'psa'
-            level_array[3][7] = 'psr'
-            level_array[3][8] = 'pss'
-            level_array[3][9] = 'p'
-            level_array[3][10] = 'pre'   
-
-        if level_array[3][5] == 'kl' and (level_array[3][10] == 'hre' or 'pre'):
-            print("1")
-            level_array[3][4] = 'p'
-            level_array[3][5] = 'pk'
-            level_array[3][6] = 'psa'
-            level_array[3][7] = 'psr'
-            level_array[3][8] = 'pss'
-            level_array[3][9] = 'p'
-            level_array[3][10] = 'pre'
-            
-        if level_array[3][6] == 'kl' and (level_array[3][10] == 'hre' or 'pre'):
-            print("2")
-            level_array[3][4] = 'p'
-            level_array[3][5] = 'p'
-            level_array[3][6] = 'psa'
-            level_array[3][7] = 'psr'
-            level_array[3][8] = 'pss'
-            level_array[3][9] = 'p'
-            level_array[3][10] = 'pre'
-        
-        if level_array[3][7] == 'kl' and (level_array[3][10] == 'hre' or 'pre'):
-            print("3")
-            level_array[3][4] = 'p'
-            level_array[3][5] = 'p'
-            level_array[3][6] = 'psa'
-            level_array[3][7] = 'pk'
-            level_array[3][8] = 'pss'
-            level_array[3][9] = 'p'
-            level_array[3][10] = 'pre'  
-        
-        if level_array[3][8] == 'kl' and (level_array[3][10] == 'hre' or 'pre'):
-            print("4")
-            level_array[3][4] = 'p'
-            level_array[3][5] = 'pk'
-            level_array[3][6] = 'psa'
-            level_array[3][7] = 'psr'
-            level_array[3][8] = 'pk'
-            level_array[3][9] = 'p'
-            level_array[3][10] = 'pre'
-        
-        if level_array[3][9] == 'kl' and (level_array[3][10] == 'hre' or 'pre'):
-            print("5")
-            level_array[3][4] = 'p'
-            level_array[3][5] = 'p'
-            level_array[3][6] = 'psa'
-            level_array[3][7] = 'psr'
-            level_array[3][8] = 'pss'
-            level_array[3][9] = 'pk'
-            level_array[3][10] = 'pre'
-
-        if level_array[3][10] == 'lre':
-            print("5")
-            level_array[3][4] = 'l'
-            level_array[3][5] = 'l'
-            level_array[3][6] = 'lsa'
-            level_array[3][7] = 'lsr'
-            level_array[3][8] = 'lss'
-            level_array[3][9] = 'l'
-            level_array[3][10] = 'l'
-            """

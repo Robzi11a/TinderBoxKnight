@@ -156,7 +156,7 @@ class Tinder_Box_Knight:
                 if event.key == pygame.K_o:
                       # open gate(steping on the pressure plate)
                       door_sound.play()
-                      PressurePlate(self.knight.return_position(),self.level_array,self.surface)
+                     # PressurePlate(self.knight.return_position(),self.level_array,self.surface)
                 
 
                 # press SPACE to interactive with torch
@@ -259,7 +259,7 @@ class Tinder_Box_Knight:
         self.create_monster_objects()
         self.big_torch = BigTorch(self.level_array)
         #find and save positions for gates and pressure plates
-        PressurePlate(self.knight.return_position(),self.level_array,self.surface)
+        #PressurePlate(self.knight.return_position(),self.level_array,self.surface)
 
     # Create array of monster objects
     def create_monster_objects(self):

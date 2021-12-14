@@ -43,50 +43,14 @@ class Light:
                         # an if method to fix a bug about gate
                         if self.previous_tile=="vcg":
                             self.previous_tile="log"
-                        print('ppp', self.previous_tile)
                         self.tiles[xIndex][yIndex] = 'kl'
                         continue
                     if self.tiles[xIndex][yIndex].startswith('h'):
-                        print(xIndex, yIndex, 2)
                         self.tiles[xIndex][yIndex] = self.tiles[xIndex][yIndex].replace('h', 'v', 1)
-                        print(self.tiles[xIndex][yIndex])
                     elif self.tiles[xIndex][yIndex].startswith('d'):
-                        print(xIndex, yIndex, 3)
                         self.tiles[xIndex][yIndex] = self.tiles[xIndex][yIndex].replace('d', 'l', 1)
                     elif self.tiles[xIndex][yIndex].startswith('p'):
-                        print(xIndex, yIndex, 3)
                         self.tiles[xIndex][yIndex] = self.tiles[xIndex][yIndex].replace('p', 'l', 1)
-                    # elif self.tiles[xIndex][yIndex] == 'vs':
-                    #     self.knight.update_position(9, 0)
-                    #     self.level_array[kp_y][kp_x], self.level_array[9][0] = self.level_array[9][0], self.level_array[kp_y][kp_x]
-
-    #def reset_knight(self, kp_y, kp_x):
-     #   font = pygame.font.SysFont("arial", 20)
-      #  caption = font.render("You lit a spider!", True , WHITE)
-       # '''self.screen.fill((0,0,0))'''
-        #'''self.screen.blit(caption,[self.wINDOW_WIDTH/2,self.wINDOW_HEIGHT/2])'''
-        #self.screen.blit(caption,[100,100])
-        #pygame.display.flip()
-        #pygame.time.wait(1000)
-        #self.knight.update_position(9, 0)
-        #self.level_array[kp_y][kp_x], self.level_array[9][0] = self.level_array[9][0], self.level_array[kp_y][kp_x]    
-
-    #def reset_knight_position(self):
-     #    if self.original_array[xIndex][yIndex] == 'ls': 
-      #      return True
-
-    #def check_for_enemy(self, square):
-     #   if square == 'hs':
-      #      return True
-       # return False
-         
-    #def return_position(self):
-     #   return self.row, self.column
-
-#    def check_for_spider(self, square):
- #       if square == 'ls':
-  #          return True
-   #     return False    
 
     def update(self):
         pass

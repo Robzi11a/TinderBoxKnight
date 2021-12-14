@@ -143,7 +143,6 @@ class Level(State):
                 self.lives_change(kp_y, kp_x)
             else:
                 self.knight.previous_tile = self.light.previous_tile
-                print('previous tile: ', self.light.previous_tile)
                 self.level_array[kp_y][kp_x] = 'kl'
                 self.knight.next_tile = 'l'
                 self.is_lit = True
@@ -151,10 +150,10 @@ class Level(State):
         # Open gate 
         if key == pygame.K_o:
                 # open gate(steping on the pressure plate)
-                door_sound.play()
                 kp_y, kp_x = self.knight.return_position()
                 self.pressure_plate.check_pressure(kp_y, kp_x)
                 if self.pressure_plate.is_gate_open:
+                    door_sound.play()
                     x, y = self.get_display_position(kp_x, kp_y, 1, 0)
                     self.caption_rect = pygame.Rect((x, y, TILESIZE, TILESIZE))
                     self.message = "The gate is open!"
@@ -258,6 +257,7 @@ class Level(State):
             self.big_torch = BigTorch(self.level_array)
             self.create_monster_objects()
             self.end_level = False
+
             # find and save positions for gates and pressure plates
             self.pressure_plate = PressurePlate(self.knight.return_position(), self.level_array)
 

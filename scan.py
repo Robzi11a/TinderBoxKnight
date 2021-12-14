@@ -19,7 +19,6 @@ class Scanner:
 
     def scan(self):
         kp_y, kp_x = self.position
-        print("now position:", kp_y, kp_x, TILESIZE)
         horizontal = (c.WINDOW_WIDTH - TILES_HORIZONTAL * TILESIZE) / 2 + (kp_x + 0.2) * TILESIZE
         vertical = (kp_y + 0.5) * TILESIZE
         self.tip = pygame.Rect(horizontal, vertical, TILESIZE, TILESIZE)
