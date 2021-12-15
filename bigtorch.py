@@ -2,7 +2,6 @@
 import pygame
 import os
 import ctypes
-import cv2  # a PyPl called opencv to play video (need download)
 import math
 
 from tiles import TILES_HORIZONTAL,TILES_VERTICAL, TILES_HORIZONTAL, TILES_VERTICAL
@@ -49,30 +48,6 @@ class BigTorch:
         self.level_array[self.yIndex][self.xIndex] = 'vlt'
         return True
 
-   # after lit torch, play a related cutscene (must add opencv PyPl then import cv2)
-    def play_lightcutscene(self):
-        current_dir = os.path.dirname(os.path.abspath(__file__))
-        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-        WINDOW_WIDTH = self.screen.get_rect().width
-        WINDOW_HEIGHT = self.screen.get_rect().height
-        video_path = os.path.join("levels", "cutscenes","LightTorch.mp4")  #500X300(WIDTH X HEIGHT)
-        cap = cv2.VideoCapture(video_path)
-        while(cap.isOpened()): 
-            ret,frame = cap.read()
-            ret_flag=0
-            if((ret == True) and (ret_flag == 0)):
-                cv2.imshow('lit torch',frame) 
-                cv2.moveWindow('lit torch',math.ceil(WINDOW_WIDTH/3),math.ceil(WINDOW_HEIGHT/3))
-                k = cv2.waitKey(30)
-                #press q and quit
-                if (k & 0xff == ord('q')): 
-                    ret = False
-                    break
-            elif((ret == False) or (ret_flag == 1)):
-                ret_flag=0
-                cap.release()
-                cv2.destroyAllWindows()
-            else: print("light_torch video meets error! ")
                 
 # load level 2 when lit the torch
 #    def next_level(self):
