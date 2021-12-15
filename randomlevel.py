@@ -81,6 +81,8 @@ class RandomLevel:
                             self.level_array[x][y - 1] = random.choice(spider_clue)
                             self.empty_tile.remove([x, y - 1])
                             self.spider_clue = self.spider_clue - 1
+                else:
+                    self.empty_tile.remove(self.empty_tile[index])
         # for j in range(0, self.range_num):
         #     flag = False
         #     while not flag and len(self.empty_tile) > 0:
