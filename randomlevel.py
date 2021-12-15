@@ -94,11 +94,31 @@ class RandomLevel:
         #             j = j - 1
 
     def check_can_put_enemy(self, x, y):
-        ll = y == 0 or x == TILES_VERTICAL - 2 or self.level_array[x + 1][y - 1].startswith('h') or self.level_array[x + 1][y - 1].startswith('v')
-        lr = y == TILES_HORIZONTAL - 1 or x == TILES_VERTICAL - 2 or self.level_array[x + 1][y + 1].startswith('h') or self.level_array[x + 1][y + 1].startswith('v')
-        ul = y == 0 or x == 0 or self.level_array[x - 1][y - 1].startswith('h') or self.level_array[x - 1][y - 1].startswith('v')
-        ur = y == TILES_HORIZONTAL - 1 or x == 0 or self.level_array[x - 1][y + 1].startswith('h') or self.level_array[x - 1][y + 1].startswith('v')
-        if ll and lr and ul and ur:
+        gtd = ["hcg", "ht", "dpp"]
+        ll = y == 0 or x == TILES_VERTICAL - 2 \
+             or self.level_array[x + 1][y - 1].startswith('h') or self.level_array[x + 1][y - 1].startswith('v') \
+             or self.level_array[x + 1][y - 1] in gtd
+        lr = y == TILES_HORIZONTAL - 1 or x == TILES_VERTICAL - 2 \
+             or self.level_array[x + 1][y + 1].startswith('h') or self.level_array[x + 1][y + 1].startswith('v') \
+             or self.level_array[x + 1][y + 1] in gtd
+        ul = y == 0 or x == 0 \
+             or self.level_array[x - 1][y - 1].startswith('h') or self.level_array[x - 1][y - 1].startswith('v') \
+             or self.level_array[x - 1][y - 1] in gtd
+        ur = y == TILES_HORIZONTAL - 1 or x == 0 \
+             or self.level_array[x - 1][y + 1].startswith('h') or self.level_array[x - 1][y + 1].startswith('v') \
+             or self.level_array[x - 1][y + 1] in gtd
+        lower = x == TILES_VERTICAL - 2 \
+                or self.level_array[x + 1][y].startswith('h') or self.level_array[x + 1][y].startswith('v') \
+                or self.level_array[x + 1][y] in gtd
+        upper = x == 0 \
+                or self.level_array[x - 1][y].startswith('h') or self.level_array[x - 1][y].startswith('v') \
+                or self.level_array[x - 1][y] in gtd
+        left = y == 0 or self.level_array[x][y - 1].startswith('h') or self.level_array[x][y - 1].startswith('v') \
+                or self.level_array[x][y - 1] in gtd
+        right = y == TILES_HORIZONTAL - 1 \
+                or self.level_array[x][y + 1].startswith('h') or self.level_array[x][y + 1].startswith('v') \
+                or self.level_array[x][y - 1] in gtd
+        if (ll and lr) or (ul and ur) or (lower and upper) or (left and right):
             return False
         else:
             return True
