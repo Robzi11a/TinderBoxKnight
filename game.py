@@ -51,7 +51,7 @@ class Game:
     def next_state(self):
         if self.state.next == c.QUIT:
             print('quit game')
-            quit()
+            self.keep_looping = False
         else:
             self.state_name = self.state.next
             game_info = self.state.cleanup()
