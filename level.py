@@ -182,10 +182,7 @@ class Level(State):
                 else:
                     self.keep_looping = False
                     self.next = floor.MAIN_MENU
-                    self.big_torch.play_lightcutscene()
-                
-
-
+                    # self.big_torch.play_lightcutscene()
 
             # missing: all tiles change into visible
 
@@ -217,6 +214,9 @@ class Level(State):
                 self.level_array[y][x] = self.level_array[y][x].replace("ml1","ml3",1)            #change lives tiles(1lives->3 lives)
                 self.end_level = True
                 self.end_caption_rect = pygame.Rect(w/2.5, h/2, 50, 50)
+                self.end_message = 'You have no lives left!'
+                if self.level_number >= 0:
+                    self.level_number = 0
                 self.draw(self.surface, self.time_tick)                            #display message1
                 pygame.time.wait(1000)
                 self.keep_looping = False
