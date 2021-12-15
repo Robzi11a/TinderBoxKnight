@@ -21,7 +21,7 @@ from game import State
 
 
 class Level(State):
-    def __init__(self, level_number=1):
+    def __init__(self, level_number=0):
         super().__init__()
         #mixer.music.load('sound/TinderBoxKnightTheme.mp3')  # loading backgroundmusic     
         self.BG_COLOR = floor.DARK_PURPLE
