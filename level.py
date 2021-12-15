@@ -252,25 +252,22 @@ class Level(State):
             for col_num, element in enumerate(row):
                 if element == 'kd':
                     self.knight = Knight(row_num, col_num)
-        for row_num, row in enumerate(self.level_array):
-            for col_num, element in enumerate(row):
-                if element == 'ml3':
+                elif element == 'ml3':
                     self.lives_tile = (row_num, col_num)
         self.spider = Spider(self.level_array)
         self.big_torch = BigTorch(self.level_array)
         self.create_monster_objects()
         self.end_level = False
-
         # find and save positions for gates and pressure plates
         self.pressure_plate = PressurePlate(self.knight.return_position(), self.level_array)
 
     # Create array of monster objects
     def create_monster_objects(self):
         self.ranged_enemies.clear()
-        for y in range(TILES_VERTICAL):
-            for x in range(TILES_HORIZONTAL):
-                if self.level_array[y][x] == "hre":
-                    self.ranged_enemies.append(Ranged_Enemy(y, x, self.level_array))
+        for rownum, row in enumerate(self.level_array):
+            for colnum, col in enumerate(row):
+                if self.level_array[rownum][colnum] == "hre":
+                    self.ranged_enemies.append(Ranged_Enemy(rownum, colnum, self.level_array))
 
     def get_display_position(self, x, y, offset_x, offset_y):
         x = (floor.WINDOW_WIDTH - TILES_HORIZONTAL * TILESIZE) / 2 + (x + offset_x) * TILESIZE
