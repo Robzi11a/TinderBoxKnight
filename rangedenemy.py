@@ -25,8 +25,6 @@ class Ranged_Enemy:
         
         # If enemy is on same row as player
         if kp_y == self.row:
-            print('same row')
-            print(level[kp_y][kp_x])
             # Check if there is a wall in the way
             if kp_x > self.column:
                 for i in range(self.column, kp_x):

@@ -34,7 +34,7 @@ class Level(State):
 
 
         self.level_number = level_number
-        self.levels = ['testlvl.txt', 'lvl1.txt', 'lvl2.txt', 'lvl3.txt', 'lvl4.txt', 'lvl5.txt',]
+        self.levels = ['lvl1.txt', 'lvl2.txt', 'lvl3.txt', 'lvl4.txt', 'lvl5.txt']
         self.number_of_levels = len(self.levels)
         self.level_array = []
 
@@ -157,6 +157,17 @@ class Level(State):
                     self.message = "The gate is open!"
                     self.display_text = True
 
+#For testing purposes only
+        """
+        if key == pygame.K_m:
+                count = 0
+                # open gate(steping on the pressure plate)
+                for row in self.level_array:
+                    for tile in r.ow:
+                        if tile == 'hs' or tile == 'hre':
+                            count += 1
+                print('Number of enemies:', count)
+        """
 
         # press SPACE to interactive with torch
         if key == pygame.K_SPACE:
@@ -214,7 +225,6 @@ class Level(State):
             elif(self.level_array[y][x]=="ml1"):
                 self.level_array[y][x] = self.level_array[y][x].replace("ml1","ml3",1)
                 self.two_life_sound.play()            #change lives tiles(1lives->3 lives)
-                #mixer.music.fadeout(3)
                 self.end_level = True
                 self.end_caption_rect = pygame.Rect(w/2.5, h/2, 50, 50)
                 self.end_message = 'You have no lives left!'
@@ -241,7 +251,6 @@ class Level(State):
     def read_in_level(self, level_number):
         self.scanned_tiles.clear()
         if level_number < 0:
-            print("random level")
             random_level = RandomLevel(self.level_number, self.levels)
             self.level_array = random_level.level_array
         else:

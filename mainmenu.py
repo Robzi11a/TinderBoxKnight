@@ -114,12 +114,12 @@ class Menu(State):
     def update_cursor(self, key):
         if key == pygame.K_UP:
             self.index = (self.index - 1) % len(self.menu)
-            print(self.index)
+            #print(self.index)
             self.cursor.rect.y = self.menu[self.index][1].y
             self.cursor.state = self.menu[self.index][2]
         elif key == pygame.K_DOWN:
             self.index = (self.index + 1) % len(self.menu)
-            print(self.index)
+            #print(self.index)
             self.cursor.rect.y = self.menu[self.index][1].y
             self.cursor.state = self.menu[self.index][2]
         elif key == pygame.K_RETURN:
