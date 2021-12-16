@@ -34,7 +34,7 @@ class Level(State):
 
 
         self.level_number = level_number
-        self.levels = ['lvl1.txt', 'lvl2.txt', 'lvl3.txt', 'lvl4.txt', 'lvl5.txt',]
+        self.levels = ['testlvl.txt', 'lvl1.txt', 'lvl2.txt', 'lvl3.txt', 'lvl4.txt', 'lvl5.txt',]
         self.number_of_levels = len(self.levels)
         self.level_array = []
 
@@ -71,8 +71,8 @@ class Level(State):
                 self.lives_change(kp_y, kp_x)
             if not safe_move:
                 self.spider_sound.play()  # playing spider sound
-                self.reset_knight(kp_y, kp_x, "You hit a spider!")
-                self.level_array[kp_y][kp_x + 1] = 'hs'
+                self.reset_knight(kp_y, kp_x, "You hit a monster!")
+                self.level_array[kp_y][kp_x + 1] =  self.level_array[kp_y][kp_x + 1].replace('v', 'h', 1)
                 self.lives_change(kp_y, kp_x)
 
 
@@ -86,8 +86,8 @@ class Level(State):
                 self.lives_change(kp_y, kp_x)
             if not safe_move:
                 self.spider_sound.play()  # playing spider sound
-                self.reset_knight(kp_y, kp_x, "You hit a spider!")
-                self.level_array[kp_y][kp_x - 1] = 'hs'
+                self.reset_knight(kp_y, kp_x, "You hit a monster!")
+                self.level_array[kp_y][kp_x - 1] =  self.level_array[kp_y][kp_x - 1].replace('v', 'h', 1)
                 self.lives_change(kp_y, kp_x)
 
 
@@ -101,8 +101,8 @@ class Level(State):
                 self.lives_change(kp_y, kp_x)
             if not safe_move:
                 self.spider_sound.play()  # playing spider sound
-                self.reset_knight(kp_y, kp_x, "You hit a spider!")
-                self.level_array[kp_y - 1][kp_x] = 'hs'
+                self.reset_knight(kp_y, kp_x, "You hit a monster!")
+                self.level_array[kp_y -1 ][kp_x] =  self.level_array[kp_y -1][kp_x].replace('v', 'h', 1)
                 self.lives_change(kp_y, kp_x)
 
         # Move down 
@@ -115,8 +115,8 @@ class Level(State):
                 self.lives_change(kp_y, kp_x)
             if not safe_move:
                 self.spider_sound.play()  # playing spider sound
-                self.reset_knight(kp_y, kp_x, "You hit a spider!")
-                self.level_array[kp_y + 1][kp_x] = 'hs'
+                self.reset_knight(kp_y, kp_x, "You hit a monster!")
+                self.level_array[kp_y +1 ][kp_x] =  self.level_array[kp_y +1][kp_x].replace('v', 'h', 1)
                 self.lives_change(kp_y, kp_x)
 
         # Scan

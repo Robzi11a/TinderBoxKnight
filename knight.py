@@ -40,7 +40,7 @@ class Knight:
                 self.previous_tile = self.next_tile
                 return True
             elif movement_code == 2:
-                level_array[self.row][self.column+1] = 'vs'
+                level_array[self.row][self.column+1] = level_array[self.row][self.column+1].replace('h', 'v', 1)
                 return False       
         return True
 
@@ -59,7 +59,7 @@ class Knight:
                 self.column -= 1
                 return True
             elif movement_code == 2:
-                level_array[self.row][self.column-1] = 'vs'
+                level_array[self.row][self.column-1] = level_array[self.row][self.column-1].replace('h', 'v', 1)
                 return False
         return True
 
@@ -78,7 +78,7 @@ class Knight:
                 self.row -= 1
                 return True
             elif movement_code == 2:
-                level_array[self.row-1][self.column] = 'vs'
+                level_array[self.row-1][self.column] = level_array[self.row-1][self.column].replace('h', 'v', 1)
                 return False
         return True
 
@@ -97,7 +97,7 @@ class Knight:
                 self.row += 1
                 return True
             elif movement_code == 2:
-                level_array[self.row+1][self.column] = 'vs'
+                level_array[self.row+1][self.column] = level_array[self.row+1][self.column].replace('h', 'v', 1)
                 return False
         return True
 
