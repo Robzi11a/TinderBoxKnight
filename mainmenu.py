@@ -137,7 +137,8 @@ class Menu(State):
         self.index = 0
         self.cursor.rect.y = self.menu[self.index][1].y
         self.cursor.state = self.menu[self.index][2]
-        mixer.music.load('sound/TinderBoxKnightTheme.mp3')  # loading backgroundmusic
+        mixer.music.load('sound/TinderBoxKnightTheme.mp3')
+        pygame.mixer.music.set_volume(1)  # loading backgroundmusic
         mixer.music.play(-1)
 
     def update(self, surface, keys, time_tick):

@@ -209,9 +209,12 @@ class Level(State):
             if(self.level_array[y][x]=="ml3"):
                 self.level_array[y][x] = self.level_array[y][x].replace("ml3","ml2",1)            #change lives tiles(3lives->2 lives)
             elif(self.level_array[y][x]=="ml2"):
-                self.level_array[y][x] = self.level_array[y][x].replace("ml2","ml1",1)            #change lives tiles(2lives->1 lives)
+                self.level_array[y][x] = self.level_array[y][x].replace("ml2","ml1",1)   #change lives tiles(2lives->1 lives)
+                self.one_life_sound.play()         
             elif(self.level_array[y][x]=="ml1"):
-                self.level_array[y][x] = self.level_array[y][x].replace("ml1","ml3",1)            #change lives tiles(1lives->3 lives)
+                self.level_array[y][x] = self.level_array[y][x].replace("ml1","ml3",1)
+                self.two_life_sound.play()            #change lives tiles(1lives->3 lives)
+                #mixer.music.fadeout(3)
                 self.end_level = True
                 self.end_caption_rect = pygame.Rect(w/2.5, h/2, 50, 50)
                 self.end_message = 'You have no lives left!'
@@ -318,6 +321,8 @@ class Level(State):
         self.door_sound = pygame.mixer.Sound("sound/dooropen.wav")  # loading door open sound
         self.match_sound = pygame.mixer.Sound("sound/LightingMatch.mp3")  # loading spider sound
         self.shadow_sound = pygame.mixer.Sound("sound/GhostSound.mp3")
+        self.one_life_sound = pygame.mixer.Sound("sound/onelife.mp3")
+        self.two_life_sound = pygame.mixer.Sound("sound/twolives.mp3")
 
     def update(self, surface, key, time_tick):
         if (self.flag_restart == 1):
