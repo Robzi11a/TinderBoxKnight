@@ -163,7 +163,7 @@ class Level(State):
                 count = 0
                 # open gate(steping on the pressure plate)
                 for row in self.level_array:
-                    for tile in r.ow:
+                    for tile in row:
                         if tile == 'hs' or tile == 'hre':
                             count += 1
                 print('Number of enemies:', count)
