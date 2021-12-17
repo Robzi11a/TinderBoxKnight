@@ -323,15 +323,21 @@ class Level(State):
         self.scanned_tiles = []
         mixer.music.pause()
         mixer.music.unload()
+        
+        # background music from https://www.chosic.com/download-audio/25499/
         mixer.music.load('sound/backgroundtwo.mp3')  # loading backgroundmusic
         pygame.mixer.music.set_volume(0.6)
         pygame.mixer.music.play(-1)  # loading for indefinite time
-        self.spider_sound = pygame.mixer.Sound("sound/spider.mp3")  # loading spider sound
+        
+        # door sound from https://mixkit.co/free-sound-effects/doors/
         self.door_sound = pygame.mixer.Sound("sound/dooropen.wav")  # loading door open sound
+        
+        # other sound effects from https://www.zapsplat.com/
         self.match_sound = pygame.mixer.Sound("sound/LightingMatch.mp3")  # loading spider sound
         self.shadow_sound = pygame.mixer.Sound("sound/GhostSound.mp3")
         self.one_life_sound = pygame.mixer.Sound("sound/onelife.mp3")
         self.two_life_sound = pygame.mixer.Sound("sound/twolives.mp3")
+        self.spider_sound = pygame.mixer.Sound("sound/spider.mp3")  # loading spider sound
 
     def update(self, surface, key, time_tick):
         if (self.flag_restart == 1):
